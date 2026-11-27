@@ -1,4 +1,4 @@
-# AI SPEC — Lịch trình Hà Giang hoặc Đà Nẵng theo ngân sách và thời tiết · Nhóm ASCLE · Phòng [XXX] · Zone [X]
+# AI SPEC — Lịch trình Hà Giang hoặc Đà Nẵng theo ngân sách và thời tiết · Nhóm ASCLE 
 
 > Mốc nộp: §7 chốt chuẩn "đạt" tại **CP2 19:30 Thứ Sáu 27/11** · §0–§7 nộp **CP3 10:00 Thứ Bảy 28/11** · đủ §0–§10 **CP4 14:30 Thứ Bảy 28/11** · §10 changelog ghi tiếp đến **23:59 Thứ Bảy 28/11**.
 > Đầu mỗi mục ghi bước guide (`02-guide.md` trong repo đề) chỉ cách điền. Mỗi mục ngắn, có số và nguồn; chi tiết để ở file được trỏ tới. Xoá dòng hướng dẫn trong ngoặc vuông khi điền xong.
@@ -20,15 +20,28 @@ Phạm vi dữ liệu: địa điểm, giá, cung đường và thời tiết t�
 
 ## §2. Impact & quyết định chọn *(guide 1.3)*
 
+Quy ước: Impact tính trên **100 người dùng mục tiêu** (đơn vị chuẩn hóa, không phải quy mô thị trường). Cơ cấu 100 người: 50 sinh viên/nhóm bạn trẻ, 30 người đi làm đi cuối tuần/lễ, 20 cặp đôi/gia đình nhỏ (tự ước tính). Tổng khoảng 20,5 chuyến tự túc/tháng (xem persona bên dưới).
+
 | Hướng | Bao nhiêu người gặp | Bao nhiêu lần / tháng | Mỗi lần tốn gì | Impact / tháng | Làm kịp không | Chọn? |
 |---|---|---|---|---|---|---|
-| Đổi một hoạt động vì mưa | Chưa đo; 6/8 bài thăm dò có tín hiệu | Chưa đo | Chưa đo phút | Chưa tính | Có, một ngày | Chọn cho CP2 |
-| Đối chiếu chi phí lưu trú | Chưa đo | Chưa đo | Chưa đo phút | Chưa tính | Cần chuẩn hóa đơn vị và chỗ còn | Chưa chọn |
-| Tối ưu cả cung đường nhiều ngày | Chưa đo | Chưa đo | Chưa đo phút | Chưa tính | Thiếu thời lượng và tuyến | Chưa chọn |
+| Đổi một hoạt động vì mưa | 100 (chuẩn hóa); 6/8 bài thăm dò có tín hiệu | 8,2 (= 20,5 chuyến × 40% chuyến gặp mưa phải đổi) (tự ước tính) | 25 phút: tìm lại phương án trong nhà, hỏi nhóm, tính lại tiền (tự ước tính) | 100 người → 8,2 lần × 25 phút ≈ 205 phút (≈ 3,4 giờ) | Có, một ngày | Chọn cho CP2 |
+| Đối chiếu chi phí lưu trú | 100 (chuẩn hóa) | 20,5 (mỗi chuyến một lần) (tự ước tính) | 40 phút: mở nhiều tab so giá, quy đổi phòng/người (tự ước tính) | 20,5 lần × 40 phút ≈ 820 phút (≈ 13,7 giờ) | Cần chuẩn hóa đơn vị và chỗ còn | Chưa chọn |
+| Tối ưu cả cung đường nhiều ngày | 100 (chuẩn hóa) | 20,5 (mỗi chuyến một lần) (tự ước tính) | 90 phút: xếp lịch cả chuyến, kiểm tra quãng đường (tự ước tính) | 20,5 lần × 90 phút ≈ 1.845 phút (≈ 30,8 giờ) | Thiếu thời lượng và tuyến | Chưa chọn |
 
-- **Impact / tháng** của hướng chọn = __ người × __ lần × __ phút = __ — nguồn từng thừa số: __ (không có nguồn thì ghi rõ *(tự ước tính)*)
+- **Impact / tháng** của hướng chọn = 100 người × 0,082 lần/người (= 0,205 chuyến × 40%) × 25 phút = **205 phút ≈ 3,4 giờ** — nguồn từng thừa số: 100 người là đơn vị chuẩn hóa (tự ước tính); 0,205 chuyến/người/tháng suy từ cơ cấu persona bên dưới (tự ước tính); 40% chuyến gặp mưa phải đổi (tự ước tính, chưa đo); 25 phút mỗi lần (tự ước tính, chưa đo). Tín hiệu có thật duy nhất: 6/8 bài thăm dò nhắc đến mưa hoặc thời tiết, mẫu nhỏ nên chỉ là dấu hiệu, không phải tỉ lệ.
 - Hướng ĐÃ LOẠI + vì sao (giữ lại, đừng xoá):
+  - **Tối ưu cả cung đường nhiều ngày:** hoãn. Theo kiểm tra Bước 0, cả 362 địa điểm đều thiếu thời lượng tham quan và tuyến đường chưa đủ chuẩn. Làm bây giờ sẽ phải dựa vào số mặc định.
+  - **Đối chiếu chi phí lưu trú:** hoãn. Theo Bước 0, 12 dòng có ghi đơn vị phòng/giường đều thiếu giá tối đa, và đơn vị của các dòng còn lại cần chuẩn hóa. Ước tính impact của hướng này **cao hơn** hướng đã chọn (xem số trên), nên cần giữ lại cho CP sau.
+  - **Lưu ý trung thực:** theo ước tính, hướng đã chọn có impact thấp nhất trong ba hướng. Lý do chọn là làm kịp trong một ngày và đây là phần làm sản phẩm khác với việc hỏi đáp thông thường (tự đổi lịch theo thời tiết thật).
 - Số lần / tháng của từng kiểu người dùng (dùng cho persona ở §8):
+
+| Persona | Số chuyến tự túc / tháng | Quy ra / năm | Tỉ trọng trong 100 người |
+|---|---|---|---|
+| Sinh viên / nhóm bạn trẻ | 0,25 (tự ước tính) | 3 chuyến | 50 người |
+| Người đi làm, đi cuối tuần và lễ | 0,20 (tự ước tính) | 2,4 chuyến | 30 người |
+| Cặp đôi / gia đình nhỏ | 0,10 (tự ước tính) | 1,2 chuyến | 20 người |
+
+Tổng: 50 × 0,25 + 30 × 0,20 + 20 × 0,10 = 20,5 chuyến/tháng trên 100 người.
 
 ## §3. Giải pháp tương tự *(guide 2.1)*
 - [Tripadvisor – hoạt động trong nhà ở Đà Nẵng](https://www.tripadvisor.com/Attractions-g298085-Activities-zft11295-Da_Nang.html) nhóm điểm theo tình huống ngày mưa. ASCLE học cách lọc hoạt động theo thời tiết và bổ sung bước đối chiếu một phương án với lịch và ngân sách cụ thể.
