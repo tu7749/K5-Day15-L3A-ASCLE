@@ -1,40 +1,18 @@
-# Đào data — cách đếm và kết quả
+# Bằng chứng ban đầu từ bài hỏi đáp công khai · CP2
 
-> Điền ở guide bước 1.2. Ôn lại: ngày 2, ngày 6 · lab ngày 2, lab ngày 6.
-> Không đào data thì xoá file này. Script / công thức đếm để trong repo (vd `evidence/count.py` hoặc ghi công thức Sheets ngay dưới), người khác chạy lại phải ra cùng số.
-> Repo chỉ chứa số đã tổng hợp và vài dòng ví dụ — không chép lại nguyên file data.
+Ngày xem 27/11/2026. Tập thăm dò cố định gồm 8 bài công khai dành cho khách du lịch, 4 bài về Hà Giang và 4 bài về Đà Nẵng. Mẫu thuận tiện lấy từ tìm kiếm bài hỏi đáp về lập lịch, thời tiết và tham quan ở hai điểm đến. Ba bài mỗi nơi được tìm bằng từ khóa thời tiết, một bài mỗi nơi hỏi chung về chuyến đi. Chỉ chấm nội dung bài đăng gốc, bỏ bình luận và bài đăng trùng. Đơn vị là bài đăng, mẫu số gồm cả bài không đạt. Không lưu tên tài khoản.
 
-## 1. Cách đếm — viết TRƯỚC khi chạy
+Gán 1 khi chính người đăng hỏi có nên giữ, hoãn hoặc bỏ một hoạt động vì mưa hay dự báo mưa, hoặc chủ động hỏi hoạt động thay thế. Gán 0 cho bài chỉ xin gợi ý chung hay chỉ hỏi thời tiết mà không gắn với quyết định. Tỷ lệ là tổng cột Nhãn chia cho số dòng. Để kiểm lại, mở 8 link dưới đây và áp cùng quy tắc cho bài đăng gốc.
 
-- Data dùng: __ (file nào, từ ngày nào đến ngày nào)
-- Đếm gì: __ · trên tập nào: __ · lọc gì: __
-- **Mẫu số là gì:** __ *(lỗi hay gặp nhất là mẫu số sai)*
-- Script / công thức: __
+| Mã | Điểm đến | Nhãn | Trích nguyên văn ngắn | Nguồn |
+|---|---|---:|---|---|
+| R01 | Hà Giang | 1 | “what is an alternative place to visit or do during that time?” | [Bài hỏi phương án thay thế](https://www.reddit.com/r/VietnamTravelAdvice/comments/1vww8x9/ha_giang_loop_alternative/) |
+| R02 | Hà Giang | 1 | “Should I Re-Consider the Ha Giang Loop in the Rain?” | [Bài hỏi có nên đổi kế hoạch khi mưa](https://www.reddit.com/r/VietNam/comments/1bxsjuo) |
+| R03 | Hà Giang | 1 | “Has someone done with pouring rain? Is it still worth it?” | [Bài hỏi có nên đi khi mưa lớn](https://www.reddit.com/r/VietNam/comments/1rk7hcs/weather_for_ha_giang_loop/) |
+| R04 | Hà Giang | 0 | “Was it worth the money spent?” | [Bài hỏi chọn tour](https://af.reddit.com/r/VietNam/comments/1j3wibw/ha_giang_loop_best_easyrider_tour/) |
+| R05 | Đà Nẵng | 1 | “What indoor activities do you recommend when it’s rainy?” | [Bài hỏi hoạt động trong nhà](https://www.reddit.com/r/DaNang/comments/1wxxyr4/well_be_in_da_nang_on_oct_812_where_to_go_if_its/) |
+| R06 | Đà Nẵng | 1 | “If it rains, is Ba Na Hills still possible?” | [Bài hỏi có nên giữ Bà Nà Hills](https://www.reddit.com/r/DaNang/comments/1hfd080) |
+| R07 | Đà Nẵng | 1 | “If it rains for a day, are there enough indoor/alternative activities to keep the trip enjoyable?” | [Bài hỏi phương án cho một ngày mưa](https://www.reddit.com/r/DaNang/comments/1vknnlt/planning_a_trip_to_vietnam_in_september_end/) |
+| R08 | Đà Nẵng | 0 | “I'm looking for recommendations on where to eat, places to explore, hikes, beaches, parks, cultural experiences” | [Bài xin gợi ý đi lần đầu](https://www.reddit.com/r/DaNang/comments/1v53sfx/first_time_visiting_da_nangvietnam_looking_for/) |
 
-## 2. Đọc trước, đếm sau
-
-Đã đọc __ dòng đầu và từ điển cột. Các *kiểu* hành vi thấy được (trước khi định nghĩa thứ cần đếm):
-- __
-- __
-
-## 3. Kết quả
-
-| Đếm gì | x / N | % | Ghi chú |
-|---|---|---|---|
-| | | | |
-| | | | |
-
-Ghi dạng "x/N (y%)". "Nhiều bạn…" không phải số.
-
-## 4. ≥5 ví dụ cụ thể (mã dòng / mã đã ẩn danh, không đoán ai là ai)
-
-1.
-2.
-3.
-4.
-5.
-
-## 5. Giới hạn của data
-
-Data cho biết người ta **làm gì**, không cho biết **vì sao**. Thiếu gì, lệch về phía nào: __
-→ Kiểm lại bằng phỏng vấn / khảo sát nào: __
+Kết quả **6/8 (75%) trong tập bài đã chọn**, gồm 3/4 ở mỗi điểm đến. Cách tìm đã ưu tiên bài về thời tiết, nên số này chỉ mô tả tập thăm dò. Từ các bài chỉ biết người đăng đang cân nhắc thay đổi, chưa đo được số phút, phần chi phí tính lại hay mức độ phổ biến trong toàn bộ nhóm khách tự túc. Một số bài nói về đi theo tour hoặc đi một mình. Phỏng vấn đúng vai người lên lịch nhóm bạn để kiểm lại phần đó.
