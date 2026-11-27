@@ -19,16 +19,11 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(ROOT, "codebase"))
 sys.path.insert(0, ROOT)
 
+from ui.result_page import render_result  # noqa: E402
 from ui.validate import MAX_DAYS, MAX_PEOPLE, MIN_DAYS, MIN_PEOPLE, STYLES, DESTINATIONS, check_plan, validate_input  # noqa: E402
 
-MOCK_PATH = os.path.join(ROOT, "ui", "mock_plan.json")
-WEATHER_ICON = {"nang": "☀️", "may": "☁️", "mua": "🌧️"}
-SLOT_LABEL = [("sang", "Sáng"), ("chieu", "Chiều"), ("toi", "Tối")]
-COST_LABEL = {"cho_o": "Chỗ ở", "an_uong": "Ăn uống", "di_lai": "Đi lại", "ve": "Vé tham quan", "du_phong": "Dự phòng"}
-
-
-def vnd(n) -> str:
-    return "{:,}đ".format(int(n)).replace(",", ".")
+MOCK_PATHS = {"ha_giang": os.path.join(ROOT, "ui", "mock_plan.json"),
+              "da_nang": os.path.join(ROOT, "ui", "mock_plan_da_nang.json")}
 
 
 def get_plan(req: dict):
@@ -38,7 +33,7 @@ def get_plan(req: dict):
     except ModuleNotFoundError as e:
         if e.name != "planner":      # lỗi import bên trong planner thì phải hiện ra, không che
             raise
-        with open(MOCK_PATH, encoding="utf-8") as f:
+        with open(MOCK_PATHS.get(req.get("diem_den"), MOCK_PATHS["ha_giang"]), encoding="utf-8") as f:
             return json.load(f), True
     try:
         return make_plan(req), False
@@ -70,8 +65,7 @@ def render_form():
     return True, req
 
 
-def render_preview(plan: dict, is_mock: bool):
-    """Hiển thị thử (việc 1). Trang kết quả đầy đủ làm ở việc 4."""
+def render_plan(plan: dict, is_mock: bool):
     problems = check_plan(plan)
     if problems:
         st.error("Kết quả từ planner sai định dạng (docs/schema.md) — báo người viết planner:")
@@ -80,40 +74,12 @@ def render_preview(plan: dict, is_mock: bool):
             st.json(plan)
         return
     if is_mock:
-        st.warning("Đang hiển thị **dữ liệu giả** (ui/mock_plan.json) — chưa nối planner. "
-                   "Kết quả không phụ thuộc đầu vào vừa nhập.")
+        st.warning("Đang hiển thị **dữ liệu giả** (ui/mock_plan*.json) — chưa nối planner. "
+                   "Lịch không phụ thuộc số ngày, ngân sách vừa nhập.")
     if not plan.get("ok"):
         st.error(plan.get("error") or "Không xếp được lịch với đầu vào này.")
         return
-
-    used, total = plan["total_per_person"], plan["budget_per_person"]
-    c1, c2, c3 = st.columns(3)
-    c1.metric("Tổng chi phí / người", vnd(used))
-    c2.metric("Ngân sách / người", vnd(total))
-    c3.metric("Còn lại", vnd(total - used))
-
-    if plan.get("text"):
-        st.markdown(plan["text"])
-
-    for d in plan["days"]:
-        w = d.get("weather") or {}
-        head = "Ngày %d · %s · %s mưa %d%%" % (
-            d["day"], d.get("date", ""), WEATHER_ICON.get(w.get("condition"), ""), round((w.get("rain_prob") or 0) * 100))
-        if d.get("changed_because"):
-            head = "🔄 " + head
-        with st.expander(head, expanded=True):
-            if d.get("changed_because"):
-                st.info("Đổi lịch: " + d["changed_because"])
-            for msg in d.get("warnings") or []:
-                st.warning(msg)
-            for key, label in SLOT_LABEL:
-                items = d.get("slots", {}).get(key) or []
-                text = ", ".join("%s (%s)" % (i["name"], vnd(i.get("cost", 0))) for i in items) or "—"
-                st.markdown("**%s:** %s" % (label, text))
-
-    st.subheader("Chi phí mỗi người")
-    st.table([{"Khoản": COST_LABEL.get(k, k), "Số tiền": vnd(v)} for k, v in plan["cost_breakdown"].items()])
-
+    render_result(plan)
     with st.expander("JSON gốc (debug)"):
         st.json(plan)
 
@@ -132,7 +98,7 @@ def main():
 
     if "plan" in st.session_state:
         plan, is_mock = st.session_state["plan"]
-        render_preview(plan, is_mock)
+        render_plan(plan, is_mock)
 
 
 main()
