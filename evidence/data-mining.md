@@ -16,3 +16,5 @@ Gán 1 khi chính người đăng hỏi có nên giữ, hoãn hoặc bỏ một 
 | R08 | Đà Nẵng | 0 | “I'm looking for recommendations on where to eat, places to explore, hikes, beaches, parks, cultural experiences” | [Bài xin gợi ý đi lần đầu](https://www.reddit.com/r/DaNang/comments/1v53sfx/first_time_visiting_da_nangvietnam_looking_for/) |
 
 Kết quả **6/8 (75%) trong tập bài đã chọn**, gồm 3/4 ở mỗi điểm đến. Cách tìm đã ưu tiên bài về thời tiết, nên số này chỉ mô tả tập thăm dò. Từ các bài chỉ biết người đăng đang cân nhắc thay đổi, chưa đo được số phút, phần chi phí tính lại hay mức độ phổ biến trong toàn bộ nhóm khách tự túc. Một số bài nói về đi theo tour hoặc đi một mình. Phỏng vấn đúng vai người lên lịch nhóm bạn để kiểm lại phần đó.
+
+**Kiểm tra nguồn cho CP3.** Đã đối chiếu 7 trích dẫn với bài gốc. Đường dẫn R06 chưa truy cập được trong lần kiểm tra này. Các bài R01, R02, R03, R05 và R07 là năm ví dụ có thể đối chiếu về quyết định đi, hoãn hoặc đổi hoạt động khi mưa. Kết quả 6/8 ở trên là số ghi nhận của mẫu CP2.

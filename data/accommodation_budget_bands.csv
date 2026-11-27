@@ -1,0 +1,27 @@
+﻿region_id,zone,accommodation_type,property_count,rate_unit,p25_listing_from_vnd,median_listing_from_vnd,p75_listing_from_vnd,min_listing_from_vnd,max_listing_from_vnd,checked_at,method
+da_nang,ALL,guesthouse,11,night_unspecified,265000,330000,355000,180000,3540000,2026-11-27,one_directory_starting_price_per_property
+da_nang,ALL,homestay,24,night_unspecified,257500,310000,370000,190000,670000,2026-11-27,one_directory_starting_price_per_property
+da_nang,ALL,hotel,105,night_unspecified,260000,390000,880000,140000,14060000,2026-11-27,one_directory_starting_price_per_property
+da_nang,An Hải – Mỹ Khê,homestay,7,night_unspecified,260000,320000,520000,190000,670000,2026-11-27,one_directory_starting_price_per_property
+da_nang,An Hải – Mỹ Khê,hotel,11,night_unspecified,285000,370000,845000,190000,2250000,2026-11-27,one_directory_starting_price_per_property
+da_nang,Cù Lao Chàm,homestay,7,night_unspecified,310000,350000,375000,270000,410000,2026-11-27,one_directory_starting_price_per_property
+da_nang,Hải Châu – trung tâm,hotel,19,night_unspecified,275000,310000,390000,140000,830000,2026-11-27,one_directory_starting_price_per_property
+da_nang,Hội An,hotel,23,night_unspecified,290000,460000,830000,150000,14060000,2026-11-27,one_directory_starting_price_per_property
+da_nang,Ngũ Hành Sơn,hotel,14,night_unspecified,427500,1570000,2495000,230000,6890000,2026-11-27,one_directory_starting_price_per_property
+da_nang,Sơn Trà,hotel,10,night_unspecified,237500,335000,622500,170000,13570000,2026-11-27,one_directory_starting_price_per_property
+da_nang,Thanh Khê – sân bay,hotel,8,night_unspecified,207500,220000,427500,200000,2210000,2026-11-27,one_directory_starting_price_per_property
+da_nang,Điện Bàn,hotel,5,night_unspecified,400000,1600000,1670000,240000,7180000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,ALL,guesthouse,12,night_unspecified,275000,340000,512500,170000,1740000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,ALL,homestay,59,night_unspecified,270000,360000,530000,95000,1190000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,ALL,hostel,7,night_unspecified,175000,200000,390000,160000,450000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,ALL,hotel,67,night_unspecified,300000,400000,705000,180000,11900000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,Du Già,homestay,9,night_unspecified,450000,470000,700000,320000,950000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,Hoàng Su Phì,homestay,6,night_unspecified,400000,455000,765000,350000,1060000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,Hoàng Su Phì,hotel,5,night_unspecified,1370000,1580000,2200000,840000,2420000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,Hà Giang – trung tâm,homestay,7,night_unspecified,230000,270000,310000,95000,380000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,Hà Giang – trung tâm,hostel,5,night_unspecified,180000,200000,330000,160000,450000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,Hà Giang – trung tâm,hotel,30,night_unspecified,282500,335000,650000,180000,11900000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,Mèo Vạc,homestay,8,night_unspecified,260000,290000,377500,170000,550000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,Quản Bạ,homestay,13,night_unspecified,250000,260000,360000,200000,600000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,Yên Minh,homestay,8,night_unspecified,257500,300000,325000,220000,490000,2026-11-27,one_directory_starting_price_per_property
+ha_giang,Đồng Văn,hotel,13,night_unspecified,350000,470000,820000,320000,1390000,2026-11-27,one_directory_starting_price_per_property

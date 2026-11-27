@@ -99,9 +99,9 @@ Tên cột và bảng chuyển đổi giá trị nằm trong [data_adapter.py](d
 | Vùng | Phòng / giường / không rõ / gói (giá chi tiết) | Suy ra giá tính theo phòng ở hotel hoặc guesthouse | Đơn vị vẫn chưa rõ trong bộ chuẩn | Giá một mức | Hạ độ tin cậy thực tế |
 |---|---:|---:|---:|---:|---:|
 | Hà Giang | 5 / 1 / 146 / 2 | 79 | 61 | 129 | 135 |
-| Đà Nẵng | 3 / 3 / 150 / 0 | 122 | 24 | 128 | 142 |
+| Đà Nẵng | 3 / 3 / 150 / 0 | 116 | 30 | 128 | 142 |
 
-Đơn vị không rõ của Hà Giang trong bộ chuẩn gồm 59 dòng homestay ghi `night_unspecified` và 2 dòng gói. Đà Nẵng có 24 dòng homestay ghi `night_unspecified`. Danh mục gốc có 58 ô đơn vị trống ở Hà Giang (12 hotel, 23 guesthouse, 22 homestay, 1 hostel) và 47 ở Đà Nẵng (39 guesthouse, 8 homestay). Bảng giá chi tiết không có ô đơn vị trống. Bộ chuẩn loại 12 hàng kiểu hostel ở Hà Giang và 4 ở Đà Nẵng vì schema chỉ nhận hotel, guesthouse và homestay. Có thể trùng nhóm giữa các cột. Số hạ độ tin cậy so với quy tắc chỉ xét tuổi dữ liệu và độ rộng giá, tại ngày 27/11/2026. Sau áp giới hạn có 85 dòng thấp và 210 dòng vừa trên 295 dòng lưu trú đã ánh xạ.
+Đơn vị không rõ của Hà Giang trong bộ chuẩn gồm 59 dòng homestay ghi `night_unspecified` và 2 dòng gói. Đà Nẵng có 24 dòng homestay ghi `night_unspecified` và 6 dòng quảng cáo giá dorm chưa ghi rõ đơn vị tại cơ sở được xếp là khách sạn. Danh mục gốc có 58 ô đơn vị trống ở Hà Giang (12 hotel, 23 guesthouse, 22 homestay, 1 hostel) và 47 ở Đà Nẵng (39 guesthouse, 8 homestay). Bảng giá chi tiết không có ô đơn vị trống. Bộ chuẩn loại 12 hàng kiểu hostel ở Hà Giang và 4 ở Đà Nẵng vì schema chỉ nhận hotel, guesthouse và homestay. Có thể trùng nhóm giữa các cột. Số hạ độ tin cậy so với quy tắc chỉ xét tuổi dữ liệu và độ rộng giá, tại ngày 27/11/2026. Sau áp giới hạn có 91 dòng thấp và 204 dòng vừa trên 295 dòng lưu trú đã ánh xạ.
 
 ### Số dòng dùng sau ánh xạ
 

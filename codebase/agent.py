@@ -1,4 +1,4 @@
-"""Luồng chính CP2. Demo, eval và simulate đều gọi answer(text)."""
+"""Luồng CLI. Demo, eval và simulate đều gọi answer(text)."""
 from datetime import date
 from decimal import Decimal
 import json
@@ -6,15 +6,14 @@ import re
 import unicodedata
 
 from ai import call_model
-from tools import load_destination, weather_scenario
+from tools import load_destination, search_lodging, weather_scenario
 from tracing import note
 
 SYSTEM = (
-    "Chọn một candidate_id từ danh sách đã kiểm tra. "
-    "Dựa vào ưu tiên và dữ liệu JSON được cung cấp. "
-    "Trả đúng một mã, không thêm giá, địa điểm hay lời giải thích."
+    "Choose the candidate whose numeric value is smallest. When values are equal, choose the smallest ID. "
+    "Return its ID as a JSON object with the single key candidate_id."
 )
-DESTINATION_PATTERNS = {"ha_giang": r"\bha giang\b", "da_nang": r"\bda nang\b"}
+DESTINATION_PATTERNS = {"ha_giang": r"\bha[ _]giang\b", "da_nang": r"\bda[ _]nang\b"}
 MONEY = re.compile(
     r"(?<![\w.,+\-])([+-]?\d+(?:[.,]\d+)*)(?:\s*(trieu|tr|nghin|ngan|k|vnd|dong|d)(?!\w))"
 )
@@ -24,6 +23,16 @@ WEATHER_DAYS = re.compile(
     r"\b(?:mua(?: lon)?|ngap|lu|sat lo|dong set|bao lon)\s+ngay\s+"
     r"(\d{1,2}(?:(?:\s*,\s*|\s+va\s+|\s+den\s+|\s*-\s*)(?:ngay\s+)?\d{1,2})*)(?!\d)"
 )
+LODGING_TYPES = {
+    "hotel": r"\b(?:khach san|hotel)\b",
+    "guesthouse": r"\b(?:nha nghi|guesthouse)\b",
+    "homestay": r"\bhomestay\b",
+}
+LODGING_TIERS = {"budget": "Tiết kiệm", "mid": "Vừa", "comfort": "Thoải mái"}
+LODGING_SCOPE_LABELS = {
+    "room_night": "mỗi phòng mỗi đêm", "person_night": "mỗi người mỗi đêm",
+    "person_total": "mỗi người cho cả kỳ", "group_night": "cả nhóm mỗi đêm", "group_total": "cả nhóm cho cả kỳ",
+}
 
 
 def _normalize(text):
@@ -80,18 +89,76 @@ def _money(value):
     return f"{value:,}".replace(",", ".") + " VNĐ"
 
 
+def _price_range(value):
+    low, high = value["min_vnd"], value["max_vnd"]
+    return _money(low) if low == high else f"{_money(low)}–{_money(high)}"
+
+
+def _lodging_answer(text, destination, types):
+    people_match = re.search(r"(?<![\w.,])([+-]?\d{1,4})\s*(?:nguoi|khach)\b", text)
+    nights_match = re.search(r"(?<![\w.,])([+-]?\d{1,4})\s*dem\b", text)
+    days_match = re.search(r"(?<![\w.,])([+-]?\d{1,4})\s*ngay\b", text)
+    people = int(people_match[1]) if people_match else None
+    nights = int(nights_match[1]) if nights_match else int(days_match[1]) - 1 if days_match else None
+    if people is None or people <= 0 or nights is None or nights <= 0:
+        return "Bạn có bao nhiêu người và ở mấy đêm? Ví dụ Đà Nẵng, 2 người, 2 đêm."
+
+    budget_text = re.sub(r"\bngan sach\s+(?:luu tru|cho o|ca nhom|moi phong)\b", "ngan sach", text)
+    budget = _budget(budget_text)
+    nightly = bool(re.search(r"(?:/\s*dem\b|\b(?:mot|moi)\s+dem\b)", text))
+    per_room = bool(re.search(r"(?:/\s*phong\b|\b(?:mot|moi)\s+phong\b|\bphong\s*/\s*dem\b)", text))
+    per_person = bool(re.search(r"(?:/\s*nguoi\b|\b(?:mot|moi)\s+nguoi\b)", text))
+    total = bool(re.search(r"\b(?:ca ky|ca chuyen|ca nhom|toan nhom|tong)\b", text))
+    if budget is None or not (nightly or total) or (per_room and (per_person or not nightly)):
+        return "Bạn muốn giới hạn ngân sách lưu trú thế nào? Ví dụ 500 nghìn/phòng/đêm hoặc tổng 2 triệu cho cả nhóm."
+
+    if nightly:
+        scope = "room_night" if per_room else "person_night" if per_person else "group_night"
+    else:
+        scope = "person_total" if per_person else "group_total"
+    try:
+        result = search_lodging(destination, nights, people, budget, scope, types)
+    except (OSError, ValueError):
+        return "Chưa đọc được bảng giá lưu trú đã kiểm tra. Bạn có thể thử lại sau."
+
+    label = LODGING_SCOPE_LABELS[scope]
+    lines = [f"{result['destination_name']} · {people} người · {nights} đêm · Trần lưu trú {_money(budget)} ({label})."]
+    if result["uses_fallback"]:
+        lines.append("Chỉ có bảng giá dự phòng theo vùng, chưa có danh mục giá của từng cơ sở.")
+    if not any(result["groups"].values()):
+        lines.append("Chưa có lựa chọn đủ dữ liệu với cận trên vừa ngân sách.")
+        if cheapest := result["cheapest"]:
+            lines.append(f"Lựa chọn có cận trên thấp nhất vượt {_money(cheapest['gap_vnd'])} ({label}).")
+    else:
+        for tier, options in result["groups"].items():
+            if not options:
+                continue
+            lines.append(LODGING_TIERS[tier])
+            for room in options:
+                unit = "phòng" if room["price_unit"] == "per_room_night" else "suất"
+                confidence = {"high": "cao", "medium": "vừa", "low": "thấp"}[room["confidence"]]
+                area = f" · {room['area']}" if room["area"] else ""
+                lines.append(
+                    f"- {room['name']}{area} · {_price_range(room['price_range'])}/{unit}/đêm · "
+                    f"{room['rooms']} {unit}, tổng {_price_range(room['predicted_total'])} cho cả kỳ · độ tin cậy {confidence}."
+                )
+                if room["price_unit_is_estimate"] or room["capacity_is_estimate"]:
+                    lines.append("  Có giả định về đơn vị giá hoặc sức chứa.")
+                lines.append(f"  Nguồn: {room['source']} (kiểm tra {room['source_date']}).")
+    if result["unknown_count"]:
+        lines.append("Các dòng chưa rõ đơn vị giá không được đưa vào dự toán.")
+    lines.append("Giá là ước tính tham khảo. Hãy kiểm tra giá và tình trạng còn phòng với cơ sở.")
+    return "\n".join(lines)
+
+
 def _ticket_total(visits):
     return sum(visit["price_vnd"] for visit in visits if visit is not None)
 
 
 def _choose_rain_option(candidates, preference):
+    field = "price_vnd" if preference == "tiết kiệm" else "round_trip_minutes"
     payload = {
-        "preference": preference,
-        "candidates": [
-            {"id": item["id"], "name": item["name"], "price_vnd": item["price_vnd"],
-             "round_trip_minutes": item["round_trip_minutes"]}
-            for item in candidates
-        ],
+        "candidates": [{"id": item["id"], "value": item[field]} for item in candidates],
     }
     reply = call_model(SYSTEM, json.dumps(payload, ensure_ascii=False))
     chosen_id = reply["text"].strip()
@@ -183,6 +250,10 @@ def answer(text: str) -> dict:
     destinations = [key for key, pattern in DESTINATION_PATTERNS.items() if re.search(pattern, normalized)]
     if len(destinations) != 1:
         return {"output": "Bản thử hỗ trợ một điểm đến mỗi lần. Bạn chọn Hà Giang hoặc Đà Nẵng nhé."}
+
+    types = tuple(kind for kind, pattern in LODGING_TYPES.items() if re.search(pattern, normalized))
+    if types or re.search(r"\b(?:cho o|luu tru|phong nghi)\b", normalized):
+        return {"output": _lodging_answer(normalized, destinations[0], types)}
 
     day_match = re.search(r"(?<![\w/.,])([+-]?\d+)\s*ngay\b", normalized)
     days = int(day_match[1]) if day_match and len(day_match[1]) <= 3 else None

@@ -4,6 +4,10 @@
 > Số **không điền tay**: điền `cost/personas.yaml` → `python run.py simulate` → chép bảng trong `cost/simulate-N-summary.md` vào đây.
 > Lúc build dùng gói miễn phí vẫn tính theo **giá gói trả phí** — đây là chi phí cho lúc đưa vào dùng thật.
 
+## Kiểm tra khung CP3
+
+`python3 run.py simulate --try` tạo lượt `simulate-try@20261127-222403` với seed 42. Chạy xong 10 phiên, 3 phiên gọi `qwen3-0.6b-f16`, 0 lỗi kỹ thuật, tổng 242 token vào và 525 token ra. Hai mức giá Gemini trong [cấu hình](personas.yaml) là giá tham chiếu áp lên token đo từ Qwen. Kịch bản 30, 60 và 120 người là tự ước tính. Chi phí trên mỗi tác vụ thành công sẽ tính ở CP4 từ lượt đánh giá đã duyệt.
+
 ## 1. Đầu vào
 
 - **Persona** (`cost/personas.yaml`): ≥3 kiểu — tỉ lệ, số phiên / người / tháng, số lượt hỏi / phiên. Nguồn: __

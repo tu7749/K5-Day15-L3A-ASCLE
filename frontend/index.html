@@ -1,0 +1,75 @@
+<div class="vietdu" lang="vi">
+  <a class="vd-skip" href="#lap-lich">Đến form lập lịch</a>
+  <header class="vd-header">
+    <div class="vd-header-inner">
+      <a class="vd-brand" href="#lap-lich" aria-label="Việt Du, lập lịch trình">
+        <span class="vd-mark" aria-hidden="true"></span><span>Việt Du<span class="vd-brand-dot">.</span></span>
+      </a>
+      <nav aria-label="Điều hướng chính">
+        <a href="#lap-lich">Lập lịch trình</a>
+        <a href="#diem-den">Điểm đến</a>
+      </nav>
+    </div>
+  </header>
+  <main class="vd-main">
+    <section class="vd-hero" id="lap-lich" aria-labelledby="vd-title">
+      <div class="vd-intro">
+        <div class="vd-ornament" aria-hidden="true"></div>
+        <h1 id="vd-title">Lên lịch cho<br class="vd-break"> chuyến đi của bạn</h1>
+        <p class="vd-intro-text">Khám phá Hà Giang hoặc Đà Nẵng với lịch trình phù hợp ngân sách, sở thích và thời tiết.</p>
+        <form class="vd-form" id="vd-form" novalidate>
+          <div class="vd-form-grid vd-two">
+            <label>Điểm đến<select name="region" id="vd-region" aria-label="Điểm đến"><option value="ha_giang">Hà Giang</option><option value="da_nang">Đà Nẵng</option></select></label>
+            <label>Ngày đi<input name="departure" required type="date"></label>
+          </div>
+          <div class="vd-form-grid vd-numbers">
+            <label>Số ngày<input name="days" type="number" min="1" max="5" value="3" required></label>
+            <label>Số khách<input name="people" type="number" min="1" max="99" value="2" required></label>
+            <label>Tổng ngân sách nhóm<span class="vd-input-unit"><input name="budget" inputmode="numeric" value="4.500.000" required><span aria-hidden="true">₫</span></span></label>
+          </div>
+          <details class="vd-options">
+            <summary>Tùy chọn chuyến đi</summary>
+            <div class="vd-extra">
+              <div class="vd-form-grid vd-two">
+                <label>Phương tiện<select name="mode"><option value="car">Ô tô</option><option value="motorbike">Xe máy</option><option value="transit">Xe buýt</option></select></label>
+                <label>Điểm xuất phát<select name="origin"></select></label>
+              </div>
+              <label>Loại chỗ ở<select name="lodging_type"><option value="">Mọi loại chỗ ở</option><option value="hotel">Khách sạn</option><option value="guesthouse">Nhà nghỉ</option><option value="homestay">Homestay</option></select></label>
+              <fieldset><legend>Sở thích</legend><div id="vd-interests" class="vd-chips"></div></fieldset>
+              <details class="vd-allowance">
+                <summary>Dự trù những khoản chưa có giá</summary>
+                <div class="vd-form-grid vd-two">
+                  <label>Vé tham quan (VNĐ)<input name="allow_ticket" type="number" min="0" inputmode="numeric" placeholder="0"></label>
+                  <label>Di chuyển (VNĐ)<input name="allow_transport" type="number" min="0" inputmode="numeric" placeholder="0"></label>
+                  <label>Ăn uống (VNĐ)<input name="allow_food" type="number" min="0" inputmode="numeric" placeholder="0"></label>
+                  <label>Lưu trú (VNĐ)<input name="allow_lodging" type="number" min="0" inputmode="numeric" placeholder="0"></label>
+                </div>
+              </details>
+            </div>
+          </details>
+          <button class="vd-primary" type="submit">Tạo lịch trình</button>
+          <p id="vd-form-error" class="vd-form-error" role="alert" hidden></p>
+        </form>
+      </div>
+      <figure class="vd-hero-photo">
+        <img id="vd-cover" width="1200" height="960" fetchpriority="high" alt="Sông Nho Quế quanh co giữa núi đá Hà Giang">
+        <figcaption><span id="vd-province">Miền núi phía Bắc</span><strong id="vd-cover-title">Hà Giang</strong><span id="vd-cover-place">Mã Pí Lèng · Sông Nho Quế</span></figcaption>
+      </figure>
+    </section>
+    <section class="vd-results" id="vd-results" aria-labelledby="vd-results-title" hidden></section>
+    <section class="vd-destinations" id="diem-den" aria-labelledby="vd-destinations-title">
+      <h2 id="vd-destinations-title">Điểm đến</h2>
+      <div class="vd-destination-grid">
+        <button class="vd-destination" type="button" data-region="ha_giang">
+          <img data-asset="ha-giang-thumb.webp" alt="" width="440" height="330" loading="lazy">
+          <span><strong>Hà Giang</strong><small>Cao nguyên đá và những cung đèo</small></span>
+        </button>
+        <button class="vd-destination" type="button" data-region="da_nang">
+          <img data-asset="da-nang-thumb.webp" alt="" width="440" height="330" loading="lazy">
+          <span><strong>Đà Nẵng</strong><small>Biển xanh và nhịp sống ven sông</small></span>
+        </button>
+      </div>
+    </section>
+  </main>
+  <footer class="vd-footer"><div><span class="vd-brand">Việt Du<span class="vd-brand-dot">.</span></span><span>Lập lịch Hà Giang và Đà Nẵng</span></div></footer>
+</div>

@@ -22,3 +22,16 @@ data/*
 !data/accommodations.csv
 !data/accommodation_prices.csv
 !data/duration_overrides.csv
+!vietdu_planner.py
+!vietdu_weather.py
+!frontend/
+!frontend/**
+!static/
+!static/assets/
+!static/assets/**
+!.streamlit/
+!.streamlit/config.toml
+!data/accommodation_budget_bands.csv
+!codebase/
+!codebase/ai.py
+!codebase/tracing.py

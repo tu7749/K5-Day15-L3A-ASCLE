@@ -59,7 +59,7 @@ def validate_data(data):
     for row in data.routes:
         if (row["region"] not in cfg.REGIONS
                 or any(place_lookup.get(row[key]) != row["region"] for key in ("from_place_id", "to_place_id"))
-                or row["distance_km"] < 0 or row["duration_min"] <= 0 or row["mode"] not in {"motorbike", "car"}
+                or row["distance_km"] < 0 or row["duration_min"] <= 0 or row["mode"] not in {"motorbike", "car", "transit"}
                 or (row["source_date"] is not None and not _valid_date(row["source_date"]))):
             errors.append(f"routes: tuyến {row['from_place_id']} → {row['to_place_id']} sai schema chuẩn")
 

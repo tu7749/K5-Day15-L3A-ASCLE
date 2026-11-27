@@ -4,7 +4,29 @@
 
 Mục tiêu: `call_model()` trong `codebase/ai.py` gọi model thật và trả về câu trả lời kèm **số token** đo được. Prompt và luồng là phần nhóm tự viết trong `codebase/agent.py`. File này chỉ lo phần kết nối.
 
-Ba ví dụ dưới đây (OpenAI, Claude, Ollama) **đã chạy với key thật ngày 25/11/2026**: chép vào là chạy.
+## Luồng CP3 đang dùng · Qwen qua llama.cpp
+
+CLI đã nối API local `POST /v1/chat/completions` của `llama.cpp`. Model chọn mã hoạt động trong danh sách Python đã lọc theo vùng, tuyến và ngân sách. Python kiểm lại mã trước khi hiển thị. Token lấy từ `usage` trong phản hồi của server. Các ca thiếu căn cứ, thiếu ngân sách hoặc phải hoãn vì nguy hiểm có thể kết thúc trước bước gọi model.
+
+Lượt CP3 dùng [Qwen3 0.6B](https://huggingface.co/Qwen/Qwen3-0.6B/tree/c1899de289a04d12100db370d81485cdf75e47ca) chuyển sang F16 GGUF bằng [công cụ của llama.cpp b6000](https://github.com/ggml-org/llama.cpp/blob/b6000/convert_hf_to_gguf.py) với `--outtype f16`. Có thể dùng [bản GGUF Q8 của Qwen](https://huggingface.co/Qwen/Qwen3-0.6B-GGUF) để chạy demo với tên model tương ứng. Với F16, khởi động [llama.cpp b12815](https://github.com/ggml-org/llama.cpp/releases/tag/b12815) từ terminal thứ nhất.
+
+```bash
+llama-server -m /duong-dan/qwen3-0.6b-f16.gguf \
+  --alias qwen3-0.6b-f16 --host 127.0.0.1 --port 8087 --ctx-size 2048 \
+  --threads 4 -ngl 0 --reasoning on --reasoning-budget 160 --no-webui
+```
+
+Từ terminal thứ hai, có thể đặt cấu hình sau trong `.env`. `LLAMA_CPP_PORT` mặc định là `8087`. Luồng local dùng địa chỉ loopback và không cần API key.
+
+```dotenv
+MODEL_PROVIDER=llamacpp
+MODEL_NAME=qwen3-0.6b-f16
+LLAMA_CPP_PORT=8087
+```
+
+Chạy `python3 run.py`, nhập `Đà Nẵng 3 ngày, 3 triệu/người, tháng 10, mưa ngày 2. Ưu tiên đường đi ngắn.` Ca demo phải hiển thị mã điểm được chọn, lý do đổi và số token lớn hơn 0. Sau đó dùng `python3 run.py eval --try` để kiểm kết nối và `python3 run.py eval` để tạo lượt chính thức.
+
+Các đoạn dưới là ví dụ của bộ khung nếu nhóm muốn tự bổ sung nhà cung cấp khác.
 
 ## 1. Điền `.env`
 

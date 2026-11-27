@@ -14,13 +14,17 @@ Chế độ giả (mặc định khi .env chưa có MODEL_PROVIDER, hoặc MODEL
     chọn một mã từ danh sách đã kiểm, model "fake", token 0 — để luồng chạy hết từ trước CP2 (guide bước 3.2).
     Lượt `run.py eval` / `run.py simulate` chạy bằng model giả KHÔNG được tính.
 
-Nối model thật: điền .env (chép từ .env.example), rồi viết nhánh gọi API ở dưới theo docs/connect-model.md
-(có ví dụ OpenAI, Claude, model chạy trên máy, và cách nối nhà cung cấp khác). Không dán API key vào file này.
+Nối model thật qua llama.cpp trên máy. Xem docs/connect-model.md.
 """
 import json
 import os
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
-from tracing import model_call
+if __package__:
+    from .tracing import model_call
+else:
+    from tracing import model_call
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -41,20 +45,67 @@ def load_env(path=os.path.join(ROOT, ".env")):
 load_env()
 MODEL_PROVIDER = (os.environ.get("MODEL_PROVIDER") or "fake").strip().lower()
 MODEL_NAME = (os.environ.get("MODEL_NAME") or "").strip()
-API_KEY = (os.environ.get("API_KEY") or "").strip()
+
+
+def _call_llamacpp(system: str, user: str) -> dict:
+    if not MODEL_NAME:
+        raise RuntimeError("Chưa đặt MODEL_NAME cho llama.cpp. Xem docs/connect-model.md.")
+    port = os.environ.get("LLAMA_CPP_PORT", "8087")
+    if not port.isascii() or not port.isdecimal() or len(port) > 5 or not 1 <= int(port) <= 65535:
+        raise ValueError("LLAMA_CPP_PORT phải là cổng từ 1 đến 65535.")
+
+    candidates = json.loads(user)["candidates"]
+    schema = {
+        "type": "object",
+        "properties": {"candidate_id": {"type": "string", "enum": [candidate["id"] for candidate in candidates]}},
+        "required": ["candidate_id"], "additionalProperties": False,
+    }
+    request = Request(
+        f"http://127.0.0.1:{int(port)}/v1/chat/completions",
+        data=json.dumps({
+            "model": MODEL_NAME,
+            "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+            "temperature": 0, "max_tokens": 256, "stream": False,
+            "response_format": {"type": "json_object", "schema": schema},
+        }, ensure_ascii=False).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+    )
+    try:
+        with urlopen(request, timeout=60) as response:
+            payload = json.load(response)
+    except HTTPError as error:
+        raise RuntimeError(f"llama.cpp trả HTTP {error.code}. Kiểm tra tên model và cấu hình server.") from error
+    except (URLError, TimeoutError) as error:
+        raise RuntimeError(f"Chưa kết nối được llama.cpp tại cổng {int(port)}. Kiểm tra server local.") from error
+
+    try:
+        usage, model = payload["usage"], payload["model"]
+        tokens_in, tokens_out = usage["prompt_tokens"], usage["completion_tokens"]
+        body = payload["choices"][0]["message"]["content"]
+        if not isinstance(model, str) or not model or type(tokens_in) is not int or type(tokens_out) is not int or min(tokens_in, tokens_out) < 0:
+            raise ValueError("model hoặc usage không hợp lệ")
+    except (KeyError, TypeError, IndexError, ValueError) as error:
+        raise RuntimeError("llama.cpp trả phản hồi thiếu model, nội dung hoặc số token.") from error
+
+    try:
+        choice = json.loads(body)
+    except (ValueError, TypeError):
+        choice = {}
+    chosen = choice.get("candidate_id") if isinstance(choice, dict) else None
+    return {"text": chosen if isinstance(chosen, str) else "", "model": model,
+            "tokens_in": tokens_in, "tokens_out": tokens_out}
 
 
 @model_call
 def call_model(system: str, user: str) -> dict:
     if MODEL_PROVIDER == "fake":
-        scenario = json.loads(user)
-        candidates = scenario["candidates"]
-        field = "price_vnd" if scenario["preference"] == "tiết kiệm" else "round_trip_minutes"
-        chosen = min(candidates, key=lambda item: (item[field], item["id"])) if candidates else None
+        candidates = json.loads(user)["candidates"]
+        chosen = min(candidates, key=lambda item: (item["value"], item["id"]), default=None)
         return {"text": chosen["id"] if chosen else "", "model": "fake", "tokens_in": 0, "tokens_out": 0}
 
-    # NHÓM VIẾT: gọi model thật ở đây (theo MODEL_PROVIDER, MODEL_NAME, API_KEY) rồi trả đúng 4 khoá.
-    # Ví dụ chép được cho từng nhà cung cấp: docs/connect-model.md mục 2.
+    if MODEL_PROVIDER == "llamacpp":
+        return _call_llamacpp(system, user)
+
     raise NotImplementedError(
         "chưa viết phần gọi model thật cho MODEL_PROVIDER=%s trong codebase/ai.py — xem docs/connect-model.md"
         % MODEL_PROVIDER)

@@ -1,4 +1,4 @@
-# AI SPEC — Lịch trình Hà Giang hoặc Đà Nẵng theo ngân sách và thời tiết · Nhóm ASCLE 
+# AI SPEC — Lịch trình Hà Giang hoặc Đà Nẵng theo ngân sách và thời tiết · Nhóm ASCLE
 
 > Mốc nộp: §7 chốt chuẩn "đạt" tại **CP2 19:30 Thứ Sáu 27/11** · §0–§7 nộp **CP3 10:00 Thứ Bảy 28/11** · đủ §0–§10 **CP4 14:30 Thứ Bảy 28/11** · §10 changelog ghi tiếp đến **23:59 Thứ Bảy 28/11**.
 > Đầu mỗi mục ghi bước guide (`02-guide.md` trong repo đề) chỉ cách điền. Mỗi mục ngắn, có số và nguồn; chi tiết để ở file được trỏ tới. Xoá dòng hướng dẫn trong ngoặc vuông khi điền xong.
@@ -16,7 +16,7 @@ Phạm vi dữ liệu: địa điểm, giá, cung đường và thời tiết t�
 - Việc họ cố làm xong: Chốt lịch trình cho điểm đến đã chọn, vừa ngân sách và có phương án thay thế nếu trời mưa.
 - Cách làm quan sát được trong mẫu: hỏi người đi trước trên diễn đàn để tìm phương án khác khi thời tiết xấu. Chưa có số đo thời gian hoặc dữ liệu về cách họ tính lại chi phí.
 - Pain dự kiến: Khi hoạt động ngoài trời gặp mưa, người lên lịch phải đối chiếu lại cung đường và chi phí nên mất thêm thời gian trước khi chốt lịch với nhóm.
-- CP2: 6/8 bài hỏi đáp công khai trong mẫu thăm dò có câu hỏi về giữ, hoãn hoặc thay hoạt động vì mưa. Xem [mẫu, trích dẫn và giới hạn](evidence/summary.md). Phỏng vấn đúng vai người lên lịch để kiểm giả thuyết về thời gian và chi phí.
+- Mẫu thăm dò CP2 ghi nhận 6/8 bài hỏi đáp công khai hỏi về giữ, hoãn hoặc thay hoạt động vì mưa. Khi rà soát cho CP3, đối chiếu được 7 trích dẫn với bài gốc, trong đó 5 bài có tín hiệu này. Cần phỏng vấn đúng vai người lên lịch để kiểm giả thuyết về thời gian và chi phí. [Tóm tắt bằng chứng](evidence/summary.md) · [Trích dẫn nguyên văn](evidence/data-mining.md)
 
 ## §2. Impact & quyết định chọn *(guide 1.3)*
 
@@ -43,11 +43,18 @@ Quy ước: Impact tính trên **100 người dùng mục tiêu** (đơn vị ch
 
 Tổng: 50 × 0,25 + 30 × 0,20 + 20 × 0,10 = 20,5 chuyến/tháng trên 100 người.
 
+### Kịch bản kiểm khung chi phí CP3
+
+Kịch bản thử khung giữ mốc cơ sở 60 người và giả định tần suất sử dụng sản phẩm tách khỏi số chuyến ở bảng trên. Có thể dùng sản phẩm nhiều lần trước một chuyến. [Cấu hình mô phỏng](cost/personas.yaml)
+
+- **Impact / tháng của hướng chọn** = 60 người *(tự ước tính quy mô)* × 0,5 lần/người/tháng *(tự ước tính từ cơ cấu persona bên dưới)* × 25 phút/lần *(tự ước tính thời gian)* = **750 phút/tháng**. Đây là thời gian công việc phát sinh trong kịch bản, chưa phải thời gian sản phẩm đã tiết kiệm được.
+- **Persona dự kiến cho §8** *(tự ước tính)*. Dùng ít chiếm 50%, 0,2 lần/người/tháng. Dùng vừa chiếm 30%, 0,5 lần/người/tháng. Dùng nhiều chiếm 20%, 1,25 lần/người/tháng. Trung bình có trọng số là 0,5 lần/người/tháng.
+
 ## §3. Giải pháp tương tự *(guide 2.1)*
 - [Tripadvisor – hoạt động trong nhà ở Đà Nẵng](https://www.tripadvisor.com/Attractions-g298085-Activities-zft11295-Da_Nang.html) nhóm điểm theo tình huống ngày mưa. ASCLE học cách lọc hoạt động theo thời tiết và bổ sung bước đối chiếu một phương án với lịch và ngân sách cụ thể.
 
 ## §4. Thiết kế *(guide 2.2, 3.2)*
-- **Lát cắt CP2.** Khi người lên lịch cho nhóm bạn chọn Hà Giang hoặc Đà Nẵng và nhập số ngày, ngân sách mỗi người cùng thời điểm đi, AI chọn một hoạt động thay thế từ các phương án đủ căn cứ cho một ngày mưa để người đó nhận lịch mẫu kèm tổng chi phí ước tính và lý do đổi.
+- **Lát cắt CP3.** Khi người lên lịch cho nhóm bạn chọn Hà Giang hoặc Đà Nẵng và nhập số ngày, ngân sách mỗi người cùng thời điểm đi, AI chọn một hoạt động thay thế từ các phương án đủ căn cứ cho một ngày mưa để người đó nhận lịch mẫu kèm tổng chi phí ước tính và lý do đổi.
 - **Ngoài phạm vi.** Đặt hoặc thanh toán dịch vụ, ghép hai điểm đến, nhận yêu cầu ngoài 2–5 ngày, đổi nhiều ngày mưa một lượt, xác nhận đường an toàn hoặc chỗ còn.
 
 ### Sơ đồ
@@ -59,7 +66,7 @@ flowchart TD
     C --> E["Xếp lịch mẫu và lọc phương án theo vùng, tuyến, chi phí"]
     D --> E
     E --> F{"Có phương án đổi?"}
-    F -->|Có| G["Model chọn mã ứng viên đã được kiểm"]
+    F -->|Có| G["Qwen3 qua llama.cpp chọn mã theo ưu tiên giá hoặc thời gian di chuyển"]
     F -->|Không| H["Giữ lịch tham khảo hoặc để trống ngày mưa và giải thích"]
     G --> I["Python đối chiếu mã, cộng lại tổng và kiểm ngân sách"]
     H --> I
@@ -84,11 +91,11 @@ flowchart TD
   | G2 — nói rõ khả năng và giới hạn | Nêu chi phí chỉ gồm chỗ ở, thuê xe và vé. Thời gian OSRM và giá là tham khảo. |
   | G11 — giải thích vì sao | Hiển thị lý do đổi lịch, mã địa điểm, mã giá và chi phí từng khoản. |
 
-- **Phần mô phỏng.** CP2 dùng giá và tuyến từ CSV đã tổng hợp. Thời tiết do người dùng nhập như một kịch bản, chưa xác minh. Model giả chọn trong danh sách theo ưu tiên giá thấp hoặc đường đi ngắn. Model thật sẽ nối trước CP3. Hà Giang chưa có ứng viên ngày mưa đạt điều kiện.
+- **Model và dữ liệu.** CLI gọi Qwen3 0.6B qua llama.cpp trên máy để chọn mã ứng viên, rồi kiểm tra mã và tính lại chi phí từ CSV. Thời tiết ở luồng CLI là kịch bản do người dùng nhập. Nếu không có dữ liệu đủ căn cứ cho điểm thay thế tại Hà Giang, CLI để trống ngày mưa. [Cách chạy model](docs/connect-model.md)
 
 ### Bản Streamlit thử nghiệm
 
-Bản Streamlit dùng cùng hai vùng và thử thêm ngân sách cả nhóm, lịch 1–5 ngày và gợi ý chỗ ở. Python xếp lịch, đổi hoạt động và kiểm cận trên của chi phí. Bedrock chỉ trình bày kết quả đã kiểm. Bản này có bộ pytest riêng và chưa được dùng để chạy benchmark CP2. Benchmark, chuẩn đạt §7 và công cụ đánh giá CLI vẫn áp dụng cho luồng CP2 ở trên. Xem [báo cáo triển khai](REPORT.md).
+Bản Streamlit dùng cùng hai vùng và thử thêm ngân sách cả nhóm, lịch 1–5 ngày và gợi ý chỗ ở. Backend lấy thời tiết từ Open-Meteo. Python lọc các điểm theo giờ mở cửa, tuyến và ngân sách. Khi dự báo mưa và có ít nhất hai ứng viên trong nhà đủ dữ liệu giá và tuyến, Qwen3 chọn điểm mở đầu và giao diện hiện model cùng số token. Nếu Qwen3 chưa trả được kết quả hợp lệ, lịch vẫn dùng phương án Python. Lượt đánh giá §7 đo luồng CLI. [Báo cáo triển khai](REPORT.md) · [Video demo web](slides/demo-cp3-ui.mp4)
 
 ## §5. Chỗ khó — 4 lớp, 7 kịch bản và 2 câu thử tấn công *(guide 2.3)*
 
@@ -111,9 +118,9 @@ Bản Streamlit dùng cùng hai vùng và thử thêm ngân sách cả nhóm, l�
 
 ## §7. Đánh giá & chuẩn "đạt" *(guide 2.4, 4.1)*
 
-- [Data card](data/DATA_CARD.md), [benchmark](eval/benchmark.csv) có 15 câu (6 thường, 7 khó, 2 từ chối), [metric spec](eval/metric_spec.yaml) có 3 metric.
+- [Data card](data/DATA_CARD.md), [benchmark](eval/benchmark.csv) có 22 câu (8 thường, 12 khó, 2 từ chối), [metric spec](eval/metric_spec.yaml) có 3 metric.
 - **Chuẩn "đạt" chốt tại CP2:** “Đạt khi ít nhất 80% toàn bộ câu qua, 100% câu trả lịch đạt kiểm tra ngân sách và nguồn, 100% câu có ngày mưa hợp lệ xử lý đúng, và 100% câu từ chối đạt.”
-- Chưa có lượt đánh giá chính thức với model thật. Xem [hồ sơ đánh giá](eval/README.md).
+- Lượt `run-1@20261127-222340` đạt 22/22 (100%) theo điểm đã duyệt và xác nhận qua `score`. Có 5 câu gọi `qwen3-0.6b-f16` và 0 lỗi kỹ thuật. [Kết quả gốc](eval/run-1.csv) · [Trace](traces/run-1.jsonl) · [Báo cáo chấm](eval/report.md)
 
 ## §8. Chi phí khi dùng thật *(guide 4.2)*
 - Persona + giá: `cost/personas.yaml` · lượt mô phỏng: `cost/simulate-__.csv` (__ phiên)
@@ -128,14 +135,19 @@ Bản Streamlit dùng cùng hai vùng và thử thêm ngân sách cả nhóm, l�
 
 ## §10. Phân công & changelog
 - Phân công: Đoàn Văn Tú phụ trách bộ xếp lịch, kiểm ngân sách, đổi lịch và tích hợp model. Nguyễn Đăng Doanh phụ trách giao diện, Docker và AWS. Lê Nguyễn Hoàng Sơn phụ trách dữ liệu và thời tiết. Nguyễn Thanh Tùng phụ trách kiểm thử và demo.
-- Dùng AI vào việc gì (2–3 dòng; chi tiết `docs/ai-usage.md`):
+- Dùng Codex để nối model local, mở rộng benchmark, rà lại nguồn công khai và soạn bản nháp đối chiếu kết quả CP3. [Hồ sơ dùng AI](docs/ai-usage.md)
 - Nhật ký thay đổi — **mọi thay đổi sau CP2 19:30 Thứ Sáu 27/11 phải có dòng ở đây**:
 
 **CP2 → CP4** (vd thu hẹp lát cắt, hỏi thêm người dùng, lần cải tiến trước lượt 2)
 
 | Thời điểm | Đổi gì | Vì sao (trỏ về câu thử / lỗi / bằng chứng nào) |
 |---|---|---|
-|  |  |  |
+| 27/11, sau CP2 | Thêm yêu cầu gợi ý lưu trú vào agent dòng lệnh, dùng chung bộ đọc và xếp hạng với Streamlit. | Người dùng cần so khách sạn, nhà nghỉ và homestay theo trần giá. Loại đơn vị giá dorm chưa rõ để tránh tính nhầm giá theo phòng, xem [kiểm kê dữ liệu](data_report.md#đếm-đơn-vị-và-xử-lý-độ-tin-cậy). |
+| 27/11, 21:30 | Làm website Việt Du trên Streamlit, bổ sung bản đồ, thời tiết Open-Meteo và dự toán theo khoản. | Kiểm thử riêng cho web, giữ luồng CLI và benchmark CP2 để đánh giá theo chuẩn đã chốt. |
+| 27/11, chuẩn bị CP3 | Nối Qwen3 qua llama.cpp ở bước chọn điểm thay thế, thêm B16–B22 vào benchmark. | Bổ sung các tình huống sát trần, thiếu phương án, một ngày đã có điểm trong nhà, nhiều ngày mưa và ngân sách cả nhóm. |
+| 27/11, demo CP3 | Nối Qwen3 vào lựa chọn điểm trong nhà ở giao diện web, hiện số token và ghi demo 30 giây. | Kịch bản mưa Đà Nẵng cho thấy model tham gia chọn điểm trước khi xếp lịch và tính chi phí. |
+| Sau lần quay CP3 đầu | Bỏ kịch bản mẫu khỏi website. Form lấy thời tiết trực tiếp từ Open-Meteo. | Video giới thiệu sử dụng luồng sản phẩm với dự báo thật và model thật. |
+| Chốt kết quả CP3 | Ghi cột `pass` của lượt 1 sau khi duyệt và chạy `score`. | Kết quả 22/22 cho lượt `run-1@20261127-222340`. |
 
 **Sau CP4 (đến 23:59 Thứ Bảy 28/11)** (sửa theo góp ý — không sửa chuẩn "đạt", câu thử, số bằng chứng, kết quả các lượt đã chạy)
 

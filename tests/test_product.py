@@ -137,6 +137,32 @@ def test_person_price_normalizes_per_room_and_point_confidence():
     assert result["price_unit_is_estimate"]
 
 
+def test_agent_lodging_quotes_respect_price_unit_type_and_upper_bound(monkeypatch):
+    from collections import Counter
+    from importlib import import_module
+    import data_loader
+
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[1] / "codebase"))
+    agent = import_module("agent")
+    room = raw_lodging("Phòng A") | {"type": "hotel", "tier": "budget", "price_unit": "room_night",
+                                     "price_min_vnd": "300000", "price_max_vnd": "500000", "capacity_persons": "2"}
+    costly = room | {"lodging_id": "expensive", "name": "Phòng B", "price_max_vnd": "510000"}
+    dorm = room | {"lodging_id": "dorm", "name": "Dorm C", "price_unit": "night_unspecified", "rate_kind": "operator_dorm_from"}
+    homestay = room | {"lodging_id": "other", "name": "Homestay D", "type": "homestay"}
+    rows = [_lodging(raw, raw, Counter()) for raw in (room, costly, dorm, homestay)]
+    monkeypatch.setattr(data_loader, "load_data", lambda: Catalog(lodging=rows))
+    assert rows[2]["price_unit"] == "unit_unknown" and rows[2]["room_price_max_vnd"] is None
+
+    result = agent.answer("Gợi ý khách sạn Hà Giang cho 3 người 2 đêm, tối đa 500 nghìn/phòng/đêm")["output"]
+    assert "Phòng A" in result and "2.000.000 VNĐ" in result
+    assert all(name not in result for name in ("Phòng B", "Dorm C", "Homestay D"))
+
+    result = agent.answer("Khách sạn Hà Giang, 3 người, 2 đêm, tổng 1,9 triệu cho cả nhóm")["output"]
+    assert "Phòng A" not in result and "vượt 100.000 VNĐ" in result
+    prompt = agent.answer("Tìm chỗ ở Hà Giang, 3 người 2 đêm, 500k")["output"]
+    assert "giới hạn ngân sách" in prompt
+
+
 def test_regional_tertiles_count_distinct_properties():
     from collections import Counter
     rows = []
@@ -224,7 +250,4 @@ def test_streamlit_form_works_without_external_services(monkeypatch):
     monkeypatch.delenv("BEDROCK_MODEL_ID", raising=False)
     app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py")).run(timeout=12)
     assert not app.exception
-    assert app.title[0].value == "Đi Vừa Túi"
-    app.button[0].click().run(timeout=12)
-    assert not app.exception
-    assert any(metric.label == "Chi phí ước tính cho nhóm" for metric in app.metric)
+    assert app.session_state["vietdu"] == {}

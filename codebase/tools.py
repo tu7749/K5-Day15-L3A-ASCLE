@@ -2,6 +2,7 @@
 import csv
 from heapq import heappop, heappush
 from pathlib import Path
+import sys
 
 from tracing import tool
 
@@ -102,4 +103,32 @@ def weather_scenario(rain_day: int | None, severe: bool) -> dict:
     return {
         "rain_day": rain_day, "severe": severe,
         "source": "kịch bản do người dùng nhập; chưa xác minh" if rain_day else "chưa có dữ liệu",
+    }
+
+
+@tool
+def search_lodging(destination, nights, people, budget, scope, lodging_types=()):
+    """Tìm chỗ ở. Input: vùng, đêm, khách, ngân sách, cách tính, loại cơ sở. Output: lựa chọn theo hạng giá. Chỉ đọc CSV hoặc S3."""
+    root = str(DATA.parent)
+    if root not in sys.path:
+        sys.path.insert(1, root)
+    from data_loader import load_data
+    from lodging import lodging_options
+
+    catalog = load_data()
+    room_limit = budget if scope == "room_night" else None
+    units = {
+        "room_night": people * nights, "person_night": people * nights,
+        "person_total": people, "group_night": nights, "group_total": 1,
+    }
+    group_budget = budget * units[scope]
+    result = lodging_options(
+        catalog, destination, nights, people, group_budget,
+        lodging_types=lodging_types, room_budget_per_night=room_limit, require_upper_bound=True,
+    )
+    return {
+        "groups": result["groups"], "cheapest": result["cheapest_outside_allocation"],
+        "destination_name": DESTINATIONS[destination]["name"],
+        "uses_fallback": not any(row["region"] == destination for row in catalog.lodging),
+        "unknown_count": len(result["unpriced"]),
     }

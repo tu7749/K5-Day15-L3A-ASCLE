@@ -9,3 +9,7 @@ score: ; $(PY) run.py score $(RUN)
 simulate: ; $(PY) run.py simulate
 simulate-try: ; $(PY) run.py simulate --try
 .PHONY: run check eval eval-try score simulate simulate-try
+
+.PHONY: dev
+dev:
+	python -m streamlit run app.py

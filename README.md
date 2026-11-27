@@ -1,12 +1,42 @@
-# ASCLE — Lịch trình Hà Giang hoặc Đà Nẵng theo ngân sách và thời tiết
+# Việt Du — Lập lịch Hà Giang và Đà Nẵng
 
-**AI20K khóa 5 · Lớp L3A · Track C (Du lịch).** Xem [thành viên và phân công](TEAMS.md), [Canvas CP1](canvas.md) và [đặc tả](spec.md).
+Phiên bản 1.0.0
 
-Người lên lịch cho nhóm bạn đi tự túc phải đối chiếu chi phí, cung đường và thời tiết từ nhiều nguồn. Khi hoạt động ngoài trời gặp mưa, họ phải xếp lại lịch và tính lại chi phí trước khi chốt với nhóm.
+Việt Du là bản web Streamlit của nhóm ASCLE (AI20K khóa 5, L3A, Track C). Chọn điểm đến, ngày đi, số ngày, số khách và tổng ngân sách của cả nhóm. Kết quả gồm lịch theo ngày, bản đồ, gợi ý lưu trú và các khoản đã tính hoặc còn thiếu. Xem [thành viên](TEAMS.md) và [đặc tả hackathon](spec.md).
 
-**Lát cắt dự kiến.** Người dùng chọn **Hà Giang hoặc Đà Nẵng**, nhập số ngày (2–5), ngân sách mỗi người và thời điểm đi. Mỗi lịch trình chỉ dùng dữ liệu của điểm đến đã chọn. Khi có mưa, AI chọn hoạt động thay thế cho một ngày từ các phương án đã được Python kiểm tra về cung đường và chi phí. Python kiểm lại lựa chọn trước khi hiển thị lịch từng ngày, tổng chi phí ước tính và lý do đổi lịch. Người dùng quyết định có áp dụng gợi ý hay không.
+## Chạy website
 
-**Trạng thái.** Hồ sơ đang ở CP1. Lệnh `python run.py` mở bản khung dòng lệnh với công cụ mẫu và model giả. Luồng lập lịch, dữ liệu cho hai điểm đến và kết nối model thật đang ở giai đoạn chuẩn bị.
+Yêu cầu Python 3.10 trở lên. Tại thư mục chứa repo:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+make dev
+```
+
+Có thể chạy trực tiếp bằng `python -m streamlit run app.py`. Mở địa chỉ Local URL mà Streamlit in ra, mặc định `http://localhost:8501`. Website chạy khi chưa cấu hình khóa LLM. Nếu đã cấu hình Bedrock, phần tóm tắt được tạo từ dữ kiện đã kiểm tra. [Cách triển khai Docker và cấu hình dữ liệu](DEPLOY.md)
+
+### Lập lịch trên website
+
+Chọn điểm đến, ngày đi, số ngày, số khách và tổng ngân sách nhóm, rồi bấm **Tạo lịch trình**. Website lấy thời tiết từ Open-Meteo. Khi có dự báo mưa và ít nhất hai điểm trong nhà đủ dữ liệu giá và tuyến, [Qwen3 local](docs/connect-model.md) chọn điểm và giao diện hiện số token thực tế. Trên điện thoại, bấm **Bản đồ** để xem các ghim. [Video demo CP3](slides/demo-cp3-ui.mp4)
+
+### Dữ liệu và các giới hạn
+
+- Ba tệp lõi nằm trong `data/`: `places.csv`, `routes.csv`, `costs.csv`. Bộ nạp chỉ đọc UTF-8 hoặc UTF-8 BOM. Nối tuyến qua mã địa điểm, giữ đúng chiều và phương tiện. Hầu hết tuyến hiện có là tuyến ô tô một chiều. Thiếu chặng hoặc giờ mở cửa thì giao diện ghi rõ. Thời lượng thiếu dùng giả định có nhãn.
+- `data/accommodations.csv` và `data/accommodation_prices.csv` nối bằng `accommodation_id`. Toàn bộ giá thiếu đơn vị hoặc sức chứa cần thiết chỉ hiện dưới dạng **Tham khảo từ …/đêm**. `data/accommodation_budget_bands.csv` cung cấp mức tham khảo tổng hợp khi có. Nếu bản clone thiếu các bảng lưu trú chi tiết, thêm các file đó vào `data/` hoặc cấu hình S3 theo hướng dẫn triển khai. [Kiểm kê dữ liệu](data_report.md)
+- Chọn **Tùy chọn chuyến đi → Dự trù những khoản chưa có giá** để bổ sung khoản chi cho cả nhóm. Việt Du chỉ hiện **Trong ngân sách** khi mọi khoản phát sinh đã được tính hoặc dự trù. Các dòng `official_fee`, khoảng hiệu lực, nhóm thay thế và mã cùng khu được dùng khi CSV có trường tương ứng. Bảng hiện tại chưa có đầy đủ metadata này.
+- Dự báo lấy từ Open-Meteo theo cụm điểm và múi giờ Việt Nam. Ngoài kỳ dự báo, lịch vẫn giữ nguyên và hiển thị tần suất mưa cùng tháng từ 5 năm đầy đủ gần nhất, dùng bộ dữ liệu ERA5. Khi API lỗi, lịch vẫn được trả và thời tiết ghi **Chưa có dữ liệu thời tiết**. [Tài liệu Open-Meteo](https://open-meteo.com/en/docs)
+- Ảnh điểm đến minh họa do imagegen tạo, lưu dưới dạng WebP trong `static/assets/`. Ghim và đường nối trên Leaflet thể hiện thứ tự tham quan, với ghi công bản đồ OpenStreetMap.
+
+### Kiểm tra
+
+```bash
+python run.py check
+python -m pytest -q tests
+```
+
+`python run.py` vẫn mở bản thử CLI cho bộ đánh giá hackathon. Luồng web được kiểm tra riêng.
 
 ## Nhóm làm gì, khung làm gì
 
@@ -18,9 +48,9 @@ Người lên lịch cho nhóm bạn đi tự túc phải đối chiếu chi ph�
 | Chấm cột `pass` theo metric spec | Chạy cả bộ một lệnh, có run ID, model, token từng câu (`run.py eval`) · tính % đạt (`run.py score`) |
 | Persona, số người dùng thật, giá model (`cost/personas.yaml`) | Sinh ~50 phiên, chạy thật qua bản chạy thử, tính chi phí / phiên, / task thành công, / tháng 3 kịch bản (`run.py simulate`) |
 
-## Chạy trong 3 phút
+## Chạy bản CLI trong 3 phút
 
-Bộ khung cần **Python 3.10 trở lên** (Python 3.9 có sẵn trên macOS vẫn chạy được, chỉ in một dòng nhắc). **Không cần `pip install`.**
+Bản CLI dùng Python 3.10 trở lên. Các lệnh kiểm tra và bản web dùng thư viện trong `requirements.txt`.
 
 **Bước 1 — Mở cửa sổ lệnh ngay trong thư mục repo**
 
@@ -40,7 +70,7 @@ Gõ `dir` (Windows) hoặc `ls` (macOS / Linux): thấy `run.py` và `README.md`
 
 - Windows: gõ `python` mà mở Microsoft Store hoặc báo không có lệnh → dùng `py`. Chưa có Python: cài từ python.org, **tick "Add python.exe to PATH"**, mở lại PowerShell.
 - macOS: báo `command not found: python` là bình thường → dùng `python3`.
-- `python run.py` in ra "[câu trả lời giả — chưa nối model] …" là khung chạy đúng. Nối model thật: [docs/connect-model.md](docs/connect-model.md).
+- Bản CP3 dùng Qwen3 0.6B qua llama.cpp để chọn phương án đổi lịch khi mưa. Cấu hình chạy trên máy và không cần API key. [Hướng dẫn chạy model](docs/connect-model.md)
 
 Trong README này lệnh viết là `python …`; máy nhóm cần `python3` hay `py` thì gõ thay.
 
@@ -68,7 +98,7 @@ Gói miễn phí báo hết lượt: thêm `--wait 4` sau `eval` hoặc `simulat
 |---|---|---|
 | `codebase/agent.py` | `answer(text)` — luồng chính, đúng hình dạng ở `spec.md` §4. Khung có sẵn một workflow 2 bước *ví dụ* | 3.2 |
 | `codebase/tools.py` | Công cụ của bài toán, mỗi công cụ một hàm có `@tool` | 2.2, 3.2 |
-| `codebase/ai.py` | `call_model(system, user)` — chỗ duy nhất gọi model. Hiện bộ khung hỗ trợ **chế độ giả** | 3.3 |
+| `codebase/ai.py` | `call_model(system, user)` gọi API nội bộ của llama.cpp và lấy token từ `usage`. Lệnh mặc định vẫn hỗ trợ chạy khung với model giả. | 3.3 |
 
 - **Trước CP2:** để chế độ giả, công cụ trả dữ liệu giả — `python run.py` đi hết luồng là đủ.
 - **Trước CP3:** nối model thật theo [docs/connect-model.md](docs/connect-model.md), `eval --try` thấy token > 0 rồi mới `eval`.
@@ -78,12 +108,12 @@ Gói miễn phí báo hết lượt: thêm `--wait 4` sau `eval` hoặc `simulat
 
 | Thành phần | Thật / Giả | Ghi chú |
 |---|---|---|
-| Lời gọi AI ở quyết định trung tâm | Model giả | Cần kết nối model thật trước khi nộp CP3. |
-| Dữ liệu địa điểm, giá, cung đường và thời tiết | Chuẩn bị | Phạm vi gồm Hà Giang và Đà Nẵng. Bộ khung hiện trả dữ liệu mẫu. |
+| Lời gọi AI ở quyết định trung tâm | Qwen3 0.6B | Chọn mã điểm thay thế trong danh sách đã qua kiểm tra. |
+| Dữ liệu địa điểm, giá, cung đường và thời tiết | CSV của Hà Giang và Đà Nẵng | CLI nhận thời tiết giả lập từ đầu vào. Bản web có luồng Open-Meteo riêng. |
 
 ## Dùng AI vào việc gì
 
-Nhóm dùng Codex để điền hồ sơ CP1, diễn đạt lát cắt và đồng bộ phạm vi dự án giữa các tài liệu dựa trên thông tin nhóm cung cấp. Xem [hồ sơ dùng AI](docs/ai-usage.md) và [quy ước làm việc](AGENTS.md).
+Nhóm dùng Codex để điền hồ sơ CP1, diễn đạt lát cắt và đồng bộ tài liệu. Ở CP3, Codex hỗ trợ tích hợp model local, mở rộng benchmark và soạn bản nháp đối chiếu kết quả. [Hồ sơ dùng AI](docs/ai-usage.md) · [Quy ước làm việc](AGENTS.md)
 
 ## File mẫu — điền ở bước nào
 

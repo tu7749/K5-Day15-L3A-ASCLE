@@ -33,7 +33,7 @@ def _snapshot(read, source):
     optional = read("lodging")
     lodging_files = ("accommodations", "accommodation_prices")
     with ThreadPoolExecutor(max_workers=6) as executor:
-        pending = {name: executor.submit(read, name) for name in (*CORE_FILES, "duration_overrides", *(lodging_files if optional is None else ()))}
+        pending = {name: executor.submit(read, name) for name in (*CORE_FILES, "duration_overrides", "accommodation_budget_bands", *(lodging_files if optional is None else ()))}
         inputs = {name: task.result() for name, task in pending.items()}
     if optional is not None:
         inputs["lodging"] = optional

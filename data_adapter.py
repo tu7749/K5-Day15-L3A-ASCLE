@@ -14,11 +14,14 @@ FIELD_MAP = {
         "setting": "loai", "duration_hours": "thoi_luong_phut", "ticket_vnd": "ve_vnd",
         "best_months": "mua_dep", "category": "loai_osm", "source": "nguon_toa_do",
         "source_date": "ngay_kiem", "ticket_cost_id": "ve_cost_id",
+        "opening_hours": "gio_mo_cua", "area_id": "ma_khu",
     },
     "costs": {
         "cost_id": "id", "region": "thanh_pho", "category": "hang_muc", "item": "mo_ta",
         "unit": "don_vi", "price_min_vnd": "gia_min_vnd", "price_max_vnd": "gia_max_vnd",
         "notes": "ghi_chu", "source": "nguon", "source_date": "ngay_kiem", "place_id": "place_id",
+        "opening_hours": "gio_mo_cua", "fee_type": "loai_gia", "alternative_group": "nhom_thay_the",
+        "valid_from": "ap_dung_tu", "valid_to": "ap_dung_den", "area_id": "ma_khu",
     },
     "routes": {
         "from_place_id": "tu_id", "to_place_id": "den_id", "distance_km": "km",
@@ -35,6 +38,7 @@ FIELD_MAP = {
         "price_id": "price_id", "lodging_id": "accommodation_id", "price_min_vnd": "price_from_vnd",
         "price_max_vnd": "price_to_vnd", "price_unit": "rate_unit",
         "capacity_persons": "adults_per_unit", "source": "price_source_url", "source_date": "checked_at",
+        "rate_kind": "rate_kind",
     },
 }
 CORE_COLUMNS = {
@@ -42,10 +46,11 @@ CORE_COLUMNS = {
     "costs": ("cost_id", "region", "category", "item", "unit", "price_min_vnd", "price_max_vnd", "notes", "source", "source_date"),
     "routes": ("from_place_id", "to_place_id", "distance_km", "duration_min", "mode", "note"),
     "accommodations": tuple(FIELD_MAP["accommodations"]),
-    "accommodation_prices": tuple(FIELD_MAP["accommodation_prices"]),
+    "accommodation_prices": tuple(field for field in FIELD_MAP["accommodation_prices"] if field != "rate_kind"),
     "lodging": ("lodging_id", "region", "name", "type", "area", "lat", "lon", "price_min_vnd",
                 "price_max_vnd", "price_unit", "capacity_persons", "rating", "tier", "source", "source_date"),
     "duration_overrides": ("place_id", "duration_hours", "source"),
+    "accommodation_budget_bands": ("region_id", "zone", "accommodation_type", "rate_unit", "median_listing_from_vnd", "checked_at"),
 }
 COST_CATEGORIES = {
     "an_uong": "food", "thue_xe_may": "bike_rental", "thue_o_to": "car_rental", "xang": "fuel",
@@ -88,6 +93,7 @@ class Catalog:
     costs: list[dict] = field(default_factory=list)
     routes: list[dict] = field(default_factory=list)
     lodging: list[dict] = field(default_factory=list)
+    lodging_bands: list[dict] = field(default_factory=list)
     source: str = "local"
     audit: Counter = field(default_factory=Counter)
 
@@ -168,7 +174,9 @@ def _lodging(info, price, audit):
 
     raw_unit = price["price_unit"].casefold()
     unit = ROOM_UNITS.get(raw_unit, "unit_unknown")
-    assumed_unit = raw_unit in cfg.AMBIGUOUS_NIGHT_UNITS and kind in cfg.ASSUMED_ROOM_TYPES
+    # Một dòng quảng cáo giá dorm có thể tính theo giường dù cơ sở được xếp là khách sạn.
+    is_unspecified_dorm = raw_unit in cfg.AMBIGUOUS_NIGHT_UNITS and price.get("rate_kind") == "operator_dorm_from"
+    assumed_unit = raw_unit in cfg.AMBIGUOUS_NIGHT_UNITS and kind in cfg.ASSUMED_ROOM_TYPES and not is_unspecified_dorm
     if assumed_unit:
         unit = "per_room_night"
     capacity = _integer(price.get("capacity_persons", "")) or None
@@ -182,6 +190,7 @@ def _lodging(info, price, audit):
     audit[f"{key}/assumed_unit"] += assumed_unit
     audit[f"{key}/assumed_capacity"] += assumed_capacity
     audit[f"{key}/unknown_unit"] += unit == "unit_unknown"
+    audit[f"{key}/unspecified_dorm_unit"] += is_unspecified_dorm
     audit[f"{key}/confidence_capped"] += is_point or assumed_unit or assumed_capacity or unit == "unit_unknown"
 
     lat, lon = _coordinates(info["lat"], info["lon"])
@@ -191,6 +200,7 @@ def _lodging(info, price, audit):
         "region": region, "name": info["name"], "type": kind, "area": info["area"], "lat": lat, "lon": lon,
         "price_min_vnd": lower, "price_max_vnd": upper, "price_unit": unit,
         "capacity_persons": capacity, "rating": _number(info.get("rating")),
+        "published_capacity": _integer(price.get("capacity_persons", "")), "published_unit": raw_unit,
         "tier": info.get("tier") or None, "tier_is_estimate": False,
         "source": price["source"], "source_date": price["source_date"], "price_is_point": is_point,
         "price_unit_is_estimate": assumed_unit or bed_equivalent,
@@ -256,7 +266,9 @@ def adapt(tables: dict[str, list[dict]], source: str) -> Catalog:
             catalog.audit[f"costs/{row['region']}/missing_price_or_unsupported_unit"] += 1
             continue
         catalog.costs.append({
-            **row, "category": COST_CATEGORIES.get(row["category"], row["category"] if "category" in raw else "other"),
+            **row, "category": "ticket" if row["category"] == "official_fee" else
+            COST_CATEGORIES.get(row["category"], row["category"] if "category" in raw else "other"),
+            "fee_type": row["fee_type"] or ("official_fee" if row["category"] == "official_fee" else ""),
             "unit": unit, "basis": basis, "price_min_vnd": prices[0], "price_max_vnd": prices[1],
         })
 
@@ -268,10 +280,10 @@ def adapt(tables: dict[str, list[dict]], source: str) -> Catalog:
         if row["region"] and row["region"] not in cfg.REGIONS:
             catalog.audit[f"outside/routes/{row['region']}"] += 1
             continue
-        mode = {"osrm_oto": "car"}.get(row["mode"], row["mode"])
+        mode = {"osrm_oto": "car", "bus": "transit", "xe_buyt": "transit"}.get(row["mode"], row["mode"])
         distance, duration = _number(row["distance_km"]), _number(row["duration_min"])
         if (region not in cfg.REGIONS or place_regions.get(start) != region or place_regions.get(end) != region
-                or mode not in {"motorbike", "car"} or distance is None or duration is None or distance < 0 or duration <= 0):
+                or mode not in {"motorbike", "car", "transit"} or distance is None or duration is None or distance < 0 or duration <= 0):
             catalog.audit[f"routes/{region or '(trống)'}/missing_or_unverified_route"] += 1
             continue
         catalog.routes.append({
@@ -304,4 +316,5 @@ def adapt(tables: dict[str, list[dict]], source: str) -> Catalog:
         if entry := _lodging(info, price, catalog.audit):
             catalog.lodging.append(entry)
     _tier_lodging(catalog.lodging)
+    catalog.lodging_bands = [row for row in tables.get("accommodation_budget_bands", []) if row["region_id"] in cfg.REGIONS]
     return catalog

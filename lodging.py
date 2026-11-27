@@ -73,7 +73,8 @@ def quote_lodging(row, nights, people, budget_vnd, places, today):
     }
 
 
-def lodging_options(catalog, region, nights, people, budget_vnd, places=(), *, today=None):
+def lodging_options(catalog, region, nights, people, budget_vnd, places=(), *, today=None,
+                    lodging_types=(), room_budget_per_night=None, require_upper_bound=False):
     today = today or datetime.now(cfg.TIMEZONE).date()
     rows = [row for row in catalog.lodging if row["region"] == region]
     if not rows:
@@ -93,18 +94,41 @@ def lodging_options(catalog, region, nights, people, budget_vnd, places=(), *, t
                 "price_unit_is_estimate": bed, "capacity_persons": cfg.ONE_BED_PERSONS if bed else cfg.ROOM_CAPACITY_DEFAULT,
                 "capacity_is_estimate": True, "source": cost["source"], "source_date": cost["source_date"],
             })
-    quotes = [quote_lodging(row, nights, people, budget_vnd, places, today) for row in rows]
+    quotes = [
+        quote_lodging(row, nights, people, budget_vnd, places, today)
+        for row in rows
+        if (not lodging_types or row["type"] in lodging_types)
+        and (room_budget_per_night is None or row["price_unit"] == "per_room_night")
+    ]
     known = [quote for quote in quotes if quote["predicted_total"] is not None]
     groups = {tier: [] for tier in LODGING_TIERS}
+
+    def price_and_limit(row):
+        if room_budget_per_night is not None:
+            return row["price_range"], room_budget_per_night
+        return row["predicted_total"], budget_vnd
+
+    def fits(row):
+        price, limit = price_and_limit(row)
+        return price["max_vnd" if require_upper_bound else "min_vnd"] <= limit
+
     candidates = sorted(known, key=lambda item: (-item["score"], item["predicted_total"]["max_vnd"], item["price_id"]))
     for row in candidates:
         group = groups.get(row["tier"])
         if (group is not None and len(group) < cfg.MAX_LODGING_OPTIONS
-                and row["predicted_total"]["min_vnd"] <= budget_vnd
+                and fits(row)
                 and all(option["lodging_id"] != row["lodging_id"] for option in group)):
             group.append(row)
-    cheapest = min(known, key=lambda item: (item["predicted_total"]["min_vnd"], item["predicted_total"]["max_vnd"]), default=None)
+    price_key = "max_vnd" if require_upper_bound else "min_vnd"
+    cheapest = min(known, key=lambda row: (price_and_limit(row)[0][price_key], price_and_limit(row)[0]["max_vnd"]), default=None)
+    if require_upper_bound:
+        if cheapest is not None:
+            price, limit = price_and_limit(cheapest)
+            cheapest = {**cheapest, "gap_vnd": max(0, price[price_key] - limit)}
+        any_fit = any(fits(row) for row in known)
+    else:
+        any_fit = any(row["fits_budget"] for row in known)
     return {
-        "groups": groups, "known": known, "cheapest_outside_allocation": cheapest if not any(item["fits_budget"] for item in known) else None,
+        "groups": groups, "known": known, "cheapest_outside_allocation": cheapest if not any_fit else None,
         "unpriced": [row for row in quotes if row["predicted_total"] is None],
     }
