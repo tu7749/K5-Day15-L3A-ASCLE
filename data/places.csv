@@ -13,21 +13,21 @@ H11,ha_giang,Phố cổ Đồng Văn,23.2796709,105.3607839,,tourism/attraction,
 H12,ha_giang,Chợ Đồng Văn,23.2768851,105.3609726,,amenity/marketplace,,,,,OpenStreetMap Nominatim,2026-11-27,
 H13,ha_giang,Đèo Mã Pí Lèng,23.2419571,105.3979217,,tourism/attraction,,,,,OpenStreetMap Nominatim,2026-11-27,
 H14,ha_giang,Mèo Vạc,23.1633187,105.4104440,,boundary/administrative,,,,,OpenStreetMap Nominatim,2026-11-27,toạ độ tâm xã - nên đổi sang trung tâm thị trấn
-D01,da_nang,Cầu Rồng (trung tâm),16.0611682,108.2278968,,man_made/bridge,60,0,C134,quanh năm (tự ước tính),OpenStreetMap Nominatim,2026-11-27,"vé lấy từ costs.csv C134; rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính"
+D01,da_nang,Cầu Rồng (trung tâm),16.0611682,108.2278968,,man_made/bridge,60,0,C134,,OpenStreetMap Nominatim,2026-11-27,"vé lấy từ costs.csv C134; rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: quanh năm"
 D02,da_nang,Sân bay quốc tế Đà Nẵng,16.0425792,108.1971613,,aeroway/aerodrome,,,,,OpenStreetMap Nominatim,2026-11-27,
-D03,da_nang,Sun World Bà Nà Hills,15.9958569,107.9890712,,tourism/theme_park,360,1000000,C150,T2–T8 (tự ước tính),OpenStreetMap Nominatim,2026-11-27,"trên đỉnh núi - xe tới chân núi rồi đi cáp treo; vé lấy từ costs.csv C150; rủi ro khi mưa: cao (tự ước tính, Doanh); thời lượng tự ước tính"
-D04,da_nang,Ngũ Hành Sơn,16.0040200,108.2627745,,natural/wood,150,40000,C144,T2–T8 (tự ước tính),OpenStreetMap Nominatim,2026-11-27,"vé lấy từ costs.csv C144; rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính"
-D05,da_nang,Bảo tàng Điêu khắc Chăm,16.0601209,108.2230840,trong_nha,tourism/museum,90,60000,C139,quanh năm,OpenStreetMap Nominatim,2026-11-27,"loai theo OSM: museum; vé lấy từ costs.csv C139; rủi ro khi mưa: thấp (tự ước tính, Doanh); thời lượng tự ước tính"
-D06,da_nang,Bãi biển Mỹ Khê,16.0756254,108.2468784,,natural/beach,120,0,C213,T4–T8 (tự ước tính),OpenStreetMap Nominatim,2026-11-27,"rủi ro khi mưa: cao (tự ước tính, Doanh); thời lượng tự ước tính"
-D07,da_nang,Chùa Linh Ứng Sơn Trà,16.1001567,108.2784112,,amenity/place_of_worship,90,0,C133,quanh năm (tự ước tính),OpenStreetMap Nominatim,2026-11-27,"vé lấy từ costs.csv C133; rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính"
-D08,da_nang,Chợ Hàn,16.0683525,108.2242830,trong_nha,amenity/marketplace,90,0,C215,quanh năm,OpenStreetMap Nominatim,2026-11-27,"rủi ro khi mưa: thấp (tự ước tính, Doanh); thời lượng tự ước tính"
-D09,da_nang,Chợ Cồn,16.0681275,108.2145213,trong_nha,amenity/marketplace,90,0,C216,quanh năm,OpenStreetMap Nominatim,2026-11-27,"rủi ro khi mưa: thấp (tự ước tính, Doanh); thời lượng tự ước tính"
+D03,da_nang,Sun World Bà Nà Hills,15.9958569,107.9890712,,tourism/theme_park,360,1000000,C150,,OpenStreetMap Nominatim,2026-11-27,"trên đỉnh núi - xe tới chân núi rồi đi cáp treo; vé lấy từ costs.csv C150; rủi ro khi mưa: cao (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: T2–T8"
+D04,da_nang,Ngũ Hành Sơn,16.0040200,108.2627745,,natural/wood,150,40000,C144,,OpenStreetMap Nominatim,2026-11-27,"vé lấy từ costs.csv C144; rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: T2–T8"
+D05,da_nang,Bảo tàng Điêu khắc Chăm,16.0601209,108.2230840,trong_nha,tourism/museum,90,60000,C139,,OpenStreetMap Nominatim,2026-11-27,"loai theo OSM: museum; vé lấy từ costs.csv C139; rủi ro khi mưa: thấp (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: quanh năm"
+D06,da_nang,Bãi biển Mỹ Khê,16.0756254,108.2468784,,natural/beach,120,0,C213,,OpenStreetMap Nominatim,2026-11-27,"rủi ro khi mưa: cao (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: T4–T8"
+D07,da_nang,Chùa Linh Ứng Sơn Trà,16.1001567,108.2784112,,amenity/place_of_worship,90,0,C133,,OpenStreetMap Nominatim,2026-11-27,"vé lấy từ costs.csv C133; rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: quanh năm"
+D08,da_nang,Chợ Hàn,16.0683525,108.2242830,trong_nha,amenity/marketplace,90,0,C215,,OpenStreetMap Nominatim,2026-11-27,"rủi ro khi mưa: thấp (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: quanh năm"
+D09,da_nang,Chợ Cồn,16.0681275,108.2145213,trong_nha,amenity/marketplace,90,0,C216,,OpenStreetMap Nominatim,2026-11-27,"rủi ro khi mưa: thấp (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: quanh năm"
 D10,da_nang,Bảo tàng Đà Nẵng,16.0750129,108.2239347,trong_nha,tourism/museum,,50000,C140,,OpenStreetMap Nominatim,2026-11-27,loai theo OSM: museum; vé lấy từ costs.csv C140
-D11,da_nang,Asia Park,16.0412218,108.2263899,,landuse/construction,120,200000,C130,quanh năm (tự ước tính),OpenStreetMap Nominatim,2026-11-27,"OSM ghi 'Da Nang Downtown - construction': có thể đã đổi tên/đóng - PHẢI kiểm trước khi dùng; vé: xem costs.csv C130 (bài 2022, chưa chắc còn hoạt động); rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính"
-D12,da_nang,Art in Paradise (bảo tàng 3D),16.0953807,108.2430769,trong_nha,tourism/museum,90,200000,C217,quanh năm,OpenStreetMap Nominatim,2026-11-27,"loai theo OSM: museum; vé: chưa có nguồn giá vé; rủi ro khi mưa: thấp (tự ước tính, Doanh); thời lượng tự ước tính"
-D13,da_nang,Nhà thờ Chính tòa Đà Nẵng,16.0666827,108.2230584,,amenity/place_of_worship,30,0,C220,quanh năm,OpenStreetMap Nominatim,2026-11-27,"rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính"
+D11,da_nang,Asia Park,16.0412218,108.2263899,,landuse/construction,120,200000,C130,,OpenStreetMap Nominatim,2026-11-27,"OSM ghi 'Da Nang Downtown - construction': có thể đã đổi tên/đóng - PHẢI kiểm trước khi dùng; vé: xem costs.csv C130 (bài 2022, chưa chắc còn hoạt động); rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: quanh năm"
+D12,da_nang,Art in Paradise (bảo tàng 3D),16.0953807,108.2430769,trong_nha,tourism/museum,90,200000,C217,,OpenStreetMap Nominatim,2026-11-27,"loai theo OSM: museum; vé: chưa có nguồn giá vé; rủi ro khi mưa: thấp (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: quanh năm"
+D13,da_nang,Nhà thờ Chính tòa Đà Nẵng,16.0666827,108.2230584,,amenity/place_of_worship,30,0,C220,,OpenStreetMap Nominatim,2026-11-27,"rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: quanh năm"
 D14,da_nang,Phố cổ Hội An,15.8771291,108.3286631,,boundary/protected_area,,80000,C136,,OpenStreetMap Nominatim,2026-11-27,vé lấy từ costs.csv C136
-D15,da_nang,Đèo Hải Vân,16.2186120,108.1030613,,highway/trunk,180,0,C214,T2–T8 (tự ước tính),OpenStreetMap Nominatim,2026-11-27,"rủi ro khi mưa: cao (tự ước tính, Doanh); thời lượng tự ước tính"
+D15,da_nang,Đèo Hải Vân,16.2186120,108.1030613,,highway/trunk,180,0,C214,,OpenStreetMap Nominatim,2026-11-27,"rủi ro khi mưa: cao (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: T2–T8"
 HO001,ha_giang,Cho Minh Khai,22.8198783,104.9856553,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/5390086448),2026-11-27,giờ mở (OSM): Mo-Su 06:00-19:00
 HO002,ha_giang,Chợ Bò,23.1657742,105.4081317,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1327813980),2026-11-27,
 HO003,ha_giang,Chợ Cầu Trắng,22.8204254,104.9820109,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/853226259),2026-11-27,
@@ -294,7 +294,7 @@ DO140,da_nang,Nam Son Pagoda,15.9987986,108.2051036,,tourism=attraction,,,,,Open
 DO141,da_nang,Ngũ Hành Sơn,16.0017096,108.2596132,,tourism=attraction,,,,,OpenStreetMap Overpass API (relation/8552348),2026-11-27,https://nguhanhson.org
 DO142,da_nang,Nhà thờ Saint Denis,15.997358,107.9877992,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/1109970009),2026-11-27,
 DO143,da_nang,Non Nuoc Beach,16.0205336,108.261744,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/4172034499),2026-11-27,
-DO144,da_nang,Núi Thần Tài,15.9681262,108.0196301,,tourism=attraction,300,465500,C219,quanh năm (tự ước tính),OpenStreetMap Overpass API (node/5286977425),2026-11-27,"rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính"
+DO144,da_nang,Núi Thần Tài,15.9681262,108.0196301,,tourism=attraction,300,465500,C219,,OpenStreetMap Overpass API (node/5286977425),2026-11-27,"rủi ro khi mưa: trung bình (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: quanh năm"
 DO145,da_nang,Phùng Hung,15.8770404,108.3263229,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5153761923),2026-11-27,
 DO146,da_nang,Pont main,16.0520775,108.2156357,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/10603622205),2026-11-27,
 DO147,da_nang,Quan Công Miếu,15.8775404,108.3313895,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/631064893),2026-11-27,
@@ -343,7 +343,7 @@ DO189,da_nang,Rào chắn,16.1167482,108.3084376,,tourism=viewpoint,,,,,OpenStre
 DO190,da_nang,Small waterfall,16.1145234,108.2556163,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/12701675501),2026-11-27,
 DO191,da_nang,Son Tra view,16.109214,108.2517721,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/12701646101),2026-11-27,
 DO192,da_nang,Thác Tóc Tiên,16.0244662,108.0262303,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/2177056870),2026-11-27,
-DO193,da_nang,Đỉnh Bàn Cờ,16.1189286,108.2720036,,tourism=viewpoint,120,0,C212,T2–T8 (tự ước tính),OpenStreetMap Overpass API (node/1538334281),2026-11-27,"tên khác: Ban Co Peak; rủi ro khi mưa: cao (tự ước tính, Doanh); thời lượng tự ước tính"
+DO193,da_nang,Đỉnh Bàn Cờ,16.1189286,108.2720036,,tourism=viewpoint,120,0,C212,,OpenStreetMap Overpass API (node/1538334281),2026-11-27,"tên khác: Ban Co Peak; rủi ro khi mưa: cao (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: T2–T8"
 DO194,da_nang,Xanh Design DN Tiệm Cây và Nước,16.0201637,108.236873,,tourism=zoo,,,,,OpenStreetMap Overpass API (way/1484919510),2026-11-27,
 H15,ha_giang,Du Già,22.93117,105.22291,,,,,,,https://mapcarta.com/15510216,2026-11-27,Điểm dân cư dùng làm đầu chặng; tọa độ đại diện xã. https://vietnam.travel/vi/things-to-do/ha-giang-loop-where-nature-and-culture-come-one/
 H16,ha_giang,Thác Du Già,,,ngoai_troi,,,,,,,2026-11-27,Thác ở vùng Du Già. Các nguồn bản đồ cho vị trí khác nhau. https://vietnam.travel/vi/things-to-do/ha-giang-loop-where-nature-and-culture-come-one/
@@ -353,7 +353,7 @@ H19,ha_giang,Chợ tình Khau Vai,,,ngoai_troi,,,,,,,2026-11-27,Chợ theo kỳ 
 H20,ha_giang,Thác Tiên – Đèo Gió,,,ngoai_troi,,,,,,,2026-11-27,Danh thắng tại Xín Mần. https://vietnam.travel/vi/things-to-do/ha-giang-loop/
 H21,ha_giang,Bãi đá cổ Nấm Dẩn,,,ngoai_troi,,,,,,,2026-11-27,Di tích khảo cổ ở Xín Mần. https://vietnam.travel/vi/things-to-do/ha-giang-loop/
 H22,ha_giang,Suối khoáng Quảng Ngần,,,ngoai_troi,,,,,,,2026-11-27,Suối khoáng ở Vị Xuyên. https://vietnam.travel/vi/things-to-do/ha-giang-loop/
-D16,da_nang,Bảo tàng Mỹ thuật Đà Nẵng,16.07137,108.21768,trong_nha,,90,20000,C141,quanh năm,https://mapcarta.com/W759913076,2026-11-27,"78 Lê Duẩn. https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich; rủi ro khi mưa: thấp (tự ước tính, Doanh); thời lượng tự ước tính"
+D16,da_nang,Bảo tàng Mỹ thuật Đà Nẵng,16.07137,108.21768,trong_nha,,90,20000,C141,,https://mapcarta.com/W759913076,2026-11-27,"78 Lê Duẩn. https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich; rủi ro khi mưa: thấp (tự ước tính, Doanh); thời lượng tự ước tính; mùa đẹp tự ước tính: quanh năm"
 D17,da_nang,Bảo tàng Đồng Đình,16.101412,108.276077,,,,35000,C163,,https://hcmussh.edu.vn/api/tt/storage/download/18434.pdf,2026-11-27,Bán đảo Sơn Trà. Vé C163 dành cho khách Việt Nam. https://dongdinhmuseum.vn/gioi-thieu
 D18,da_nang,Đình Túy Loan,,,,,,,,,,2026-11-27,Di tích đình làng ở Hòa Vang. https://danangfantasticity.com/en/kien-truc/di-tich-kien-truc-nghe-thuat-da-nang
 D19,da_nang,Đình Nại Nam,,,,,,,,,,2026-11-27,Gần Cung Thể thao Tiên Sơn. https://danangfantasticity.com/en/di-tich-kien-truc-nghe-thuat/dinh-nai-nam-phuong-hoa-cuong

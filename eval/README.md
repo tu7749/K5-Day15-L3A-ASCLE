@@ -1,44 +1,47 @@
-# Hồ sơ đánh giá — một trang
-
-> Điền ở guide bước 2.4 (mục 1–4, trước CP2) và 4.1 (mục 5–6, trước CP4). Ôn lại: ngày 9, ngày 14 · lab ngày 9. Chấm ở rubric R4, R5.
-> Người ngoài nhóm đọc trang này phải hiểu được: nhóm đo cái gì, bằng gì, ra số nào. Trang slide "Đánh giá thế nào" lấy từ đây.
+# Hồ sơ đánh giá · CP2
 
 ## 1. Dataset → xử lý
 
-Dataset nào, xử lý gì: tóm 2–3 dòng từ `data/DATA_CARD.md`.
+Đọc CSV địa điểm, giá và tuyến theo vùng Hà Giang hoặc Đà Nẵng. Vé phải khớp mã điểm, mã giá và đơn vị. Lịch mẫu dùng chi phí tại điểm đến cho chỗ ở, thuê xe và vé. Ngày mưa lấy từ kịch bản nhập, không dùng dự báo live. Xem [data card](../data/DATA_CARD.md).
 
 ## 2. Bộ câu thử dựng ra sao
 
-- `eval/benchmark.csv`: __ câu (thuong __ · kho __ · tu_choi __, trong đó __ câu tấn công)
-- Nguồn (`python run.py check` in sẵn): nguoi_dung __ · data_that __ · tu_viet __ · sinh_seed __ → từ người dùng / data thật __/__ (cần ≥1/3)
-- Độ phủ — lưới input 3–5 chiều (guide 2.4 bước 5): __
-- Câu `kho` trỏ về 4 lớp chỗ khó (`spec.md` §5): lớp 1: __ · lớp 2: __ · lớp 3: __ · lớp 4: __
+- [Benchmark](benchmark.csv) có 15 câu: 6 thường, 7 khó, 2 từ chối (cả hai thử yêu cầu vượt quyền). 8/15 câu dựng từ dữ kiện trong CSV, 7 câu tự viết. Câu có kịch bản mưa ghi rõ giả lập.
+- Độ phủ: điểm đến và số ngày; ngân sách bình thường, sát ngưỡng hoặc thiếu; thời điểm thiếu hoặc đủ; một ngày mưa, cảnh báo hoặc chưa biết; yêu cầu trong phạm vi hoặc vượt quyền.
+- B03, B04 và B10 kiểm dữ liệu nguồn. B07, B12 và B13 kiểm cách hỏi lại. B14 và B15 kiểm phạm vi quyền. B08, B09 và B11 kiểm ngân sách và ngày có cảnh báo.
 
 ## 3. Metric và cách chấm
 
-| Metric (`eval/metric_spec.yaml`) | Cách chấm | Ngưỡng |
+| Metric | Cách chấm | Ngưỡng |
 |---|---|---|
-| | code / llm / nguoi | |
-| | | |
-| | | |
+| `ngan_sach_va_nguon` | Đối chiếu tổng, mã giá, vùng và đơn vị với CSV | 100% câu có lịch |
+| `xu_ly_ngay_mua` | Đối chiếu ngày bị đổi hoặc bỏ trống, căn cứ và nhãn thời tiết | 100% câu có ngày mưa hợp lệ |
+| `dung_hanh_vi_theo_cau` | Chấm tay theo `pass_criterion` | Ít nhất 80% toàn bộ, 100% câu từ chối |
 
-- **Người thứ hai chấm thử:** __ (không phải người viết spec) chấm độc lập 5 output → khớp __/5 *(cần ≥4/5; lệch thì viết lại định nghĩa)*
-- LLM chấm (nếu có): đã kiểm tay __ câu, khớp __/__
-- **Chuẩn "đạt"** (chép nguyên từ `spec.md` §7, chốt trước 19:30 Thứ Sáu 27/11): "__"
+**Chuẩn đạt:** “Đạt khi ít nhất 80% toàn bộ câu qua, 100% câu trả lịch đạt kiểm tra ngân sách và nguồn, 100% câu có ngày mưa hợp lệ xử lý đúng, và 100% câu từ chối đạt.”
+
+Chưa có kết quả hai người chấm độc lập. Dùng B03, B07, B09, B10 và B14 để chấm chéo 5 output. Mỗi người dùng cột `pass_criterion` ghi 1 hoặc 0 rồi so số ca khớp (yêu cầu ít nhất 4/5). CP2 chưa có lượt đánh giá chính thức với model thật.
 
 ## 4. Lệnh
 
-`python run.py eval` → `eval/run-N.csv` + `traces/run-N.jsonl` · điền cột `pass` · `python run.py score eval/run-N.csv`
+Bộ câu thử và chuẩn đạt ở đây đo luồng CLI CP2. Bản Streamlit dùng pytest riêng; xem [báo cáo](../REPORT.md).
+
+```bash
+python3 run.py check
+MODEL_PROVIDER=fake python3 run.py
+MODEL_PROVIDER=fake python3 run.py eval --try
+```
+
+Đầu vào mẫu cho lệnh thứ hai: `Đà Nẵng 3 ngày, ngân sách 3 triệu mỗi người, tháng 10, mưa ngày 2.`
+
+Để lấy 5 output chấm chéo, chạy `MODEL_PROVIDER=fake python3 run.py eval --try 14` ở bản sao repo dùng cho kiểm tra, rồi lấy các mã trên trong `eval/run-try.csv`.
+
+Sau khi nối model thật, chạy `python3 run.py eval`, chấm cột `pass`, rồi chạy `python3 run.py score eval/run-1.csv`.
 
 ## 5. Đã chạy gì
 
-| Lượt | Run ID | Model | Cấu hình (prompt / công cụ / thay đổi) | Đạt / tổng | % | Đạt chuẩn? |
-|---|---|---|---|---|---|---|
-| 1 | | | | __/__ | | |
-| 2 | | | | __/__ | | |
-
-Lượt chạy lại vì lỗi kỹ thuật, lượt sau CP4: ghi thêm dòng, không sửa dòng cũ.
+Đã chạy đủ 15 câu bằng model giả trong bản sao repo. Bộ chạy ghi `run-mock.csv`, chưa tính vào lượt đánh giá. Kiểm tra smoke xác nhận tổng và ngân sách, khoanh vùng địa điểm và chặn mã ngoài danh sách. Lượt 1 và lượt 2 sẽ ghi bảng kết quả khi có run ID của model thật.
 
 ## 6. Lỗi chính
 
-Tóm 2–3 dòng từ `eval/report.md`: nhóm lỗi lớn nhất · đã sửa gì · còn lại gì.
+Chưa phân tích lỗi từ lượt chạy chính thức. Rủi ro đã biết là thiếu tuyến/giá ở một số địa điểm, và chưa có ứng viên đổi ngày mưa đạt điều kiện tại Hà Giang.

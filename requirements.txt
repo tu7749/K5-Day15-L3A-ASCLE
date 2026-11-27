@@ -1,7 +1,3 @@
-# Bộ khung (run.py, codebase/, eval/run_eval.py, cost/simulate.py) chỉ dùng thư viện chuẩn của Python 3.10+:
-# KHÔNG cần pip install để chạy.
-# Nhóm dùng thêm thư viện (vd SDK của nhà cung cấp model) thì ghi tên gói vào đây, mỗi dòng một gói,
-# và ghi lệnh cài vào README: python -m pip install -r requirements.txt
-
-# Giao diện web (streamlit_app.py) — không cần cho python run.py / eval / simulate
-streamlit>=1.40
+boto3==1.44.12
+streamlit==1.65.0
+pytest==9.2.0
