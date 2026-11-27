@@ -2,7 +2,7 @@
 Không cần cài thêm gì, không cần make.
 
   python run.py                         chạy bản chạy thử (codebase/app.py → codebase/agent.py)
-  python run.py check                   kiểm eval/benchmark.csv + eval/metric_spec.yaml
+  python run.py check                   kiểm CSV chuẩn hóa, pytest và hồ sơ eval
   python run.py eval --try [N]          thử nối model: chạy N câu thử đầu (mặc định 3) → eval/run-try.csv
   python run.py eval                    chạy cả bộ câu thử → eval/run-N.csv + traces/run-N.jsonl
   python run.py eval --fake             thử bộ chạy, KHÔNG gọi agent → eval/run-fake.csv
@@ -39,7 +39,7 @@ SIMULATE = os.path.join("cost", "simulate.py")
 
 HELP = """Các lệnh dùng được:
   python run.py                         chạy bản chạy thử
-  python run.py check                   kiểm bộ câu thử + metric spec
+  python run.py check                   kiểm CSV chuẩn hóa, pytest và hồ sơ eval
   python run.py eval --try [N]          thử nối model với N câu đầu (mặc định 3)
   python run.py eval                    chạy cả bộ câu thử → eval/run-N.csv
   python run.py eval --fake             thử bộ chạy, không gọi agent
@@ -93,7 +93,7 @@ def main(argv):
         if rest:
             print("check không nhận thêm tham số: " + " ".join(rest) + "\n" + HELP)
             return 2
-        return py(EVAL, "--check")
+        return py("validate_data.py") or py("-m", "pytest", "-q", "tests") or py(EVAL, "--check")
     if cmd == "eval":
         return py(EVAL, *rest)
     if cmd == "score":
