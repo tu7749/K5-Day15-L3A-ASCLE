@@ -11,10 +11,10 @@
 
 | STT | Họ và tên | Mã học viên | Vai trò | Phần việc chính |
 |---|---|---|---|---|
-| 1 | Đoàn Văn Tú | 2A202603595 | Đội trưởng | Bộ xếp lịch, kiểm ngân sách và đổi lịch khi mưa |
-| 2 | Nguyễn Đăng Doanh | 2A202603597 | Thành viên | Giao diện Streamlit, Docker và triển khai EC2 |
+| 1 | Đoàn Văn Tú | 2A202603595 | Đội trưởng | Bộ xếp lịch, kiểm ngân sách và đổi lịch khi mưa, tích hợp model |
+| 2 | Nguyễn Đăng Doanh | 2A202603597 | Thành viên | Giao diện Streamlit, Docker và triển khai EC2, Hạ tầng AWS |
 | 3 | Lê Nguyễn Hoàng Sơn | 2A202603686 | Thành viên | Dữ liệu địa điểm, giá, cung đường và thời tiết |
-| 4 | Nguyễn Thanh Tùng | 2A202603594 | Thành viên | Hạ tầng AWS, tích hợp model, kiểm thử và demo |
+| 4 | Nguyễn Thanh Tùng | 2A202603594 | Thành viên | Kiểm thử và demo |
 
 **Quy tắc điền**
 - **Lớp:** `L3A` hoặc `L3B`. **Track:** một chữ `A` (EdTech), `B` (Y tế), `C` (Du lịch), `D` (Thương mại điện tử), `E` (Tài chính) hoặc `F` (Làn khác). **Link repo:** link GitHub công khai của nhóm.
