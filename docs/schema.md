@@ -81,4 +81,4 @@ Nguồn chuẩn là file của Sơn (A). `req["diem_den"]` khớp cột `thanh_p
 | `thoi_luong_phut`, `ve_vnd`, `ve_cost_id` | thời lượng, vé, mã dòng giá trong `costs.csv` |
 | `mua_dep`, `nguon_toa_do`, `ngay_kiem`, `ghi_chu` | |
 
-`data/places_da_nang.csv` (Doanh) là bản bổ sung cho 15 điểm Đà Nẵng: giá vé, thời lượng, giờ mở cửa, `rui_ro_khi_mua` — chờ ghép vào `places.csv`.
+Doanh đã ghép bổ sung cho 15 điểm Đà Nẵng (thời lượng, mùa đẹp, giá vé ở `costs.csv` C212–C220). Mức rủi ro khi mưa hiện chỉ ghi trong `ghi_chu` (`rủi ro khi mưa: thấp / trung bình / cao`) — nếu planner cần lọc thì nên thêm cột riêng (chờ Sơn quyết).
