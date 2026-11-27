@@ -3,9 +3,9 @@
 > Điền ở guide bước 1.1. Ôn lại: ngày 2 · lab ngày 2.
 > Viết **trước** khi đọc dòng data đầu tiên hay hỏi người đầu tiên, để không sửa cho khớp kết quả. Kết quả ngược giả thuyết vẫn đủ điểm nếu số là thật.
 
-- Ngày giờ viết: __
-- Người dùng chính (một vai cụ thể): __
-- **Mình nghĩ:** [ai] gặp khó khi [việc] vì [lý do], hậu quả là [mất gì].
-- **Có thể còn cách giải thích khác:** __
-- **Mình đúng nếu thấy:** [một con số nhóm tự chọn] — vd "≥2/3 người kể được một lần như thế trong 1 tháng qua" hoặc "≥x/N học viên bỏ ở bước này" *(ví dụ)*
-- **Nguồn sẽ dùng** (≥1 nguồn đạt ngưỡng, guide 1.2): [ ] đào data · [ ] phỏng vấn ≥3 · [ ] khảo sát ≥20 — nguồn chính: __ · nguồn để kiểm lại: __
+- Ngày giờ viết: 27/11/2026, theo giờ Việt Nam.
+- Người dùng chính: Người đứng ra lên lịch chuyến đi Hà Giang tự túc cho nhóm bạn.
+- **Mình nghĩ:** Khi phải đổi hoạt động ngoài trời vì mưa, người lên lịch phải tra lại cung đường và chi phí từ nhiều nguồn nên mất thêm thời gian trước khi chốt phương án với nhóm.
+- **Có thể còn cách giải thích khác:** Việc xếp lại lịch có thể chủ yếu do nhóm chưa thống nhất giờ di chuyển hoặc sở thích.
+- **Mình đúng nếu thấy:** Ít nhất 2 trong 3 người được hỏi kể được một lần trong tháng qua họ phải tra lại cung đường hoặc tính lại tiền vì đổi hoạt động do mưa hay dự báo mưa. Đây là ngưỡng dự kiến để kiểm giả thuyết.
+- **Nguồn sẽ dùng:** Nguồn chính là phỏng vấn ít nhất 3 người ngoài nhóm đã lên lịch đi Hà Giang tự túc. Nguồn đối chiếu dự kiến là bài hỏi đáp công khai về việc đổi lịch Hà Giang khi mưa.

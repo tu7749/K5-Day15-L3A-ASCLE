@@ -4,16 +4,17 @@
 > Giữ nguyên tên file `TEAMS.md` ở thư mục gốc repo, giữ nguyên các dòng `- Tên nhóm:` … và tiêu đề cột của bảng. Chỉ thay chỗ `____`.
 > Kiểm bằng `python run.py check`: phần "Kiểm TEAMS.md" không báo gì là đúng format.
 
-- Tên nhóm: ____
-- Lớp: ____
-- Track: ____
-- Link repo: ____
+- Tên nhóm: ASCLE
+- Lớp: L3A
+- Track: C
+- Link repo: https://github.com/tu7749/K5-Day15-L3A-ASCLE
 
 | STT | Họ và tên | Mã học viên | Vai trò | Phần việc chính |
 |---|---|---|---|---|
-| 1 | ____ | ____ | Đội trưởng | ____ |
-| 2 | ____ | ____ | Thành viên | ____ |
-| 3 | ____ | ____ | Thành viên | ____ |
+| 1 | Đoàn Văn Tú | 2A202603595 | Đội trưởng | Bộ xếp lịch, kiểm ngân sách và đổi lịch khi mưa |
+| 2 | Nguyễn Đăng Doanh | 2A202603597 | Thành viên | Giao diện Streamlit, Docker và triển khai EC2 |
+| 3 | Lê Nguyễn Hoàng Sơn | 2A202603686 | Thành viên | Dữ liệu địa điểm, giá, cung đường và thời tiết |
+| 4 | Nguyễn Thanh Tùng | 2A202603594 | Thành viên | Hạ tầng AWS, tích hợp model, kiểm thử và demo |
 
 **Quy tắc điền**
 - **Lớp:** `L3A` hoặc `L3B`. **Track:** một chữ `A` (EdTech), `B` (Y tế), `C` (Du lịch), `D` (Thương mại điện tử), `E` (Tài chính) hoặc `F` (Làn khác). **Link repo:** link GitHub công khai của nhóm.
