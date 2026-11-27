@@ -1,0 +1,363 @@
+id,thanh_pho,ten,lat,lon,loai,loai_osm,thoi_luong_phut,ve_vnd,ve_cost_id,mua_dep,nguon_toa_do,ngay_kiem,ghi_chu
+H01,ha_giang,TP Hà Giang (trung tâm),22.8263873,104.9836083,,place/city,,,,,OpenStreetMap Nominatim,2026-11-27,thay cho cột mốc Km0 (OSM không có điểm Km0)
+H02,ha_giang,Cổng trời Quản Bạ,23.0500067,104.9919842,,man_made/tower,,0,C017,,OpenStreetMap Nominatim,2026-11-27,vé lấy từ costs.csv C017
+H03,ha_giang,Tam Sơn - Quản Bạ (khu Núi Đôi),23.0650576,104.9922793,,place/village,,0,C055,,OpenStreetMap Nominatim,2026-11-27,vé lấy từ costs.csv C055
+H04,ha_giang,Hang Lùng Khúy,23.0787737,105.0199186,trong_nha,natural/cave_entrance,,50000,C016,,OpenStreetMap Nominatim,2026-11-27,loai theo OSM: hang động; vé lấy từ costs.csv C016
+H05,ha_giang,Yên Minh,23.1172045,105.1491234,,boundary/administrative,,,,10-11,OpenStreetMap Nominatim,2026-11-27,toạ độ tâm xã - nên đổi sang trung tâm thị trấn; mùa đẹp: hoa tam giác mạch cuối T10-T11 theo https://www.vietnamtourism.com/vi/thoi-iem-ep-nhat-e-en-ha-giang-thoi-tiet-va-mua-hoa-theo-tun
+H06,ha_giang,Dốc Thẩm Mã,23.1689994,105.1941656,,mountain_pass,,,,,OpenStreetMap Nominatim,2026-11-27,
+H07,ha_giang,Nhà của Pao,23.2271368,105.2023596,,tourism/viewpoint,,10000,C014,,OpenStreetMap Nominatim,2026-11-27,vé lấy từ costs.csv C014
+H08,ha_giang,Dinh thự họ Vương (Dinh Vua Mèo),23.2562484,105.2620885,trong_nha,tourism/museum,,,,,OpenStreetMap Nominatim,2026-11-27,loai theo OSM: museum; vé: 4 nguồn lệch 10.000-40.000: xem costs.csv C012 C013 C036 C053
+H09,ha_giang,Cột cờ Lũng Cú,23.3634614,105.3163342,,man_made/tower,,25000,C010,10-11,OpenStreetMap Nominatim,2026-11-27,vé lấy từ costs.csv C010; mùa đẹp: hoa tam giác mạch cuối T10-T11 theo https://www.vietnamtourism.com/vi/thoi-iem-ep-nhat-e-en-ha-giang-thoi-tiet-va-mua-hoa-theo-tun
+H10,ha_giang,Làng Lô Lô Chải,23.3641768,105.3100598,,place/neighbourhood,,,,,OpenStreetMap Nominatim,2026-11-27,
+H11,ha_giang,Phố cổ Đồng Văn,23.2796709,105.3607839,,tourism/attraction,,50000,C015,10-11,OpenStreetMap Nominatim,2026-11-27,vé lấy từ costs.csv C015; mùa đẹp: hoa tam giác mạch cuối T10-T11 theo https://www.vietnamtourism.com/vi/thoi-iem-ep-nhat-e-en-ha-giang-thoi-tiet-va-mua-hoa-theo-tun
+H12,ha_giang,Chợ Đồng Văn,23.2768851,105.3609726,,amenity/marketplace,,,,,OpenStreetMap Nominatim,2026-11-27,
+H13,ha_giang,Đèo Mã Pí Lèng,23.2419571,105.3979217,,tourism/attraction,,,,,OpenStreetMap Nominatim,2026-11-27,
+H14,ha_giang,Mèo Vạc,23.1633187,105.4104440,,boundary/administrative,,,,,OpenStreetMap Nominatim,2026-11-27,toạ độ tâm xã - nên đổi sang trung tâm thị trấn
+D01,da_nang,Cầu Rồng (trung tâm),16.0611682,108.2278968,,man_made/bridge,,0,C134,,OpenStreetMap Nominatim,2026-11-27,vé lấy từ costs.csv C134
+D02,da_nang,Sân bay quốc tế Đà Nẵng,16.0425792,108.1971613,,aeroway/aerodrome,,,,,OpenStreetMap Nominatim,2026-11-27,
+D03,da_nang,Sun World Bà Nà Hills,15.9958569,107.9890712,,tourism/theme_park,,1000000,C150,,OpenStreetMap Nominatim,2026-11-27,trên đỉnh núi - xe tới chân núi rồi đi cáp treo; vé lấy từ costs.csv C150
+D04,da_nang,Ngũ Hành Sơn,16.0040200,108.2627745,,natural/wood,,40000,C144,,OpenStreetMap Nominatim,2026-11-27,vé lấy từ costs.csv C144
+D05,da_nang,Bảo tàng Điêu khắc Chăm,16.0601209,108.2230840,trong_nha,tourism/museum,,60000,C139,,OpenStreetMap Nominatim,2026-11-27,loai theo OSM: museum; vé lấy từ costs.csv C139
+D06,da_nang,Bãi biển Mỹ Khê,16.0756254,108.2468784,,natural/beach,,,,,OpenStreetMap Nominatim,2026-11-27,
+D07,da_nang,Chùa Linh Ứng Sơn Trà,16.1001567,108.2784112,,amenity/place_of_worship,,0,C133,,OpenStreetMap Nominatim,2026-11-27,vé lấy từ costs.csv C133
+D08,da_nang,Chợ Hàn,16.0683525,108.2242830,,amenity/marketplace,,,,,OpenStreetMap Nominatim,2026-11-27,
+D09,da_nang,Chợ Cồn,16.0681275,108.2145213,,amenity/marketplace,,,,,OpenStreetMap Nominatim,2026-11-27,
+D10,da_nang,Bảo tàng Đà Nẵng,16.0750129,108.2239347,trong_nha,tourism/museum,,50000,C140,,OpenStreetMap Nominatim,2026-11-27,loai theo OSM: museum; vé lấy từ costs.csv C140
+D11,da_nang,Asia Park,16.0412218,108.2263899,,landuse/construction,,,,,OpenStreetMap Nominatim,2026-11-27,"OSM ghi 'Da Nang Downtown - construction': có thể đã đổi tên/đóng - PHẢI kiểm trước khi dùng; vé: xem costs.csv C130 (bài 2022, chưa chắc còn hoạt động)"
+D12,da_nang,Art in Paradise (bảo tàng 3D),16.0953807,108.2430769,trong_nha,tourism/museum,,,,,OpenStreetMap Nominatim,2026-11-27,loai theo OSM: museum; vé: chưa có nguồn giá vé
+D13,da_nang,Nhà thờ Chính tòa Đà Nẵng,16.0666827,108.2230584,,amenity/place_of_worship,,,,,OpenStreetMap Nominatim,2026-11-27,
+D14,da_nang,Phố cổ Hội An,15.8771291,108.3286631,,boundary/protected_area,,80000,C136,,OpenStreetMap Nominatim,2026-11-27,vé lấy từ costs.csv C136
+D15,da_nang,Đèo Hải Vân,16.2186120,108.1030613,,highway/trunk,,,,,OpenStreetMap Nominatim,2026-11-27,
+HO001,ha_giang,Cho Minh Khai,22.8198783,104.9856553,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/5390086448),2026-11-27,giờ mở (OSM): Mo-Su 06:00-19:00
+HO002,ha_giang,Chợ Bò,23.1657742,105.4081317,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1327813980),2026-11-27,
+HO003,ha_giang,Chợ Cầu Trắng,22.8204254,104.9820109,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/853226259),2026-11-27,
+HO004,ha_giang,Chợ Hà Giang,22.8325124,104.9859919,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/853096727),2026-11-27,
+HO005,ha_giang,Chợ Lũng Cú,23.3610132,105.3175679,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/853689868),2026-11-27,
+HO006,ha_giang,Chợ Ngọc Hà,22.8379909,105.0127342,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/853273540),2026-11-27,
+HO007,ha_giang,Chợ Phó Bảng,23.2580103,105.184228,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/523736899),2026-11-27,
+HO008,ha_giang,Chợ Phương Thiện,22.800013,104.9773868,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/853242788),2026-11-27,
+HO009,ha_giang,Chợ Phố Cáo,23.1904718,105.1954718,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/862564491),2026-11-27,
+HO010,ha_giang,Chợ Sà Phìn,23.2554506,105.2620958,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/855231835),2026-11-27,
+HO011,ha_giang,Chợ Yên Minh,23.1194543,105.1406609,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/8042146303),2026-11-27,
+HO012,ha_giang,Chợ trung tâm huyện Mèo Vạc,23.1644985,105.408744,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1327813922),2026-11-27,
+HO013,ha_giang,Local market,22.8197816,104.9872929,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/4170738009),2026-11-27,
+HO014,ha_giang,Market,23.0658884,104.9903862,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/3282237826),2026-11-27,
+HO015,ha_giang,Pho Cao,23.186326,105.1973104,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/3844118493),2026-11-27,
+HO016,ha_giang,393,23.2763462,105.1982096,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7972992180),2026-11-27,
+HO017,ha_giang,394,23.2758992,105.1983116,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7972992174),2026-11-27,
+HO018,ha_giang,411,23.3100643,105.2499312,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7968676042),2026-11-27,
+HO019,ha_giang,411(1),23.3100329,105.250148,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7968676041),2026-11-27,
+HO020,ha_giang,411(2),23.3104357,105.250372,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7968676040),2026-11-27,
+HO021,ha_giang,411(3),23.3103861,105.2505363,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7968676039),2026-11-27,
+HO022,ha_giang,411(4),23.3102858,105.2505136,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7968676038),2026-11-27,
+HO023,ha_giang,411(5),23.3104317,105.2520093,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7968676037),2026-11-27,
+HO024,ha_giang,411(6),23.3111244,105.252294,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7968676036),2026-11-27,
+HO025,ha_giang,412,23.3199081,105.2579419,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7968676019),2026-11-27,
+HO026,ha_giang,413,23.325559,105.255678,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7968675608),2026-11-27,
+HO027,ha_giang,418,23.339441,105.273826,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7973139317),2026-11-27,
+HO028,ha_giang,419,23.3498435,105.2859525,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7973139318),2026-11-27,
+HO029,ha_giang,422,23.3708334,105.3019334,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7962460952),2026-11-27,
+HO030,ha_giang,423,23.3714908,105.3026502,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7962460951),2026-11-27,
+HO031,ha_giang,424,23.3725705,105.3020641,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7962460950),2026-11-27,
+HO032,ha_giang,425,23.373996,105.3026649,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7962460949),2026-11-27,
+HO033,ha_giang,426,23.3750793,105.3033838,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7962460948),2026-11-27,
+HO034,ha_giang,427,23.3763694,105.3042313,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7962460947),2026-11-27,
+HO035,ha_giang,428,23.3797523,105.3065354,,historic=boundary_stone,,,,,OpenStreetMap Overpass API (node/7962460946),2026-11-27,
+HO036,ha_giang,Pác Miầu,22.8344701,105.4938969,,historic=district,,,,,OpenStreetMap Overpass API (node/4750784853),2026-11-27,
+HO037,ha_giang,Billotte (fort),22.8162401,104.9709297,,historic=fort,,,,,OpenStreetMap Overpass API (node/13765071860),2026-11-27,
+HO038,ha_giang,Bác Hồ với đồng bào các dân tộc Hà Giang,22.8265379,104.9831873,,historic=memorial,,,,,OpenStreetMap Overpass API (node/5390051726),2026-11-27,
+HO039,ha_giang,Công trình tặng đồng bào Lũng Cú,23.3604271,105.3171143,,historic=memorial,,,,,OpenStreetMap Overpass API (node/7968147349),2026-11-27,
+HO040,ha_giang,Đài tưởng niệm liệt sĩ,23.2794007,105.3693581,,historic=memorial,,,,,OpenStreetMap Overpass API (node/7975480036),2026-11-27,
+HO041,ha_giang,Dốc 9 Khoanh,23.2092945,105.1963456,,mountain_pass=yes,,,,,OpenStreetMap Overpass API (node/7856013141),2026-11-27,
+HO042,ha_giang,1 cave ngay đg,23.1311538,105.1682756,trong_nha,natural=cave_entrance,,,,,OpenStreetMap Overpass API (node/5793799454),2026-11-27,
+HO043,ha_giang,Amazing river cave,23.2900934,105.3131765,trong_nha,natural=cave_entrance,,,,,OpenStreetMap Overpass API (node/7972609031),2026-11-27,
+HO044,ha_giang,Grotte Tien Phuong,22.7881989,104.9649973,trong_nha,natural=cave_entrance,,,,,OpenStreetMap Overpass API (node/5294733028),2026-11-27,
+HO045,ha_giang,underground river,23.2941756,105.3125381,trong_nha,natural=cave_entrance,,,,,OpenStreetMap Overpass API (node/3844119737),2026-11-27,
+HO046,ha_giang,Hậu Long Sơn,23.3713714,105.2917135,,natural=peak,,,,,OpenStreetMap Overpass API (node/7968148655),2026-11-27,tên khác: 后龙山
+HO047,ha_giang,Hắc Sơn,23.2687638,105.2314442,,natural=peak,,,,,OpenStreetMap Overpass API (node/7972607505),2026-11-27,tên khác: 黑山
+HO048,ha_giang,Ngưu Trường Lương Tử,23.3326116,105.2487981,,natural=peak,,,,,OpenStreetMap Overpass API (node/7972607486),2026-11-27,tên khác: 牛场梁子
+HO049,ha_giang,Núi Con Rồng,22.8351857,105.0244366,,natural=peak,,,,,OpenStreetMap Overpass API (node/8043969242),2026-11-27,
+HO050,ha_giang,Núi Cấm,22.823965,104.9782008,,natural=peak,,,,,OpenStreetMap Overpass API (node/7958969083),2026-11-27,
+HO051,ha_giang,Núi Hà Chú Ha,23.2574586,105.1246709,,natural=peak,,,,,OpenStreetMap Overpass API (node/8036452173),2026-11-27,
+HO052,ha_giang,Núi Long Ka,23.3671121,105.2977109,,natural=peak,,,,,OpenStreetMap Overpass API (node/8019707806),2026-11-27,
+HO053,ha_giang,Núi Lìa Phía,23.3396887,105.2727848,,natural=peak,,,,,OpenStreetMap Overpass API (node/8025398912),2026-11-27,
+HO054,ha_giang,Núi Mèo Vạc,23.1360873,105.4105402,,natural=peak,,,,,OpenStreetMap Overpass API (node/6324482053),2026-11-27,
+HO055,ha_giang,Núi Nà Càu,22.8711833,105.0344634,,natural=peak,,,,,OpenStreetMap Overpass API (node/8043969238),2026-11-27,
+HO056,ha_giang,Núi Nà Nhạn,22.863961,105.0208415,,natural=peak,,,,,OpenStreetMap Overpass API (node/8043969237),2026-11-27,
+HO057,ha_giang,Núi Phai Luông,22.8498239,105.0351048,,natural=peak,,,,,OpenStreetMap Overpass API (node/8043969236),2026-11-27,
+HO058,ha_giang,Núi Phố Bảng,23.2436283,105.1687825,,natural=peak,,,,,OpenStreetMap Overpass API (node/7976954456),2026-11-27,
+HO059,ha_giang,Núi Pu Tha Ca,22.9516234,105.134691,,natural=peak,,,,,OpenStreetMap Overpass API (node/4750689857),2026-11-27,
+HO060,ha_giang,Núi Rồng,23.3634915,105.3163414,,natural=peak,,,,,OpenStreetMap Overpass API (node/2887623693),2026-11-27,
+HO061,ha_giang,Núi Tả Mò,22.8369661,105.0551787,,natural=peak,,,,,OpenStreetMap Overpass API (node/8043969235),2026-11-27,
+HO062,ha_giang,Núi Đen,22.8195576,105.0049748,,natural=peak,,,,,OpenStreetMap Overpass API (node/8043969239),2026-11-27,
+HO063,ha_giang,Núi Đán Đeng,22.8487533,105.0215825,,natural=peak,,,,,OpenStreetMap Overpass API (node/8043969240),2026-11-27,
+HO064,ha_giang,Núi Đán Đăm,22.8440113,105.0755006,,natural=peak,,,,,OpenStreetMap Overpass API (node/8043969241),2026-11-27,
+HO065,ha_giang,Tiên Đầu Lương Tử,23.3648121,105.2577782,,natural=peak,,,,,OpenStreetMap Overpass API (node/7972607480),2026-11-27,tên khác: 先头梁子
+HO066,ha_giang,狮子山,23.3016084,105.4403831,,natural=peak,,,,,OpenStreetMap Overpass API (node/9166788371),2026-11-27,
+HO067,ha_giang,者阴山,23.2549649,105.0598635,,natural=peak,,,,,OpenStreetMap Overpass API (node/11443490229),2026-11-27,
+HO068,ha_giang,100 year old tree,23.295669,105.3740091,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/6387095285),2026-11-27,
+HO069,ha_giang,Aucune attraction touristique,22.8267089,104.9884963,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/13358813001),2026-11-27,
+HO070,ha_giang,Aucune attraction touristique here,22.8253694,104.9890762,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/13358812901),2026-11-27,
+HO071,ha_giang,Bag rack repair,23.2755382,105.3622461,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5483839925),2026-11-27,
+HO072,ha_giang,Chợ Cổ Đồng Văn,23.2787078,105.3613865,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/854829776),2026-11-27,
+HO073,ha_giang,Cầu treo Khuổi My,22.8214428,104.905245,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/863501296),2026-11-27,
+HO074,ha_giang,Duong Thuong revolutionary base,22.9795109,105.1854347,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/6057950186),2026-11-27,
+HO075,ha_giang,Gardens by the locals,22.8179139,104.9828795,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5888509086),2026-11-27,
+HO076,ha_giang,Hoang mạc Đá vôi Xà Phìn,23.2608614,105.2569655,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/7975480092),2026-11-27,
+HO077,ha_giang,Kim tự tháp,23.2511547,105.2610505,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/7975480093),2026-11-27,
+HO078,ha_giang,Kim tự tháp Lũng Táo,23.2766141,105.2745795,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/7975480068),2026-11-27,
+HO079,ha_giang,Km0 Hà Giang,22.8273297,104.9841687,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/7958012224),2026-11-27,
+HO080,ha_giang,Lake,23.049511,105.0101529,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5599691222),2026-11-27,
+HO081,ha_giang,Lung Cam Cultural Village,23.2256226,105.2035587,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/855231817),2026-11-27,
+HO082,ha_giang,Lung Tam Linen Cooperative,23.0486357,105.0430783,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5417771221),2026-11-27,
+HO083,ha_giang,Massive banyan trees,23.3015457,105.3671179,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/13332787877),2026-11-27,
+HO084,ha_giang,Place to rent land phuong anh,23.21659,105.2022244,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/8588745817),2026-11-27,
+HO085,ha_giang,Rien à voir ici,22.8358506,104.9855456,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/13358813101),2026-11-27,
+HO086,ha_giang,Rừng đá Lũng Táo,23.2886201,105.275934,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/7975480069),2026-11-27,
+HO087,ha_giang,Thach Lam Vien - Ha Giang,22.8470669,104.9632485,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5582045526),2026-11-27,giờ mở (OSM): Mo-Su 07:00-20:00
+HO088,ha_giang,Thung lũng Lũng Cẩm,23.2314529,105.2105874,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/855231823),2026-11-27,
+HO089,ha_giang,Thác số 6,22.83801,104.9321737,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/7189142285),2026-11-27,
+HO090,ha_giang,Tuyèn Di Bo Vach Da Trang,23.2495628,105.3942647,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5951663886),2026-11-27,tên khác: Sky Pass
+HO091,ha_giang,scooter,23.3421563,105.3319638,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/6202400185),2026-11-27,
+HO092,ha_giang,scooter,23.3412982,105.3320899,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/6202400186),2026-11-27,
+HO093,ha_giang,Заросшая лестница из храма,22.8358485,104.9855428,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/12470652010),2026-11-27,
+HO094,ha_giang,Pa Vi,23.2060958,105.4162141,,tourism=theme_park,,,,,OpenStreetMap Overpass API (way/808298848),2026-11-27,
+HO095,ha_giang,+ belle vue d’Ha Giang,23.2209227,105.2425036,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/12529300901),2026-11-27,
+HO096,ha_giang,Beautiful View,22.9784303,105.2428805,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/10314270710),2026-11-27,
+HO097,ha_giang,Beautiful view,23.0427069,105.2052324,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/6899543085),2026-11-27,
+HO098,ha_giang,Buckwheat flowers,22.9827032,105.1233416,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/12529009501),2026-11-27,
+HO099,ha_giang,Chinese border,23.3474371,105.2851563,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/6053606399),2026-11-27,
+HO100,ha_giang,Chợ phiên Thứ 7 xã Quyết Tiến,23.018482,104.96425,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/4425904493),2026-11-27,
+HO101,ha_giang,"Cool viewpoint of the valley, better than pagoda",23.1642038,105.4149037,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/6956747385),2026-11-27,tên khác: Cool viewpoint of the valley
+HO102,ha_giang,Cổng Trời – Heaven Gate,23.0595091,104.996916,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/5388531822),2026-11-27,
+HO103,ha_giang,Dam,23.0083158,105.4866573,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/13074061573),2026-11-27,
+HO104,ha_giang,Duong Hanh Phuc,23.2406215,105.4120834,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/3282165789),2026-11-27,tên khác: Duong Hanh Phuc Ma Pi Leng
+HO105,ha_giang,Dốc Bắc Sum,22.988169,104.9359,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/5516818522),2026-11-27,
+HO106,ha_giang,Dốc Chín Khoanh,23.2098639,105.1951721,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/5516823721),2026-11-27,
+HO107,ha_giang,Fossil place,23.3103975,105.2970132,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/12529301003),2026-11-27,
+HO108,ha_giang,Great 360° view from a small peak,23.0468504,105.0221086,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/3844120594),2026-11-27,
+HO109,ha_giang,Hoa Men Say,23.2915714,105.3117837,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/5522559821),2026-11-27,
+HO110,ha_giang,Khe Lía,23.2941561,105.3108231,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/3844119611),2026-11-27,
+HO111,ha_giang,Mai Pi Leng Pass,23.2270979,105.4178491,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/4948016990),2026-11-27,
+HO112,ha_giang,Nami's Viewpoint.,23.2471613,105.3954122,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/12291548401),2026-11-27,
+HO113,ha_giang,Pháo đài Đồn Cao,23.2802448,105.3616472,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/4333176791),2026-11-27,
+HO114,ha_giang,Quan Ba,23.0895026,104.9970166,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/5645342080),2026-11-27,
+HO115,ha_giang,Sky Path (Awesome view),23.2497557,105.3941329,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/6062123688),2026-11-27,
+HO116,ha_giang,Sách đá vàn chải,23.1595441,105.1845348,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/12293440501),2026-11-27,
+HO117,ha_giang,Unnamed Viewpoint,23.1043296,105.038522,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/13634036101),2026-11-27,
+HO118,ha_giang,cave,23.2326349,105.1940078,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/5522520324),2026-11-27,
+HO119,ha_giang,nui Co Tien,23.0590018,104.9973628,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/3108058417),2026-11-27,
+HO120,ha_giang,nui Co Tien,23.064215,105.000816,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/4427121492),2026-11-27,tên khác: Núi Cô Tiên
+HO121,ha_giang,stunning view,23.254163,105.2375064,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/6512533785),2026-11-27,
+HO122,ha_giang,Điểm ngắm cảnh Núi,23.259539,105.2596175,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/5385207625),2026-11-27,
+HO123,ha_giang,Đài Vọng Cảnh cực Bắc,23.3833498,105.322788,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (way/1155364288),2026-11-27,
+DO001,da_nang,Cho Ha Than,16.0646963,108.2313711,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/5273999821),2026-11-27,
+DO002,da_nang,Chợ An Hải Đông,16.0564476,108.2388657,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/780466790),2026-11-27,
+DO003,da_nang,Chợ Bà Lê,15.8835885,108.3492955,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/210931546),2026-11-27,giờ mở (OSM): Mo-Su 05:00-19:00
+DO004,da_nang,Chợ Bà Lê,15.8833418,108.34901,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/755306110),2026-11-27,
+DO005,da_nang,Chợ Bắc Mỹ An,16.0416775,108.2424764,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/118614280),2026-11-27,
+DO006,da_nang,Chợ Cẩm Lệ,16.0135663,108.2070723,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/406780032),2026-11-27,
+DO007,da_nang,Chợ Cẩm Phô,15.8788843,108.3217011,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/565581385),2026-11-27,
+DO008,da_nang,Chợ Hòa Cường,16.0432513,108.2179878,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1326233277),2026-11-27,
+DO009,da_nang,Chợ Hòa Khánh,16.0698569,108.1493014,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1326279033),2026-11-27,
+DO010,da_nang,Chợ Hòa Xuân,16.0061957,108.2146404,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1326320368),2026-11-27,
+DO011,da_nang,Chợ Hội An,15.8767993,108.3313604,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/35952504),2026-11-27,
+DO012,da_nang,Chợ Khuê Mỹ,16.0249934,108.2482473,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1076716243),2026-11-27,
+DO013,da_nang,Chợ Kỳ Đồng,16.069641,108.187075,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1326219930),2026-11-27,
+DO014,da_nang,Chợ Mai,16.1002449,108.2525503,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/2147654924),2026-11-27,
+DO015,da_nang,Chợ Miếu Bông,15.97989,108.2089787,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/4386676224),2026-11-27,
+DO016,da_nang,Chợ Mân Thái,16.0856523,108.2433677,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1076716232),2026-11-27,
+DO017,da_nang,Chợ Mới Hòa thuận,16.0502588,108.2176369,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1326231667),2026-11-27,
+DO018,da_nang,Chợ Nam Dương,16.0612799,108.2151828,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1326236834),2026-11-27,
+DO019,da_nang,Chợ Nguyễn Tri Phương,16.0425896,108.2119262,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1326232560),2026-11-27,
+DO020,da_nang,Chợ Non Nước,15.9951476,108.2573177,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1326324217),2026-11-27,
+DO021,da_nang,Chợ Nại Hiên,16.0595644,108.2223515,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1326238459),2026-11-27,
+DO022,da_nang,Chợ Nại Hiên Đông,16.0901089,108.2341385,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1164429696),2026-11-27,
+DO023,da_nang,Chợ Phước Mỹ,16.0665465,108.2422676,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/11888483369),2026-11-27,giờ mở (OSM): Mo-Su 05:00-18:00
+DO024,da_nang,Chợ Siêu Thị Đà Nẵng,16.0665136,108.2033416,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/303193771),2026-11-27,
+DO025,da_nang,Chợ Tam Thuận,16.0714579,108.2053386,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1330644994),2026-11-27,
+DO026,da_nang,Chợ Thanh Bình,16.0766735,108.2115102,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1326234991),2026-11-27,
+DO027,da_nang,Chợ Thuận An,16.054022,108.1835394,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/1332811566),2026-11-27,
+DO028,da_nang,Chợ Tân Lập,16.0562799,108.2101736,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/429019192),2026-11-27,
+DO029,da_nang,Chợ Điện Dương mới,15.9215858,108.3005673,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/5158938154),2026-11-27,
+DO030,da_nang,Chợ Đêm Sơn Trà,16.0607314,108.2314438,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/13300819649),2026-11-27,giờ mở (OSM): Mo-Su 18:00-23:00
+DO031,da_nang,Chợ Đầu mối Hoà Cường,16.0308747,108.219824,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/118672509),2026-11-27,
+DO032,da_nang,Chợ Đống Đa,16.0815686,108.2172906,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/316236687),2026-11-27,
+DO033,da_nang,Chợ đêm Lê Duẩn,16.070751,108.2150164,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/12333995781),2026-11-27,
+DO034,da_nang,Cong Hua Xa,16.0558591,108.2393895,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/7085739056),2026-11-27,
+DO035,da_nang,Fruits and vegetables,15.876183,108.3315667,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/11364104179),2026-11-27,
+DO036,da_nang,Indoor Market,16.069215,108.2066991,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/372172906),2026-11-27,tên khác: Chợ Tân Chính
+DO037,da_nang,Lang Co Market,16.2293262,108.0855291,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/130217852),2026-11-27,
+DO038,da_nang,Local Morning Market,15.8850237,108.3297738,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/593636098),2026-11-27,
+DO039,da_nang,Market Street,16.0557874,108.2394141,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/11360322717),2026-11-27,
+DO040,da_nang,Produce,15.891668,108.314232,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/11364117282),2026-11-27,
+DO041,da_nang,Thai Market,15.9963119,107.9889349,,amenity=marketplace,,,,,OpenStreetMap Overpass API (node/11427582964),2026-11-27,
+DO042,da_nang,VinMart+,16.061811,108.2168181,,amenity=marketplace,,,,,OpenStreetMap Overpass API (way/698046892),2026-11-27,
+DO043,da_nang,Old Jets,16.0351948,108.2037811,,historic=aircraft,,,,,OpenStreetMap Overpass API (node/13531850361),2026-11-27,
+DO044,da_nang,Bản sao nhà sàn,16.0472363,108.217429,,historic=building,,,,,OpenStreetMap Overpass API (way/1481663044),2026-11-27,
+DO045,da_nang,Cầu Gò Nổi mới,15.8512507,108.2626381,,historic=castle,,,,,OpenStreetMap Overpass API (node/8616526723),2026-11-27,
+DO046,da_nang,Luna Castle,15.9930651,107.9921265,,historic=castle,,,,,OpenStreetMap Overpass API (way/542867598),2026-11-27,
+DO047,da_nang,2005 Phú Lộc derailment memorial,16.2184776,108.0566904,,historic=memorial,,,,,OpenStreetMap Overpass API (way/903067718),2026-11-27,
+DO048,da_nang,DI TÍCH LỊCH SỬ CÁCH MẠNG,15.8857313,108.3360989,,historic=memorial,,,,,OpenStreetMap Overpass API (node/11586091345),2026-11-27,
+DO049,da_nang,"Memorial to the victims of the Flight 229 plane crash on March 15, 1979.",16.121001,108.2572286,,historic=memorial,,,,,OpenStreetMap Overpass API (node/13677406601),2026-11-27,
+DO050,da_nang,Nhà Bia,15.9979511,107.9857628,,historic=memorial,,,,,OpenStreetMap Overpass API (node/13846529850),2026-11-27,https://sunworld.vn/vi/banahills/check-in/nha-bia
+DO051,da_nang,Nhà Thờ Bình An,15.8537286,108.2724278,,historic=memorial,,,,,OpenStreetMap Overpass API (node/8616536620),2026-11-27,
+DO052,da_nang,Y Pha Nho cemetery - French-Spanish fallen soldiers,16.1223304,108.2200384,,historic=memorial,,,,,OpenStreetMap Overpass API (node/6512888885),2026-11-27,tên khác: Cementerio militar franco-español de Y Pha Nho
+DO053,da_nang,nghĩa trang liệt sĩ tổ quốc ghi công,15.8846859,108.3406824,,historic=memorial,,,,,OpenStreetMap Overpass API (way/1246229021),2026-11-27,
+DO054,da_nang,Đài Kỷ Niệm Danh Nhân Chí Sĩ Quảng Nam,15.8791656,108.323789,,historic=memorial,,,,,OpenStreetMap Overpass API (node/4955662821),2026-11-27,
+DO055,da_nang,Đài tưởng niệm thảm sát Hà My,15.9252377,108.3065476,,historic=memorial,,,,,OpenStreetMap Overpass API (node/10723988763),2026-11-27,
+DO056,da_nang,Kazimierz Kwiatkowski,15.8772786,108.3277903,,historic=monument,,,,,OpenStreetMap Overpass API (node/2617007574),2026-11-27,https://vi.m.wikipedia.org/wiki/Kazimierz_Kwiatkowski
+DO057,da_nang,Khu tưởng niệm Hà My,15.9251848,108.306494,,historic=monument,,,,,OpenStreetMap Overpass API (way/1152993502),2026-11-27,
+DO058,da_nang,Nghĩa trang Liệt Sĩ,15.8898126,108.3179345,,historic=monument,,,,,OpenStreetMap Overpass API (node/5444978923),2026-11-27,
+DO059,da_nang,Nguyen Duy Hieu,15.885147,108.3256249,,historic=monument,,,,,OpenStreetMap Overpass API (node/5276546923),2026-11-27,
+DO060,da_nang,To Quoc Ghi Cong,16.023789,108.2477299,,historic=monument,,,,,OpenStreetMap Overpass API (node/4706189591),2026-11-27,
+DO061,da_nang,Tượng Bồ Câu,16.0823325,108.2231946,,historic=monument,,,,,OpenStreetMap Overpass API (way/554812139),2026-11-27,
+DO062,da_nang,Tượng Mẹ Nhu,16.0652606,108.1833538,,historic=monument,,,,,OpenStreetMap Overpass API (node/11555496744),2026-11-27,
+DO063,da_nang,Đài Tưởng niệm Liệt sỹ thành phố Đà Nẵng,16.0409714,108.2243231,,historic=monument,,,,,OpenStreetMap Overpass API (way/1331565206),2026-11-27,
+DO064,da_nang,Military blockhouse ruins,15.8794937,108.3335921,,historic=ruins,,,,,OpenStreetMap Overpass API (node/11581700332),2026-11-27,
+DO065,da_nang,Thành Điện Hải,16.0763542,108.2217691,,historic=ruins,,,,,OpenStreetMap Overpass API (way/118609193),2026-11-27,
+DO066,da_nang,Tháp Bằng An,15.8845159,108.2326904,,historic=ruins,,,,,OpenStreetMap Overpass API (node/7520818185),2026-11-27,
+DO067,da_nang,Bãi Biển Sơn Trà,16.099021,108.2549854,,natural=beach,,,,,OpenStreetMap Overpass API (node/12647208262),2026-11-27,https://sontraseahotel.com/
+DO068,da_nang,Bãi Bà Đa,16.1939524,108.16435,,natural=beach,,,,,OpenStreetMap Overpass API (way/1415072216),2026-11-27,
+DO069,da_nang,Bãi Cát Vàng,16.1426647,108.2315842,,natural=beach,,,,,OpenStreetMap Overpass API (way/1265740821),2026-11-27,tên khác: Cat Vang Beach
+DO070,da_nang,Bãi Hầm,16.1505237,108.1373248,,natural=beach,,,,,OpenStreetMap Overpass API (way/508243736),2026-11-27,
+DO071,da_nang,Bãi Sủng Cỏ,16.1903109,108.1559182,,natural=beach,,,,,OpenStreetMap Overpass API (way/1415072215),2026-11-27,
+DO072,da_nang,Bãi Xoan,16.1665742,108.1509793,,natural=beach,,,,,OpenStreetMap Overpass API (way/508244759),2026-11-27,
+DO073,da_nang,Bãi biển Bắc,16.123965,108.3079479,,natural=beach,,,,,OpenStreetMap Overpass API (way/1330726238),2026-11-27,
+DO074,da_nang,Bãi biển Mỹ Khê,16.0756098,108.2547352,,natural=beach,,,,,OpenStreetMap Overpass API (relation/19000664),2026-11-27,
+DO075,da_nang,Bãi biển Tiên Sa,16.1243611,108.2202733,,natural=beach,,,,,OpenStreetMap Overpass API (way/630377259),2026-11-27,
+DO076,da_nang,Bãi biển Tân Trà,15.9840305,108.2799055,,natural=beach,,,,,OpenStreetMap Overpass API (way/1205391949),2026-11-27,
+DO077,da_nang,Bãi tắm Non Nước,16.0054851,108.2690189,,natural=beach,,,,,OpenStreetMap Overpass API (way/1204900824),2026-11-27,
+DO078,da_nang,Bãi Đá,16.0988527,108.3012745,,natural=beach,,,,,OpenStreetMap Overpass API (node/13040467529),2026-11-27,
+DO079,da_nang,Lăng Cô,16.2689456,108.0638889,,natural=beach,,,,,OpenStreetMap Overpass API (way/256675637),2026-11-27,
+DO080,da_nang,My An Beach,16.025095,108.2595335,,natural=beach,,,,,OpenStreetMap Overpass API (node/4347089780),2026-11-27,
+DO081,da_nang,Vanessa Beach,15.9701121,108.2875917,,natural=beach,,,,,OpenStreetMap Overpass API (way/1205391950),2026-11-27,
+DO082,da_nang,Dong Tang Chon,16.004286,108.2641295,trong_nha,natural=cave_entrance,,,,,OpenStreetMap Overpass API (node/5922491535),2026-11-27,
+DO083,da_nang,Huyen Khong Cave,16.0041859,108.2623368,trong_nha,natural=cave_entrance,,,,,OpenStreetMap Overpass API (node/1758586757),2026-11-27,
+DO084,da_nang,Linh Nham Cave,16.0042103,108.2630874,trong_nha,natural=cave_entrance,,,,,OpenStreetMap Overpass API (node/2093848434),2026-11-27,
+DO085,da_nang,Van Thong Cave,16.0038323,108.2635254,trong_nha,natural=cave_entrance,,,,,OpenStreetMap Overpass API (node/1758586716),2026-11-27,
+DO086,da_nang,Động Âm Phủ,16.0031975,108.2639113,trong_nha,natural=cave_entrance,,,,,OpenStreetMap Overpass API (node/1758586686),2026-11-27,phí (OSM): yes
+DO087,da_nang,Hỏa Sơn,15.9984266,108.2560076,,natural=peak,,,,,OpenStreetMap Overpass API (node/2093848427),2026-11-27,
+DO088,da_nang,Kim Sơn,15.9997446,108.2562213,,natural=peak,,,,,OpenStreetMap Overpass API (node/2093848429),2026-11-27,
+DO089,da_nang,Mộc Sơn,16.0000029,108.2621751,,natural=peak,,,,,OpenStreetMap Overpass API (node/2093848431),2026-11-27,
+DO090,da_nang,Núi Bà Nà,15.9982174,107.9856335,,natural=peak,,,,,OpenStreetMap Overpass API (node/4122433690),2026-11-27,
+DO091,da_nang,Núi Cẩm Khê,16.0349223,108.1622001,,natural=peak,,,,,OpenStreetMap Overpass API (node/10303626688),2026-11-27,
+DO092,da_nang,Núi Hoi,16.1836944,108.1097027,,natural=peak,,,,,OpenStreetMap Overpass API (node/11630013743),2026-11-27,
+DO093,da_nang,Núi Hòng Chan,16.1936801,107.9687946,,natural=peak,,,,,OpenStreetMap Overpass API (node/11762365155),2026-11-27,
+DO094,da_nang,Núi Hải Vân,16.1922104,108.136611,,natural=peak,,,,,OpenStreetMap Overpass API (node/11629996926),2026-11-27,
+DO095,da_nang,Núi Khe Xương,16.0647808,107.9641938,,natural=peak,,,,,OpenStreetMap Overpass API (node/11629841009),2026-11-27,
+DO096,da_nang,Núi Phước Tường,16.0277351,108.1647027,,natural=peak,,,,,OpenStreetMap Overpass API (node/10303626687),2026-11-27,
+DO097,da_nang,Núi Sơn Trà,16.1195909,108.2866498,,natural=peak,,,,,OpenStreetMap Overpass API (node/1623183649),2026-11-27,
+DO098,da_nang,Núi Đồng Đen,16.1073907,108.0386388,,natural=peak,,,,,OpenStreetMap Overpass API (node/10892129283),2026-11-27,
+DO099,da_nang,Thổ Sơn,16.0047612,108.255928,,natural=peak,,,,,OpenStreetMap Overpass API (node/2093848443),2026-11-27,
+DO100,da_nang,Quan Âm,16.0996857,108.2770161,,tourism=artwork,,,,,OpenStreetMap Overpass API (way/420947244),2026-11-27,
+DO101,da_nang,7 wonders,16.0988101,108.2244144,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/12815941401),2026-11-27,
+DO102,da_nang,Ancient House Free Visit,15.8820042,108.3264125,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/6151642485),2026-11-27,phí (OSM): no
+DO103,da_nang,Casa Tan my,15.8764811,108.3270804,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/6627739386),2026-11-27,
+DO104,da_nang,Cau Nguyen Van Troi Bridge,16.0510888,108.2292466,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5276547123),2026-11-27,
+DO105,da_nang,Chùa Cầu,15.8771159,108.326013,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/39268284),2026-11-27,
+DO106,da_nang,Chợ vải Hội An,15.8770764,108.3325201,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/35952591),2026-11-27,giờ mở (OSM): Mo-Su 06:00-19:00
+DO107,da_nang,Chợ Đêm,15.8757772,108.3259285,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/6099308589),2026-11-27,giờ mở (OSM): Mo-Su 18:00-22:00
+DO108,da_nang,Chợ đêm Helio,16.0370944,108.2248186,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/7301996085),2026-11-27,
+DO109,da_nang,Cây đa Đò Xu,16.0276784,108.2218873,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/6528451001),2026-11-27,
+DO110,da_nang,Cây đa đại thụ,16.1226157,108.3316779,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/6346486685),2026-11-27,
+DO111,da_nang,Cầu An Hội,15.8764915,108.3264631,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/35952574),2026-11-27,
+DO112,da_nang,Cầu Sông Hàn,16.0721398,108.2268106,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/7276380289),2026-11-27,
+DO113,da_nang,Cầu Thuận Phước,16.0948084,108.2200134,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5273999121),2026-11-27,
+DO114,da_nang,Cầu Tiên Sơn,16.0352694,108.2352722,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5273998822),2026-11-27,
+DO115,da_nang,Cầu Trần Thị Lý,16.050179,108.2293814,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5273998823),2026-11-27,giờ mở (OSM): 24/7
+DO116,da_nang,Cầu Vàng,15.9949242,107.9962304,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/683416736),2026-11-27,
+DO117,da_nang,Cẩm Kim,15.8637945,108.3247834,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/7689987500),2026-11-27,
+DO118,da_nang,Dragon's Head (Fire Show),16.0612476,108.2296554,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/11161070775),2026-11-27,
+DO119,da_nang,Dragon's Tail,16.06108,108.2248167,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/11161070774),2026-11-27,
+DO120,da_nang,Fishing Village and Fleet,16.1017543,108.2589632,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/4924323121),2026-11-27,
+DO121,da_nang,Hoi An Traditional Art Performance House,15.8760742,108.3296451,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/7127442985),2026-11-27,
+DO122,da_nang,Hải Vân Quan,16.1877471,108.1312899,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/466418347),2026-11-27,
+DO123,da_nang,Hội Quán Phước Kiến,15.877412,108.3306003,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/11259291337),2026-11-27,
+DO124,da_nang,Hội Quán Quảng Triệu,15.8773646,108.3265656,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/565300448),2026-11-27,
+DO125,da_nang,Hội quán Hải Nam,15.8778696,108.3319964,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/2092582385),2026-11-27,
+DO126,da_nang,Hội quán Triều Châu,15.8779064,108.3330332,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/448044645),2026-11-27,
+DO127,da_nang,Khu Du Lịch Sinh Thái Suối Lương,16.1559167,108.1098007,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5383428522),2026-11-27,
+DO128,da_nang,Khu Văn hóa Tâm linh Đà Sơn,16.0418575,108.1477778,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/12404434601),2026-11-27,
+DO129,da_nang,Kim Bong Carpentry Village,15.865593,108.3256188,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/4171971289),2026-11-27,
+DO130,da_nang,Lang Bich hoa Da Nang,16.0607097,108.2200254,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/11176025737),2026-11-27,
+DO131,da_nang,Lantern street,15.8761042,108.3284,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/6873083990),2026-11-27,
+DO132,da_nang,Linh Phong Bảo Tháp,15.9980969,107.985969,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/13687068650),2026-11-27,https://sunworld.vn/vi/banahills/check-in/linh-phong-bao-thap
+DO133,da_nang,Louvre,15.9951834,107.9897584,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/1511011826),2026-11-27,
+DO134,da_nang,Làng chiếu Cẩm Nê,15.9867322,108.1772823,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/10709738005),2026-11-27,
+DO135,da_nang,Làng mộc Kim Bồng,15.8645169,108.3253021,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/10709738006),2026-11-27,
+DO136,da_nang,Làng mộc Thanh Hà,15.877712,108.3009146,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/10709738405),2026-11-27,
+DO137,da_nang,Làng nước mắm Nam Ô,16.1128315,108.1300902,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/10709738105),2026-11-27,
+DO138,da_nang,Làng đá mỹ nghệ Non Nước,16.0009523,108.2666434,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/10709724107),2026-11-27,
+DO139,da_nang,Làng đúc đồng Phước Kiều,15.8700868,108.2613646,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/10709724108),2026-11-27,
+DO140,da_nang,Nam Son Pagoda,15.9987986,108.2051036,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/11359603957),2026-11-27,
+DO141,da_nang,Ngũ Hành Sơn,16.0017096,108.2596132,,tourism=attraction,,,,,OpenStreetMap Overpass API (relation/8552348),2026-11-27,https://nguhanhson.org
+DO142,da_nang,Nhà thờ Saint Denis,15.997358,107.9877992,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/1109970009),2026-11-27,
+DO143,da_nang,Non Nuoc Beach,16.0205336,108.261744,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/4172034499),2026-11-27,
+DO144,da_nang,Núi Thần Tài,15.9681262,108.0196301,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5286977425),2026-11-27,
+DO145,da_nang,Phùng Hung,15.8770404,108.3263229,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/5153761923),2026-11-27,
+DO146,da_nang,Pont main,16.0520775,108.2156357,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/10603622205),2026-11-27,
+DO147,da_nang,Quan Công Miếu,15.8775404,108.3313895,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/631064893),2026-11-27,
+DO148,da_nang,Queen Cobra,16.0432987,108.22599,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/11934169470),2026-11-27,giờ mở (OSM): Mo-Su 18:00-22:00
+DO149,da_nang,Saturday Option,16.0991336,108.3011822,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/4222784590),2026-11-27,
+DO150,da_nang,Suoi Voi,16.2421202,107.9893274,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/1981026588),2026-11-27,
+DO151,da_nang,Thanh Ha Pottery Village,15.8771257,108.2989875,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/4171964390),2026-11-27,
+DO152,da_nang,Thuỷ Sơn,16.0043044,108.263527,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/1758586662),2026-11-27,
+DO153,da_nang,Triem Tay Village,15.8721333,108.3055893,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/4517387589),2026-11-27,
+DO154,da_nang,Trú Vũ Trà Quán,15.9978276,107.9862426,,tourism=attraction,,,,,OpenStreetMap Overpass API (way/1109970012),2026-11-27,https://sunworld.vn/vi/banahills/check-in/tru-vu-tra-quan
+DO155,da_nang,Tượng Phật Phước Lý,16.0405625,108.1489375,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/13734880501),2026-11-27,
+DO156,da_nang,Đèo Hải Vân,16.1874495,108.1307217,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/1036552571),2026-11-27,
+DO157,da_nang,כפר הקדרים טאן הא,15.8832622,108.3314662,,tourism=attraction,,,,,OpenStreetMap Overpass API (node/4171971589),2026-11-27,tên khác: Thanh Ha Pottery Village
+DO158,da_nang,Art Gallery,16.0857203,108.2194277,trong_nha,tourism=gallery,,,,,OpenStreetMap Overpass API (node/7095169367),2026-11-27,
+DO159,da_nang,Hùng Đông về và bạn tránh,15.8774451,108.3303659,trong_nha,tourism=gallery,,,,,OpenStreetMap Overpass API (way/626704914),2026-11-27,phí (OSM): no
+DO160,da_nang,Phan Kim Chi Art Gallery,15.8774754,108.3285499,trong_nha,tourism=gallery,,,,,OpenStreetMap Overpass API (node/6091196615),2026-11-27,
+DO161,da_nang,TASY STUDIO,15.9256934,108.2939032,trong_nha,tourism=gallery,,,,,OpenStreetMap Overpass API (node/8883385553),2026-11-27,giờ mở (OSM): 24/7
+DO162,da_nang,Bao Tàng Dà Nãng,16.0763269,108.221568,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (way/302618031),2026-11-27,tên khác: Bảo tàng Đà Nẵng; phí (OSM): yes; https://baotangdanang.vn/
+DO163,da_nang,Boa tang gom su mau dich,15.8772671,108.329548,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/2076856032),2026-11-27,phí (OSM): yes
+DO164,da_nang,Bảo Tàng Thó Sản,15.8771924,108.3297946,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/13293830517),2026-11-27,
+DO165,da_nang,Bảo tàng Phật giáo,15.9994308,108.2545831,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/8474743417),2026-11-27,giờ mở (OSM): Mo-Su 09:00-17:00
+DO166,da_nang,Bảo tàng Hồ Chí Minh,16.0464824,108.2182471,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (way/303341669),2026-11-27,
+DO167,da_nang,Bảo tàng Hội An,15.8803099,108.3294674,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (way/565592419),2026-11-27,"giờ mở (OSM): Mo-Su 07:30-11:30,13:30-17:30"
+DO168,da_nang,Bảo tàng Quân khu 5,16.0478741,108.2173603,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (way/118691767),2026-11-27,
+DO169,da_nang,Bảo tàng Điện Bàn,15.8874257,108.2551164,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (way/584941415),2026-11-27,
+DO170,da_nang,Di San Vô Giá,15.8771754,108.3342411,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/12344125229),2026-11-27,tên khác: Precious Heritage Art Gallery Museum; giờ mở (OSM): Mo-Su 08:00-20:00; phí (OSM): no; https://www.rehahnphotographer.com
+DO171,da_nang,Diep Dong Nguyen,15.8766285,108.3285601,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/5674096859),2026-11-27,
+DO172,da_nang,Hoi An Museum of Traditional Medicine,15.8766492,108.3298384,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/7127464285),2026-11-27,giờ mở (OSM): Mo-Su 07:00-11:00
+DO173,da_nang,Marble Mountains Museum,16.003907,108.2660314,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/12622064034),2026-11-27,
+DO174,da_nang,Nhà Trưng bày Hoàng Sa,16.0935205,108.2512559,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/13261644768),2026-11-27,
+DO175,da_nang,Nhà cổ Phùng Hưng,15.8772193,108.3257902,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/4279640089),2026-11-27,phí (OSM): yes
+DO176,da_nang,Nhà cổ Quân Thắng,15.8770968,108.3292876,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/2076855954),2026-11-27,phí (OSM): yes
+DO177,da_nang,Nhà cổ Đức An,15.8770533,108.3273582,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/2076855866),2026-11-27,phí (OSM): yes
+DO178,da_nang,Sa Huynh,15.8770347,108.3264247,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/3189923484),2026-11-27,phí (OSM): yes
+DO179,da_nang,Tan Ky,15.8764553,108.3278311,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (way/595299310),2026-11-27,
+DO180,da_nang,Terracotta Park,15.8778967,108.3001365,trong_nha,tourism=museum,,,,,OpenStreetMap Overpass API (node/5513474821),2026-11-27,giờ mở (OSM): Mo-Su 08:30-17:30; phí (OSM): yes
+DO181,da_nang,Fantasy Park,15.9968339,107.9888036,,tourism=theme_park,,,,,OpenStreetMap Overpass API (node/10154412164),2026-11-27,giờ mở (OSM): 08:30-18:00
+DO182,da_nang,Hoi An Memories Land,15.875074,108.3398475,,tourism=theme_park,,,,,OpenStreetMap Overpass API (way/14131302),2026-11-27,
+DO183,da_nang,Mini-Golf Hoi An,15.912947,108.3386895,,tourism=theme_park,,,,,OpenStreetMap Overpass API (node/13149084101),2026-11-27,
+DO184,da_nang,Trung tâm Giải trí Phức hợp Helio Center,16.0364559,108.2246715,,tourism=theme_park,,,,,OpenStreetMap Overpass API (node/4807957148),2026-11-27,https://helio.vn/
+DO185,da_nang,Crowd watching,15.8764862,108.3268477,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/11425562478),2026-11-27,giờ mở (OSM): Mo-Su 19:00-22:00
+DO186,da_nang,Hard to climb,16.0039418,108.2633507,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/13525483833),2026-11-27,
+DO187,da_nang,Lăng Cô,16.2252074,108.0928331,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/4943668921),2026-11-27,
+DO188,da_nang,Public beach,16.2497715,108.075414,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/4741642219),2026-11-27,
+DO189,da_nang,Rào chắn,16.1167482,108.3084376,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/11832500969),2026-11-27,
+DO190,da_nang,Small waterfall,16.1145234,108.2556163,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/12701675501),2026-11-27,
+DO191,da_nang,Son Tra view,16.109214,108.2517721,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/12701646101),2026-11-27,
+DO192,da_nang,Thác Tóc Tiên,16.0244662,108.0262303,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/2177056870),2026-11-27,
+DO193,da_nang,Đỉnh Bàn Cờ,16.1189286,108.2720036,,tourism=viewpoint,,,,,OpenStreetMap Overpass API (node/1538334281),2026-11-27,tên khác: Ban Co Peak
+DO194,da_nang,Xanh Design DN Tiệm Cây và Nước,16.0201637,108.236873,,tourism=zoo,,,,,OpenStreetMap Overpass API (way/1484919510),2026-11-27,
+H15,ha_giang,Du Già,22.93117,105.22291,,,,,,,https://mapcarta.com/15510216,2026-11-27,Điểm dân cư dùng làm đầu chặng; tọa độ đại diện xã. https://vietnam.travel/vi/things-to-do/ha-giang-loop-where-nature-and-culture-come-one/
+H16,ha_giang,Thác Du Già,,,ngoai_troi,,,,,,,2026-11-27,Thác ở vùng Du Già. Các nguồn bản đồ cho vị trí khác nhau. https://vietnam.travel/vi/things-to-do/ha-giang-loop-where-nature-and-culture-come-one/
+H17,ha_giang,Rừng thông Yên Minh,,,ngoai_troi,,,,,,,2026-11-27,Khu rừng dọc QL4C. https://vietnam.travel/vi/things-to-do/ha-giang-loop-where-nature-and-culture-come-one/
+H18,ha_giang,Ruộng bậc thang Hoàng Su Phì,,,ngoai_troi,,,,,,,2026-11-27,Cảnh quan trải trên nhiều địa bàn. https://vietnam.travel/vi/things-to-do/ha-giang-loop-where-nature-and-culture-come-one/
+H19,ha_giang,Chợ tình Khau Vai,,,ngoai_troi,,,,,,,2026-11-27,Chợ theo kỳ lễ hội ở Mèo Vạc. https://vietnam.travel/vi/things-to-do/ha-giang-loop/
+H20,ha_giang,Thác Tiên – Đèo Gió,,,ngoai_troi,,,,,,,2026-11-27,Danh thắng tại Xín Mần. https://vietnam.travel/vi/things-to-do/ha-giang-loop/
+H21,ha_giang,Bãi đá cổ Nấm Dẩn,,,ngoai_troi,,,,,,,2026-11-27,Di tích khảo cổ ở Xín Mần. https://vietnam.travel/vi/things-to-do/ha-giang-loop/
+H22,ha_giang,Suối khoáng Quảng Ngần,,,ngoai_troi,,,,,,,2026-11-27,Suối khoáng ở Vị Xuyên. https://vietnam.travel/vi/things-to-do/ha-giang-loop/
+D16,da_nang,Bảo tàng Mỹ thuật Đà Nẵng,16.07137,108.21768,trong_nha,,,20000,C141,,https://mapcarta.com/W759913076,2026-11-27,78 Lê Duẩn. https://danangfantasticity.com/en/len-lich-kham-pha-da-nang-2026-cap-nhat-gia-ve-tham-quan-cac-diem-khu-du-lich
+D17,da_nang,Bảo tàng Đồng Đình,16.101412,108.276077,,,,35000,C163,,https://hcmussh.edu.vn/api/tt/storage/download/18434.pdf,2026-11-27,Bán đảo Sơn Trà. Vé C163 dành cho khách Việt Nam. https://dongdinhmuseum.vn/gioi-thieu
+D18,da_nang,Đình Túy Loan,,,,,,,,,,2026-11-27,Di tích đình làng ở Hòa Vang. https://danangfantasticity.com/en/kien-truc/di-tich-kien-truc-nghe-thuat-da-nang
+D19,da_nang,Đình Nại Nam,,,,,,,,,,2026-11-27,Gần Cung Thể thao Tiên Sơn. https://danangfantasticity.com/en/di-tich-kien-truc-nghe-thuat/dinh-nai-nam-phuong-hoa-cuong
+D20,da_nang,Nhà hát Tuồng Nguyễn Hiển Dĩnh,,,trong_nha,,,,,,,2026-11-27,Sân khấu tuồng tại Đà Nẵng. https://danangfantasticity.com/en/tin-tuc/nhung-net-moi-cho-du-lich-da-nang
+D21,da_nang,Làng nón La Bông,,,,,,,,,,2026-11-27,Làng nghề nón ở vùng Hòa Tiến. https://danangfantasticity.com/en/tin-tuc/nhung-net-moi-cho-du-lich-da-nang
+D22,da_nang,Làng nong tre Yến Nê,,,,,,,,,,2026-11-27,Làng nghề đan nong tre ở vùng Hòa Tiến. https://danangfantasticity.com/en/tin-tuc/nhung-net-moi-cho-du-lich-da-nang
+D23,da_nang,Làng khô mè Quang Châu,,,,,,,,,,2026-11-27,Làng nghề làm bánh khô mè ở vùng Hòa Tiến. https://danangfantasticity.com/en/tin-tuc/nhung-net-moi-cho-du-lich-da-nang
