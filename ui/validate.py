@@ -115,3 +115,49 @@ def validate_input(raw: dict, today: dt.date = None):
         "so_nguoi": so_nguoi,
         "phong_cach": phong_cach,
     }, []
+
+
+# ---------- Kiểm đầu ra planner theo docs/schema.md ----------
+SLOTS = ("sang", "chieu", "toi")
+
+
+def check_plan(plan) -> list:
+    """Trả danh sách lỗi schema (rỗng = đúng). Dùng để giao diện báo rõ thay vì crash
+    khi planner trả thiếu trường. Chỉ kiểm hình dạng, không kiểm đúng sai nội dung."""
+    if not isinstance(plan, dict):
+        return ["planner phải trả dict, đang trả %s" % type(plan).__name__]
+    errs = []
+    if not isinstance(plan.get("ok"), bool):
+        errs.append("thiếu hoặc sai kiểu trường ok (bool)")
+        return errs
+    if not plan["ok"]:
+        if not plan.get("error"):
+            errs.append("ok=false nhưng không có error")
+        return errs
+    for k in ("total_per_person", "budget_per_person"):
+        if not isinstance(plan.get(k), int) or isinstance(plan.get(k), bool):
+            errs.append("%s phải là int VND" % k)
+    cb = plan.get("cost_breakdown")
+    if not isinstance(cb, dict) or not all(isinstance(v, int) for v in cb.values()):
+        errs.append("cost_breakdown phải là dict {khoản: int VND}")
+    days = plan.get("days")
+    if not isinstance(days, list) or not days:
+        errs.append("days phải là list không rỗng")
+        return errs
+    for i, d in enumerate(days, 1):
+        where = "days[%d]" % (i - 1)
+        if not isinstance(d, dict):
+            errs.append("%s phải là dict" % where)
+            continue
+        for k in ("day", "date", "weather", "slots"):
+            if k not in d:
+                errs.append("%s thiếu %s" % (where, k))
+        slots = d.get("slots")
+        if isinstance(slots, dict):
+            for s in SLOTS:
+                for j, a in enumerate(slots.get(s) or []):
+                    if not isinstance(a, dict) or "name" not in a or not isinstance(a.get("cost", 0), int):
+                        errs.append("%s.slots.%s[%d] cần name và cost (int)" % (where, s, j))
+        elif "slots" in d:
+            errs.append("%s.slots phải là dict sang/chieu/toi" % where)
+    return errs

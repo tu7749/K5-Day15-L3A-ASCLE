@@ -19,7 +19,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(ROOT, "codebase"))
 sys.path.insert(0, ROOT)
 
-from ui.validate import MAX_DAYS, MAX_PEOPLE, MIN_DAYS, MIN_PEOPLE, STYLES, validate_input  # noqa: E402
+from ui.validate import MAX_DAYS, MAX_PEOPLE, MIN_DAYS, MIN_PEOPLE, STYLES, check_plan, validate_input  # noqa: E402
 
 MOCK_PATH = os.path.join(ROOT, "ui", "mock_plan.json")
 WEATHER_ICON = {"nang": "☀️", "may": "☁️", "mua": "🌧️"}
@@ -40,7 +40,10 @@ def get_plan(req: dict):
             raise
         with open(MOCK_PATH, encoding="utf-8") as f:
             return json.load(f), True
-    return make_plan(req), False
+    try:
+        return make_plan(req), False
+    except Exception as e:  # lỗi hệ thống (thời tiết, Bedrock…): báo rõ, không crash trang
+        return {"ok": False, "error": "Hệ thống đang lỗi, thử lại sau ít phút (%s)." % type(e).__name__}, False
 
 
 def render_form():
@@ -68,6 +71,13 @@ def render_form():
 
 def render_preview(plan: dict, is_mock: bool):
     """Hiển thị thử (việc 1). Trang kết quả đầy đủ làm ở việc 4."""
+    problems = check_plan(plan)
+    if problems:
+        st.error("Kết quả từ planner sai định dạng (docs/schema.md) — báo người viết planner:")
+        st.code("\n".join(problems))
+        with st.expander("JSON nhận được"):
+            st.json(plan)
+        return
     if is_mock:
         st.warning("Đang hiển thị **dữ liệu giả** (ui/mock_plan.json) — chưa nối planner. "
                    "Kết quả không phụ thuộc đầu vào vừa nhập.")
