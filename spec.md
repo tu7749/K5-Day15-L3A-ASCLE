@@ -1,18 +1,19 @@
-# AI SPEC — Lịch trình Hà Giang theo ngân sách và thời tiết · Nhóm ASCLE · Phòng [XXX] · Zone [X]
+# AI SPEC — Lịch trình Hà Giang hoặc Đà Nẵng theo ngân sách và thời tiết · Nhóm ASCLE · Phòng [XXX] · Zone [X]
 
 > Mốc nộp: §7 chốt chuẩn "đạt" tại **CP2 19:30 Thứ Sáu 27/11** · §0–§7 nộp **CP3 10:00 Thứ Bảy 28/11** · đủ §0–§10 **CP4 14:30 Thứ Bảy 28/11** · §10 changelog ghi tiếp đến **23:59 Thứ Bảy 28/11**.
 > Đầu mỗi mục ghi bước guide (`02-guide.md` trong repo đề) chỉ cách điền. Mỗi mục ngắn, có số và nguồn; chi tiết để ở file được trỏ tới. Xoá dòng hướng dẫn trong ngoặc vuông khi điền xong.
 
-Track: C – Du lịch. Người lên lịch Hà Giang cho nhóm bạn phải đối chiếu chi phí, cung đường và thời tiết từ nhiều nguồn nên tốn thời gian xếp lại lịch và tính lại tiền khi hoạt động ngoài trời gặp mưa.
+Track: C – Du lịch. Người lên lịch chuyến đi tự túc cho nhóm bạn ở Hà Giang hoặc Đà Nẵng phải đối chiếu chi phí, cung đường và thời tiết từ nhiều nguồn nên tốn thời gian xếp lại lịch và tính lại tiền khi hoạt động ngoài trời gặp mưa.
 Data BTC cấp đã dùng: Track C tự tìm dữ liệu.
+Phạm vi dữ liệu dự kiến: địa điểm, giá, cung đường và thời tiết tại Hà Giang và Đà Nẵng. Mỗi lịch trình dùng dữ liệu của điểm đến đã chọn.
 
 ## §0. Hiện tại việc này diễn ra thế nào *(guide 1.1)*
 - Luồng hiện tại của việc này, trong khoá hoặc trên app thật (3–5 bước; ảnh chụp từ tài khoản của mình, đã che thông tin):
 - Công cụ / AI đang được dùng cho việc này (nếu có) + nguồn. Không kiểm được thì ghi "chưa kiểm":
 
 ## §1. Người dùng & bằng chứng *(guide 1.1, 1.2)*
-- Người dùng chính: Người đứng ra lên lịch chuyến đi Hà Giang tự túc cho nhóm bạn.
-- Việc họ cố làm xong: Chốt lịch trình Hà Giang vừa ngân sách và có phương án thay thế nếu trời mưa.
+- Người dùng chính: Người đứng ra lên lịch chuyến đi tự túc cho nhóm bạn ở Hà Giang hoặc Đà Nẵng.
+- Việc họ cố làm xong: Chốt lịch trình cho điểm đến đã chọn, vừa ngân sách và có phương án thay thế nếu trời mưa.
 - Hôm nay họ giải bằng gì, hỏng ở đâu, vì sao chưa bỏ:
 - Pain dự kiến: Khi hoạt động ngoài trời gặp mưa, người lên lịch phải đối chiếu lại cung đường và chi phí nên mất thêm thời gian trước khi chốt lịch với nhóm.
 - CP1: ghi [giả thuyết và nguồn dự kiến](evidence/hypothesis.md). Số liệu và kết luận sẽ cập nhật sau khi thu bằng chứng.
@@ -33,7 +34,7 @@ Data BTC cấp đã dùng: Track C tự tìm dữ liệu.
 - [sản phẩm / tính năng gần giống]: một điều đáng học · một điều đáng né · mình khác gì
 
 ## §4. Thiết kế *(guide 2.2, 3.2)*
-- **Lát cắt dự kiến (CP1):** Khi người lên lịch cho nhóm bạn nhập số ngày, ngân sách mỗi người và thời điểm đi Hà Giang, AI chọn hoạt động thay thế cho một ngày có mưa từ các phương án đã qua kiểm tra về cung đường và chi phí để người đó nhận lịch từng ngày kèm tổng chi phí ước tính và lý do đổi lịch.
+- **Lát cắt dự kiến (CP1):** Khi người lên lịch cho nhóm bạn chọn Hà Giang hoặc Đà Nẵng và nhập số ngày, ngân sách mỗi người cùng thời điểm đi, AI chọn hoạt động thay thế cho một ngày có mưa tại điểm đến đã chọn từ các phương án đã qua kiểm tra về cung đường và chi phí để người đó nhận lịch từng ngày kèm tổng chi phí ước tính và lý do đổi lịch.
 - Không làm (≥3 điều):
 - **Sơ đồ** (ảnh / Mermaid / draw.io): [chèn ở đây]
 - **Hình dạng:** [ ] workflow cố định · [ ] một agent · [ ] nhiều agent — 2 dòng lý do, và vì sao **không** chọn hình dạng phức tạp hơn:
