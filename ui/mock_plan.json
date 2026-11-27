@@ -1,0 +1,60 @@
+{
+  "_note": "DỮ LIỆU GIẢ để dựng giao diện trước khi có planner.py. Giá và thời tiết chưa có nguồn, không dùng làm bằng chứng.",
+  "ok": true,
+  "error": null,
+  "input": {
+    "so_ngay": 3,
+    "ngan_sach_moi_nguoi": 3000000,
+    "ngay_di": "2026-12-10",
+    "so_nguoi": 4,
+    "phong_cach": "vua"
+  },
+  "days": [
+    {
+      "day": 1,
+      "date": "2026-12-10",
+      "weather": {"rain_prob": 0.1, "condition": "nang", "temp_c": 16},
+      "slots": {
+        "sang": [{"place_id": "P01", "name": "Cột mốc Km0 Hà Giang", "cost": 0, "indoor": false}],
+        "chieu": [{"place_id": "P02", "name": "Cổng trời Quản Bạ", "cost": 0, "indoor": false}],
+        "toi": [{"place_id": "P03", "name": "Homestay Yên Minh", "cost": 250000, "indoor": true}]
+      },
+      "changed_because": null,
+      "warnings": []
+    },
+    {
+      "day": 2,
+      "date": "2026-12-11",
+      "weather": {"rain_prob": 0.75, "condition": "mua", "temp_c": 12},
+      "slots": {
+        "sang": [{"place_id": "P07", "name": "Chợ phiên Đồng Văn", "cost": 0, "indoor": true}],
+        "chieu": [{"place_id": "P05", "name": "Dinh thự họ Vương", "cost": 30000, "indoor": true}],
+        "toi": [{"place_id": "P06", "name": "Homestay phố cổ Đồng Văn", "cost": 300000, "indoor": true}]
+      },
+      "changed_because": "Xác suất mưa 75% buổi sáng: đổi đèo Mã Pí Lèng sang chợ phiên Đồng Văn (trong nhà, cùng khu vực, không phát sinh di chuyển).",
+      "warnings": ["Đường đèo trơn khi mưa, đi chậm và tránh chạy xe sau 17h."]
+    },
+    {
+      "day": 3,
+      "date": "2026-12-12",
+      "weather": {"rain_prob": 0.3, "condition": "may", "temp_c": 14},
+      "slots": {
+        "sang": [{"place_id": "P04", "name": "Đèo Mã Pí Lèng", "cost": 0, "indoor": false}],
+        "chieu": [{"place_id": "P08", "name": "Về lại TP Hà Giang", "cost": 0, "indoor": false}],
+        "toi": []
+      },
+      "changed_because": null,
+      "warnings": []
+    }
+  ],
+  "cost_breakdown": {
+    "cho_o": 550000,
+    "an_uong": 600000,
+    "di_lai": 1100000,
+    "ve": 30000,
+    "du_phong": 300000
+  },
+  "total_per_person": 2580000,
+  "budget_per_person": 3000000,
+  "text": null
+}
