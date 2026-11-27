@@ -1,4 +1,4 @@
-"""Giao diện web Streamlit cho lịch trình Hà Giang.
+"""Giao diện web Streamlit cho lịch trình Hà Giang / Đà Nẵng.
 
 Chạy: streamlit run streamlit_app.py
 (python run.py vẫn là bản chạy thử dòng lệnh của khung chấm; file này không thay nó.)
@@ -19,7 +19,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(ROOT, "codebase"))
 sys.path.insert(0, ROOT)
 
-from ui.validate import MAX_DAYS, MAX_PEOPLE, MIN_DAYS, MIN_PEOPLE, STYLES, check_plan, validate_input  # noqa: E402
+from ui.validate import MAX_DAYS, MAX_PEOPLE, MIN_DAYS, MIN_PEOPLE, STYLES, DESTINATIONS, check_plan, validate_input  # noqa: E402
 
 MOCK_PATH = os.path.join(ROOT, "ui", "mock_plan.json")
 WEATHER_ICON = {"nang": "☀️", "may": "☁️", "mua": "🌧️"}
@@ -48,6 +48,7 @@ def get_plan(req: dict):
 
 def render_form():
     with st.form("trip_input"):
+        diem_den = st.radio("Điểm đến", list(DESTINATIONS), format_func=DESTINATIONS.get, horizontal=True)
         c1, c2, c3 = st.columns(3)
         so_ngay = c1.number_input("Số ngày", min_value=MIN_DAYS, max_value=MAX_DAYS, value=3, step=1)
         so_nguoi = c2.number_input("Số người", min_value=MIN_PEOPLE, max_value=MAX_PEOPLE, value=4, step=1)
@@ -61,7 +62,7 @@ def render_form():
     if not submitted:
         return False, None
     req, errors = validate_input({
-        "so_ngay": so_ngay, "so_nguoi": so_nguoi, "phong_cach": phong_cach,
+        "diem_den": diem_den, "so_ngay": so_ngay, "so_nguoi": so_nguoi, "phong_cach": phong_cach,
         "ngan_sach_moi_nguoi": ngan_sach, "ngay_di": ngay_di,
     })
     for msg in errors:
@@ -118,9 +119,9 @@ def render_preview(plan: dict, is_mock: bool):
 
 
 def main():
-    st.set_page_config(page_title="Lịch trình Hà Giang", page_icon="🏔️", layout="wide")
-    st.title("🏔️ Lịch trình Hà Giang theo ngân sách & thời tiết")
-    st.caption("Nhập số ngày, ngân sách mỗi người và ngày đi. Lịch có ngày mưa sẽ được đổi sang hoạt động phù hợp, kèm lý do.")
+    st.set_page_config(page_title="Lịch trình du lịch", page_icon="🏔️", layout="wide")
+    st.title("🏔️ Lịch trình Hà Giang · Đà Nẵng theo ngân sách & thời tiết")
+    st.caption("Chọn điểm đến, nhập số ngày, ngân sách mỗi người và ngày đi. Lịch có ngày mưa sẽ được đổi sang hoạt động phù hợp, kèm lý do.")
 
     submitted, req = render_form()
     if submitted and req is None:          # đầu vào sai: bỏ lịch cũ để không hiện lẫn với lỗi

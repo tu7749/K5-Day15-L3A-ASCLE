@@ -1,4 +1,4 @@
-# Schema dữ liệu giữa giao diện (C) và planner (B)
+# Schema dữ liệu: giao diện (C) · planner (B) · data địa điểm (A)
 
 > Mốc "Chốt schema" (giờ 2 trong `Trinh_tu_lam_viec_24h.xlsx`). Đã thống nhất: Doanh (C), Tú (B), Sơn (A) — 27/11/2026.
 > Đổi tên trường hay thêm trường bắt buộc thì báo cả ba người và sửa file này cùng lúc với code.
@@ -22,6 +22,7 @@ Giao diện đã kiểm hợp lệ trước khi gọi (`validate_input`), planne
 
 | Trường | Kiểu | Ràng buộc | Ví dụ |
 |---|---|---|---|
+| `diem_den` | str | `ha_giang` · `da_nang` (phạm vi mới từ commit 19b4e66) | `"da_nang"` |
 | `so_ngay` | int | 1–5 | `3` |
 | `ngan_sach_moi_nguoi` | int | VND, > 0, ≤ 100.000.000 | `3000000` |
 | `ngay_di` | str | `YYYY-MM-DD`, từ hôm nay đến ≤ 1 năm | `"2026-12-10"` |
@@ -57,7 +58,7 @@ Giao diện đã kiểm hợp lệ trước khi gọi (`validate_input`), planne
 
 | Trường | Kiểu | Ý nghĩa |
 |---|---|---|
-| `place_id` | str | đúng `id` trong `data/places.csv` của A |
+| `place_id` | str | đúng `id` trong file địa điểm (mục 5) |
 | `name` | str | tên hiển thị |
 | `cost` | int | VND / người |
 | `indoor` | bool | `true` = trong nhà, dùng được khi mưa |
@@ -67,3 +68,24 @@ Giao diện đã kiểm hợp lệ trước khi gọi (`validate_input`), planne
 - Tiền luôn là **int VND / người**, không phải chuỗi đã định dạng. Giao diện tự định dạng `3.000.000đ`.
 - Mọi số tiền và địa điểm phải đến từ data của A, không do LLM sinh ra (B kiểm ở `validate_output()`).
 - Giao diện **không tự tính** tiền hay xếp lịch, chỉ hiển thị.
+
+## 5. File địa điểm (`data/places_*.csv`) — *đề xuất, chờ Sơn (A) xác nhận*
+
+Mỗi điểm đến một file cùng cột: `data/places_da_nang.csv` (Doanh), Hà Giang (Sơn). Planner đọc file theo `req["diem_den"]`.
+
+| Cột | Kiểu | Ý nghĩa |
+|---|---|---|
+| `id` | str | `DN01`… (Đà Nẵng), `HG01`… (Hà Giang) — duy nhất |
+| `diem_den` | str | `da_nang` · `ha_giang` |
+| `ten` | str | tên hiển thị |
+| `khu_vuc` | str | quận / huyện, để gom các điểm gần nhau vào một buổi |
+| `lat`, `lon` | float | tọa độ, lấy từ OpenStreetMap (Nominatim) |
+| `trong_nha` | 0/1 | 1 = dùng được khi mưa |
+| `thoi_gian_tham_quan_gio` | float | *(tự ước tính)* |
+| `ve_vnd` | int | vé người lớn / người; miễn phí = 0 |
+| `gio_mo_cua` | str | ghi `(chưa kiểm)` nếu chưa có nguồn |
+| `mua_dep` | str | tháng đẹp; không có nguồn thì ghi `(tự ước tính)` |
+| `rui_ro_khi_mua` | `thap` · `tb` · `cao` | `cao` = không xếp vào ngày mưa (đèo, biển, cáp treo) |
+| `nguon_gia` | str | link nguồn giá, hoặc `(tự ước tính: lý do)` |
+| `ngay_xem` | str | ngày xem nguồn `YYYY-MM-DD` |
+| `ghi_chu` | str | điều kiện giá, giới hạn |

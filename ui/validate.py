@@ -14,6 +14,7 @@ MIN_PEOPLE, MAX_PEOPLE = 1, 20
 MAX_BUDGET = 100_000_000          # 100 triệu / người: trên mức này coi là gõ nhầm
 MAX_DAYS_AHEAD = 365
 STYLES = {"tiet_kiem": "Tiết kiệm", "vua": "Vừa", "thoai_mai": "Thoải mái"}
+DESTINATIONS = {"ha_giang": "Hà Giang", "da_nang": "Đà Nẵng"}   # điểm đến có dữ liệu
 
 
 def parse_budget(text) -> int:
@@ -62,6 +63,11 @@ def validate_input(raw: dict, today: dt.date = None):
     today = today or dt.date.today()
     errors = []
 
+    diem_den = raw.get("diem_den")
+    if diem_den not in DESTINATIONS:
+        errors.append("Chưa chọn điểm đến, hoặc điểm đến chưa có dữ liệu (chỉ có: %s)."
+                      % ", ".join(DESTINATIONS.values()))
+
     try:
         so_ngay = _to_int(raw.get("so_ngay"))
         if not MIN_DAYS <= so_ngay <= MAX_DAYS:
@@ -109,6 +115,7 @@ def validate_input(raw: dict, today: dt.date = None):
     if errors:
         return None, errors
     return {
+        "diem_den": diem_den,
         "so_ngay": so_ngay,
         "ngan_sach_moi_nguoi": budget,
         "ngay_di": ngay_di.isoformat(),

@@ -3,6 +3,7 @@
   "ok": true,
   "error": null,
   "input": {
+    "diem_den": "ha_giang",
     "so_ngay": 3,
     "ngan_sach_moi_nguoi": 3000000,
     "ngay_di": "2026-12-10",
