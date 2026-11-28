@@ -4,3 +4,8 @@
 	encode zstd gzip
 	reverse_proxy web:8501
 }
+
+# Truy cập HTTP bằng IP hoặc tên khác: chuyển về tên miền có cert, tránh lỗi cert khi vào https://<ip>.
+http:// {
+	redir https://{$DOMAIN:localhost}{uri} permanent
+}
