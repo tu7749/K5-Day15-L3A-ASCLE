@@ -68,6 +68,8 @@ jobs:
           grep -v '^DOMAIN=' .env > .env.tmp || true
           echo "DOMAIN=$DOMAIN" >> .env.tmp && mv .env.tmp .env
           docker compose up -d --build --remove-orphans
+          # Container caddy không bị tạo lại khi chỉ Caddyfile đổi: nạp lại cấu hình, không gián đoạn.
+          docker compose exec -T caddy caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile
           docker image prune -f >/dev/null
           docker compose ps
           EOF

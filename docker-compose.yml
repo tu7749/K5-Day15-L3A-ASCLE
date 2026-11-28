@@ -26,7 +26,7 @@ services:
     environment:
       DOMAIN: ${DOMAIN:-localhost}
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./caddy:/etc/caddy:ro  # Mount thư mục để caddy reload thấy file mới sau git reset.
       - caddy-data:/data  # Giữ cert giữa các lần deploy, tránh chạm giới hạn của Let's Encrypt.
       - caddy-config:/config
     depends_on:
