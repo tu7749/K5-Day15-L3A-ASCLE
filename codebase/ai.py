@@ -53,6 +53,10 @@ def _call_llamacpp(system: str, user: str) -> dict:
     port = os.environ.get("LLAMA_CPP_PORT", "8087")
     if not port.isascii() or not port.isdecimal() or len(port) > 5 or not 1 <= int(port) <= 65535:
         raise ValueError("LLAMA_CPP_PORT phải là cổng từ 1 đến 65535.")
+    # Mặc định loopback. Trong container trên Docker Desktop đặt host.docker.internal, hoặc tên service llama.cpp.
+    host = (os.environ.get("LLAMA_CPP_HOST") or "127.0.0.1").strip()
+    if not host or any(character in host for character in "/?#@ "):
+        raise ValueError("LLAMA_CPP_HOST chỉ gồm tên máy hoặc địa chỉ IP, không kèm giao thức hay cổng.")
 
     candidates = json.loads(user)["candidates"]
     schema = {
@@ -61,7 +65,7 @@ def _call_llamacpp(system: str, user: str) -> dict:
         "required": ["candidate_id"], "additionalProperties": False,
     }
     request = Request(
-        f"http://127.0.0.1:{int(port)}/v1/chat/completions",
+        f"http://{host}:{int(port)}/v1/chat/completions",
         data=json.dumps({
             "model": MODEL_NAME,
             "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
@@ -76,7 +80,7 @@ def _call_llamacpp(system: str, user: str) -> dict:
     except HTTPError as error:
         raise RuntimeError(f"llama.cpp trả HTTP {error.code}. Kiểm tra tên model và cấu hình server.") from error
     except (URLError, TimeoutError) as error:
-        raise RuntimeError(f"Chưa kết nối được llama.cpp tại cổng {int(port)}. Kiểm tra server local.") from error
+        raise RuntimeError(f"Chưa kết nối được llama.cpp tại {host}:{int(port)}. Kiểm tra server và LLAMA_CPP_HOST.") from error
 
     try:
         usage, model = payload["usage"], payload["model"]

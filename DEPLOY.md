@@ -47,6 +47,20 @@ docker run -d --name viet-du --restart unless-stopped --network host \
   -e AWS_REGION -e S3_BUCKET -e S3_PREFIX -e BEDROCK_MODEL_ID viet-du
 ```
 
+Trong container, `127.0.0.1` là chính container web, nên `--network host` là bắt buộc với cách trên. Nếu không dùng mạng host, đặt `LLAMA_CPP_HOST` là địa chỉ máy chạy llama.cpp. Khi đó llama.cpp phải nghe ở địa chỉ container truy cập được, ví dụ `--host 0.0.0.0` sau firewall, không mở cổng 8087 ra Internet.
+
+### Docker Desktop (Windows/macOS)
+
+Docker Desktop không hỗ trợ `--network host` như Linux. Chạy llama.cpp trên máy (hoặc container `ghcr.io/ggml-org/llama.cpp:server` publish `-p 127.0.0.1:8087:8087`) rồi trỏ web tới `host.docker.internal`:
+
+```bash
+docker run -d --name viet-du -p 8501:8501 \
+  -e MODEL_PROVIDER=llamacpp -e MODEL_NAME=qwen3-0.6b-f16 \
+  -e LLAMA_CPP_HOST=host.docker.internal -e LLAMA_CPP_PORT=8087 viet-du
+```
+
+`MODEL_NAME` phải trùng `--alias` của llama-server.
+
 Streamlit phục vụ ở cổng `8501` của EC2. Kiểm tra `/_stcore/health`, sau đó thử tạo lịch ở ngày có dự báo mưa và các phương án hợp lệ để xác nhận giao diện hiện tên Qwen3 và số token.
 
 Xem [AWS Bedrock Converse](https://docs.aws.amazon.com/boto3/latest/reference/services/bedrock-runtime/client/converse.html) và [Streamlit cache](https://docs.streamlit.io/develop/api-reference/caching-and-state/st.cache_data).
