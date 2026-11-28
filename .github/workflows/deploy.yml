@@ -34,7 +34,15 @@ jobs:
       HOST: ${{ vars.EC2_HOST }}
       SSH_USER: ${{ vars.EC2_USER || 'ubuntu' }}
       APP_DIR: ${{ vars.EC2_APP_DIR || 'K5-Day15-L3A-ASCLE' }}
+      DOMAIN_VAR: ${{ vars.DOMAIN }}
     steps:
+      - name: Chọn tên miền HTTPS
+        run: |
+          # Chưa có biến DOMAIN thì dùng <ip-gạch-ngang>.sslip.io, tên này tự trỏ về IP của EC2.
+          DOMAIN="${DOMAIN_VAR:-${HOST//./-}.sslip.io}"
+          echo "DOMAIN=$DOMAIN" >> "$GITHUB_ENV"
+          echo "Tên miền: $DOMAIN"
+
       - name: Cấu hình SSH
         env:
           SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
@@ -51,11 +59,14 @@ jobs:
 
       - name: Deploy lên EC2
         run: |
-          ssh -i ~/.ssh/id_ec2 "$SSH_USER@$HOST" APP_DIR="$APP_DIR" SHA="$GITHUB_SHA" 'bash -s' <<'EOF'
+          ssh -i ~/.ssh/id_ec2 "$SSH_USER@$HOST" APP_DIR="$APP_DIR" SHA="$GITHUB_SHA" DOMAIN="$DOMAIN" 'bash -s' <<'EOF'
           set -euo pipefail
           cd "$APP_DIR"
           git fetch --quiet origin main
           git reset --hard "$SHA"
+          touch .env
+          grep -v '^DOMAIN=' .env > .env.tmp || true
+          echo "DOMAIN=$DOMAIN" >> .env.tmp && mv .env.tmp .env
           docker compose up -d --build --remove-orphans
           docker image prune -f >/dev/null
           docker compose ps
@@ -63,9 +74,10 @@ jobs:
 
       - name: Kiểm tra health
         run: |
-          for i in $(seq 1 30); do
-            if curl -fsS "http://$HOST:${{ vars.WEB_PORT || '80' }}/_stcore/health"; then echo; exit 0; fi
+          # Lần đầu Caddy cần vài chục giây để xin cert. curl kiểm cert thật, không dùng -k.
+          for i in $(seq 1 36); do
+            if curl -fsS "https://$DOMAIN/_stcore/health"; then echo; echo "https://$DOMAIN"; exit 0; fi
             sleep 5
           done
-          echo "Web chưa trả /_stcore/health sau 150 giây" >&2
+          echo "https://$DOMAIN chưa trả /_stcore/health sau 180 giây" >&2
           exit 1

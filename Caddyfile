@@ -1,0 +1,6 @@
+# Caddy tự xin và gia hạn cert Let's Encrypt cho DOMAIN, chuyển HTTP sang HTTPS.
+# DOMAIN đặt trong .env cạnh docker-compose.yml. Mặc định localhost (cert nội bộ, chỉ để thử trên máy).
+{$DOMAIN:localhost} {
+	encode zstd gzip
+	reverse_proxy web:8501
+}

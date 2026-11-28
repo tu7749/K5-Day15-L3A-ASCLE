@@ -1,5 +1,5 @@
-# Việt Du trên một máy: web Streamlit + llama.cpp (Qwen3 0.6B). Chạy: docker compose up -d --build
-# Biến tùy chọn (S3, Bedrock, cổng) đặt trong file .env cạnh file này, xem DEPLOY.md.
+# Việt Du trên một máy: Caddy (HTTPS) → web Streamlit → llama.cpp (Qwen3 0.6B). Chạy: docker compose up -d --build
+# Biến (DOMAIN, S3, Bedrock, cổng) đặt trong file .env cạnh file này, xem DEPLOY.md.
 services:
   llama:
     image: ghcr.io/ggml-org/llama.cpp:server
@@ -17,11 +17,27 @@ services:
       start_period: 300s
       retries: 3
 
+  caddy:
+    image: caddy:2
+    ports:
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+      - "${HTTPS_PORT:-443}:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN:-localhost}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data  # Giữ cert giữa các lần deploy, tránh chạm giới hạn của Let's Encrypt.
+      - caddy-config:/config
+    depends_on:
+      - web
+    restart: unless-stopped
+
   web:
     build: .
     image: viet-du:latest
-    ports:
-      - "${WEB_PORT:-80}:8501"
+    expose:
+      - "8501"  # Chỉ Caddy truy cập; ra Internet qua HTTPS.
     environment:
       MODEL_PROVIDER: llamacpp
       MODEL_NAME: qwen3-0.6b-q8_0
@@ -37,3 +53,5 @@ services:
 
 volumes:
   llama-cache:
+  caddy-data:
+  caddy-config:
