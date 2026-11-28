@@ -201,11 +201,11 @@ def _candidates(catalog, region):
     return points, eligible, fees
 
 
-def _schedule(request, catalog, points, eligible, fees, weathers, indoor_selector=None):
+def _schedule(request, catalog, points, eligible, fees, weathers, *, ticket_budget, indoor_selector=None):
     route = _route_finder(catalog, request.region, request.mode)
     anchor = request.origin or next((key for key in STARTS[request.region] if key in points), "")
     visited, paid_areas, picked_groups = set(), set(), {}
-    ticket_remaining = max(0, request.budget - sum(request.allowances.values()))
+    ticket_remaining = ticket_budget
     result = []
     for offset, weather in enumerate(weathers):
         when = request.departure + timedelta(days=offset)
@@ -346,12 +346,33 @@ def _overnight(catalog, request, end, cap):
     return cards, next((card for card in cards if card["fits"]), None)
 
 
-def _charge_book(request, catalog, schedule):
+def _base_charges(request, catalog):
+    records = [row for row in catalog.costs if row["region"] == request.region]
+    charges = []
+    meal = min((row for row in records if row["category"] == "food" and row["unit"] == "per_meal"),
+               key=lambda row: row["price_max_vnd"], default=None)
+    if meal:
+        charges.append(("food", f"Món tham khảo × {MEALS_PER_DAY} bữa mỗi người/ngày",
+                        meal["price_max_vnd"] * request.people * request.days * MEALS_PER_DAY, meal["source"]))
+    if request.mode == "motorbike":
+        rental = min((row for row in records if row["category"] == "bike_rental" and row["unit"] == "per_day"),
+                     key=lambda row: row["price_max_vnd"], default=None)
+        if rental:
+            charges.append(("transport", "Thuê xe theo mẫu, chưa gồm xăng",
+                            rental["price_max_vnd"] * ceil(request.people / PEOPLE_PER_MOTORBIKE) * request.days,
+                            rental["source"]))
+    return charges
+
+
+def _charge_book(request, catalog, schedule, base_charges):
     buckets = {category: {"amount": 0, "entries": [], "missing": [], "allowance": 0} for category in CATEGORIES}
 
     def add(category, name, amount, source):
         buckets[category]["amount"] += amount
         buckets[category]["entries"].append({"name": name, "amount": amount, "source": source})
+
+    for charge in base_charges:
+        add(*charge)
 
     for day in schedule:
         for item in day["items"]:
@@ -364,23 +385,10 @@ def _charge_book(request, catalog, schedule):
         if day["return_missing"]:
             buckets["transport"]["missing"].append("Chặng về " + day["origin"])
 
-    records = [row for row in catalog.costs if row["region"] == request.region]
-    meal = min((row for row in records if row["category"] == "food" and row["unit"] == "per_meal"),
-               key=lambda row: row["price_max_vnd"], default=None)
-    if meal:
-        add("food", f"Món tham khảo × {MEALS_PER_DAY} bữa mỗi người/ngày",
-            meal["price_max_vnd"] * request.people * request.days * MEALS_PER_DAY, meal["source"])
     bounds = next((row for row in catalog.lodging_bands
                    if row["region_id"] == request.region and row["zone"] == "ALL"
                    and row["accommodation_type"] == (request.lodging_type or "hotel")), None)
-    if request.mode == "motorbike":
-        rental = min((row for row in records if row["category"] == "bike_rental" and row["unit"] == "per_day"),
-                     key=lambda row: row["price_max_vnd"], default=None)
-        if rental:
-            add("transport", "Thuê xe theo mẫu, chưa gồm xăng",
-                rental["price_max_vnd"] * ceil(request.people / PEOPLE_PER_MOTORBIKE) * request.days,
-                rental["source"])
-    if not meal:
+    if not buckets["food"]["entries"]:
         buckets["food"]["missing"].append("Chi phí ăn uống cho cả nhóm")
     else:
         buckets["food"]["missing"].append("Phần ăn uống ngoài định mức món tham khảo")
@@ -407,9 +415,12 @@ def _charge_book(request, catalog, schedule):
 
 def build_trip(request, catalog, *, weather_provider=trip_weather, indoor_selector=None):
     points, eligible, fees = _candidates(catalog, request.region)
-    dry = _schedule(request, catalog, points, eligible, fees, [{} for _ in range(request.days)])
+    base_charges = _base_charges(request, catalog)
+    ticket_budget = max(0, request.budget - sum(charge[2] for charge in base_charges) - sum(request.allowances.values()))
+    dry = _schedule(request, catalog, points, eligible, fees, [{} for _ in range(request.days)], ticket_budget=ticket_budget)
     weather = weather_provider(_weather_requests(dry, request))
-    schedule = _schedule(request, catalog, points, eligible, fees, weather, indoor_selector)
+    schedule = _schedule(request, catalog, points, eligible, fees, weather,
+                         ticket_budget=ticket_budget, indoor_selector=indoor_selector)
     for previous, day in zip(dry, schedule):
         before = {item["id"]: item for item in previous["items"]}
         after = {item["id"]: item for item in day["items"]}
@@ -427,7 +438,7 @@ def build_trip(request, catalog, *, weather_provider=trip_weather, indoor_select
         start = request.origin or next((key for key in STARTS[request.region] if key in points), "")
         day["origin_point"] = ({"lat": points[start]["lat"], "lon": points[start]["lon"]} if start in points else None)
 
-    costs = _charge_book(request, catalog, schedule)
+    costs = _charge_book(request, catalog, schedule, base_charges)
     total = sum(row["amount"] for row in costs.values())
     reserved = sum(row["allowance"] for row in costs.values())
     remaining = request.budget - total - reserved

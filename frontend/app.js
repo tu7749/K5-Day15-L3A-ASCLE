@@ -16,6 +16,10 @@ const source = (value, label="Nguồn") => {
 const amountSpan = amount => '<strong>' + money(amount) + '</strong>';
 const range = rate => rate.low === rate.high ? money(rate.high) : money(rate.low) + " – " + money(rate.high);
 
+function perGuest(amount, people) {
+  return (amount % people ? "≈ " : "") + money(Math.round(amount / people)) + "/khách";
+}
+
 function weatherText(weather) {
   if (weather.source === "forecast") {
     const metrics = [];
@@ -38,21 +42,29 @@ function weatherText(weather) {
 }
 
 function renderBudget(plan) {
+  const people = plan.people;
+  const spent = plan.total_known + plan.total_reserved;
+  const remainingLabel = plan.remaining < 0 ? "Vượt ngân sách" :
+    plan.budget_status === "partial" ? "Còn lại tạm tính" : "Còn lại";
+  const share = (amount, label = "") => '<small class="vd-budget-share">' + esc(label + perGuest(amount, people)) + '</small>';
   const status = {
     within: "Trong ngân sách theo các mức giá và khoản dự trù ở trên.",
     partial: "Chưa thể kết luận trong ngân sách vì còn khoản chưa tính.",
     over: "Các khoản đã tính và dự trù vượt ngân sách.",
   }[plan.budget_status];
   const items = Object.entries(plan.costs).map(([key, bucket]) => '<li><b>' + COSTS[key] + '</b> · ' +
-    (bucket.entries.length ? money(bucket.amount) : bucket.missing.length ? "Chưa có giá" : "Không phát sinh theo lịch") +
-    (bucket.allowance ? " · Dự trù " + money(bucket.allowance) : "") +
+    (bucket.entries.length ? money(bucket.amount) + " cho nhóm · " + perGuest(bucket.amount, people) :
+      bucket.missing.length ? "Chưa có giá" : "Không phát sinh theo lịch") +
+    (bucket.allowance ? " · Dự trù " + money(bucket.allowance) + " cho nhóm · " + perGuest(bucket.allowance, people) : "") +
     (bucket.entries.length ? '<ul>' + bucket.entries.map(row => '<li>' + esc(row.name) + ' · ' + money(row.amount) + ' ' + source(row.source) + '</li>').join("") + '</ul>' : "") +
     (bucket.missing.length ? '<div>' + (bucket.allowance ? 'Đã dự trù: ' : 'Chưa tính: ') + esc(bucket.missing.join("; ")) + '</div>' : "") +
     '</li>').join("");
-  return '<div class="vd-budget"><div><span>Tổng đã tính</span>' + amountSpan(plan.total_known) +
-    '</div><div><span>Ngân sách nhóm</span>' + amountSpan(plan.budget) +
-    '</div><div><span>' + (plan.budget_status === "partial" ? "Còn lại tạm tính" : "Còn lại") + '</span>' +
-    amountSpan(plan.remaining) + '</div></div><p class="vd-status ' + esc(plan.budget_status) + '">' + esc(status) +
+  return '<p class="vd-budget-note">Chia đều cho ' + esc(people) + ' khách</p>' +
+    '<div class="vd-budget"><div><span>Tổng đã tính</span>' + amountSpan(plan.total_known) + share(plan.total_known) +
+    (plan.total_reserved ? share(spent, "Gồm dự trù: ") : "") +
+    '</div><div><span>Ngân sách nhóm</span>' + amountSpan(plan.budget) + share(plan.budget) +
+    '</div><div><span>' + esc(remainingLabel) + '</span>' + amountSpan(Math.abs(plan.remaining)) +
+    share(Math.abs(plan.remaining)) + '</div></div><p class="vd-status ' + esc(plan.budget_status) + '">' + esc(status) +
     (plan.total_reserved ? " Tổng dự trù: " + money(plan.total_reserved) + "." : "") +
     '</p><details class="vd-costs"><summary>Các khoản chi và khoản còn thiếu</summary><ul>' + items + '</ul></details>';
 }

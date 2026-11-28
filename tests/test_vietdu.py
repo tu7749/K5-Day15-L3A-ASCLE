@@ -101,6 +101,19 @@ def test_budget_is_partial_when_unpriced_costs_exist_and_within_after_allowance(
     assert result["total_known"] + result["total_reserved"] + result["remaining"] == result["budget"]
 
 
+def test_ticket_selection_accounts_for_known_meals_before_using_trip_budget(catalog):
+    full = Request("ha_giang", TODAY, 3, 2, 4_600_000)
+    capped = Request("ha_giang", TODAY, 3, 2, 800_000)
+    full_plan = build_trip(full, catalog, weather_provider=dry)
+    capped_plan = build_trip(capped, catalog, weather_provider=dry)
+
+    assert full_plan["total_known"] == 830_000
+    assert capped_plan["costs"]["food"]["amount"] == full_plan["costs"]["food"]["amount"] == 540_000
+    assert capped_plan["costs"]["ticket"]["amount"] < full_plan["costs"]["ticket"]["amount"]
+    assert capped_plan["total_known"] <= capped.budget
+    assert capped_plan["budget_status"] == "partial"
+
+
 def test_open_meteo_forecast_cache_and_outage(monkeypatch):
     _forecast.cache_clear()
     calls = []
