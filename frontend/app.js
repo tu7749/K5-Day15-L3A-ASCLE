@@ -45,11 +45,13 @@ function renderBudget(plan) {
   const people = plan.people;
   const spent = plan.total_known + plan.total_reserved;
   const remainingLabel = plan.remaining < 0 ? "Vượt ngân sách" :
-    plan.budget_status === "partial" ? "Còn lại tạm tính" : "Còn lại";
+    plan.budget_status === "partial" ? "Chưa phân bổ" : "Còn lại";
   const share = (amount, label = "") => '<small class="vd-budget-share">' + esc(label + perGuest(amount, people)) + '</small>';
+  const pending = Object.entries(plan.costs).filter(([, cost]) => cost.missing.length && !cost.allowance)
+    .map(([key]) => key);
   const status = {
-    within: "Trong ngân sách theo các mức giá và khoản dự trù ở trên.",
-    partial: "Chưa thể kết luận trong ngân sách vì còn khoản chưa tính.",
+    within: "Trong ngân sách theo các khoản đã tính và dự trù.",
+    partial: "Dự toán còn thiếu giá cho " + pending.map(key => COSTS[key].toLowerCase()).join(", ") + ".",
     over: "Các khoản đã tính và dự trù vượt ngân sách.",
   }[plan.budget_status];
   const items = Object.entries(plan.costs).map(([key, bucket]) => '<li><b>' + COSTS[key] + '</b> · ' +
@@ -60,12 +62,13 @@ function renderBudget(plan) {
     (bucket.missing.length ? '<div>' + (bucket.allowance ? 'Đã dự trù: ' : 'Chưa tính: ') + esc(bucket.missing.join("; ")) + '</div>' : "") +
     '</li>').join("");
   return '<p class="vd-budget-note">Chia đều cho ' + esc(people) + ' khách</p>' +
-    '<div class="vd-budget"><div><span>Tổng đã tính</span>' + amountSpan(plan.total_known) + share(plan.total_known) +
-    (plan.total_reserved ? share(spent, "Gồm dự trù: ") : "") +
+    '<div class="vd-budget"><div><span>' + (plan.total_reserved ? "Tổng gồm dự trù" : "Chi phí đã tính") +
+    '</span>' + amountSpan(spent) + share(spent) +
     '</div><div><span>Ngân sách nhóm</span>' + amountSpan(plan.budget) + share(plan.budget) +
     '</div><div><span>' + esc(remainingLabel) + '</span>' + amountSpan(Math.abs(plan.remaining)) +
     share(Math.abs(plan.remaining)) + '</div></div><p class="vd-status ' + esc(plan.budget_status) + '">' + esc(status) +
     (plan.total_reserved ? " Tổng dự trù: " + money(plan.total_reserved) + "." : "") +
+    (pending.length ? ' <button type="button" class="vd-reserve-link" data-allowance="' + esc(pending[0]) + '">Nhập khoản dự trù</button>' : "") +
     '</p><details class="vd-costs"><summary>Các khoản chi và khoản còn thiếu</summary><ul>' + items + '</ul></details>';
 }
 
@@ -295,6 +298,14 @@ export default function ({data, parentElement, setTriggerValue}) {
     } else if (data.plan) {
       displayError("");
       renderPlan(results, data.plan);
+      const reserveButton = results.querySelector(".vd-reserve-link");
+      if (reserveButton) {
+        reserveButton.onclick = () => {
+          form.querySelector(".vd-options").open = true;
+          form.querySelector(".vd-allowance").open = true;
+          field("allow_" + reserveButton.dataset.allowance).focus();
+        };
+      }
       requestAnimationFrame(() => {
         results.scrollIntoView({block:"start"});
         results.querySelector("h2")?.focus({preventScroll:true});

@@ -81,6 +81,7 @@
 .vd-status { background:#e8eee5; color:#21453d; border-radius:7px; padding:9px 13px; font-size:.875rem; margin-block:10px 17px !important; }
 .vd-status.partial { background:#f0e8d7; color:#594526; }
 .vd-status.over { background:#fae7df; color:#822e28; }
+.vd-reserve-link { padding:4px; border:0; background:transparent; color:inherit; font:inherit; font-weight:700; text-decoration:underline; cursor:pointer; }
 .vd-costs { border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-bottom:18px; }
 .vd-costs > summary { cursor:pointer; padding:10px 0; font-weight:600; color:var(--teal); }
 .vd-costs ul { margin:4px 0 12px; padding-left:20px; }

@@ -20,6 +20,7 @@ CATEGORIES = {"ticket": "Vé tham quan", "transport": "Di chuyển", "food": "Ă
 DAY_START, DAY_END = 8 * 60, 18 * 60
 STOPS_PER_DAY = 3
 NEARBY_LODGING_KM = 20  # Sàng lọc theo đường chim bay, không phải quãng đường đi.
+LODGING_SUGGESTION_SHARE = 3  # Mốc xếp hạng = 1/3 ngân sách còn lại mỗi đêm, không phải khoản chi.
 HOURS = re.compile(r"(?<!\d)([01]?\d|2[0-3])[:h]([0-5]\d)\s*[-–—]\s*([01]?\d|2[0-4])[:h]([0-5]\d)(?!\d)")
 
 
@@ -311,6 +312,7 @@ def _room_estimate(row, people):
 
 def _overnight(catalog, request, end, cap):
     ranking = []
+    target = cap // LODGING_SUGGESTION_SHARE
     for row in catalog.lodging:
         if row["region"] != request.region or (request.lodging_type and request.lodging_type != row["type"]):
             continue
@@ -332,9 +334,10 @@ def _overnight(catalog, request, end, cap):
             "distance": distance, "computed": estimated, "reference_from": row["price_min_vnd"],
             "source": row["source"], "source_date": row["source_date"], "fits": within,
         }
-        # Prefer prices with a verified unit that fit the nightly cap; then favor nearby properties.
-        rank = (not within, 0 if area_match else distance if distance is not None else 9999,
-                estimated["high"] if estimated else row["price_min_vnd"], card["id"])
+        # Listed prices with an unknown unit can influence suggestions, but never become group costs.
+        comparison_price = estimated["high"] if estimated else row["price_min_vnd"]
+        rank = (not within, abs(comparison_price - target),
+                0 if area_match else distance if distance is not None else 9999, card["id"])
         ranking.append((rank, card))
     cards, used = [], set()
     for _, card in sorted(ranking, key=lambda pair: pair[0]):

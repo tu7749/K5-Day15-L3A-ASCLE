@@ -114,6 +114,20 @@ def test_ticket_selection_accounts_for_known_meals_before_using_trip_budget(cata
     assert capped_plan["budget_status"] == "partial"
 
 
+def test_higher_budget_changes_lodging_suggestions_without_charging_reference_prices(catalog):
+    def plan(budget, reserves=None):
+        request = Request("ha_giang", TODAY, 3, 2, budget, allowances=reserves or {})
+        return build_trip(request, catalog, weather_provider=dry)
+
+    basic, higher = plan(4_600_000), plan(12_500_000)
+    assert higher["days"][1]["lodgings"][0]["reference_from"] > basic["days"][1]["lodgings"][0]["reference_from"]
+    assert higher["total_known"] == basic["total_known"] == 830_000
+    assert higher["costs"]["lodging"]["missing"]
+    with_reserve = plan(12_500_000, {"lodging": 2_000_000})
+    assert with_reserve["total_known"] + with_reserve["total_reserved"] == 2_830_000
+    assert with_reserve["remaining"] == 9_670_000
+
+
 def test_open_meteo_forecast_cache_and_outage(monkeypatch):
     _forecast.cache_clear()
     calls = []
