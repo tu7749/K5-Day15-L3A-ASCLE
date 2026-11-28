@@ -1,0 +1,39 @@
+# Việt Du trên một máy: web Streamlit + llama.cpp (Qwen3 0.6B). Chạy: docker compose up -d --build
+# Biến tùy chọn (S3, Bedrock, cổng) đặt trong file .env cạnh file này, xem DEPLOY.md.
+services:
+  llama:
+    image: ghcr.io/ggml-org/llama.cpp:server
+    command: >
+      -hf Qwen/Qwen3-0.6B-GGUF:Q8_0 --alias qwen3-0.6b-q8_0
+      --host 0.0.0.0 --port 8087 --ctx-size 2048 --threads ${LLAMA_THREADS:-2}
+      -ngl 0 --reasoning-budget 0 --no-webui
+    volumes:
+      - llama-cache:/root/.cache
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8087/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 300s
+      retries: 3
+
+  web:
+    build: .
+    image: viet-du:latest
+    ports:
+      - "${WEB_PORT:-80}:8501"
+    environment:
+      MODEL_PROVIDER: llamacpp
+      MODEL_NAME: qwen3-0.6b-q8_0
+      LLAMA_CPP_HOST: llama
+      LLAMA_CPP_PORT: "8087"
+      AWS_REGION: ${AWS_REGION:-}
+      S3_BUCKET: ${S3_BUCKET:-}
+      S3_PREFIX: ${S3_PREFIX:-}
+      BEDROCK_MODEL_ID: ${BEDROCK_MODEL_ID:-}
+    depends_on:
+      - llama  # Web vẫn chạy khi model chưa sẵn sàng; lịch trình dùng luồng không AI.
+    restart: unless-stopped
+
+volumes:
+  llama-cache:

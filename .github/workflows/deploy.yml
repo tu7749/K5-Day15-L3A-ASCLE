@@ -1,0 +1,71 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - run: python run.py check
+      - run: python -m pytest -q tests
+      - name: Build Docker image
+        run: docker build -t viet-du:ci .
+
+  deploy:
+    needs: test
+    # Chỉ deploy khi push lên main và đã khai báo biến EC2_HOST (Settings → Secrets and variables → Actions → Variables).
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.EC2_HOST != ''
+    runs-on: ubuntu-latest
+    env:
+      HOST: ${{ vars.EC2_HOST }}
+      SSH_USER: ${{ vars.EC2_USER || 'ubuntu' }}
+      APP_DIR: ${{ vars.EC2_APP_DIR || 'K5-Day15-L3A-ASCLE' }}
+    steps:
+      - name: Cấu hình SSH
+        env:
+          SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.EC2_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ec2
+          chmod 600 ~/.ssh/id_ec2
+          if [ -n "$KNOWN_HOSTS" ]; then
+            printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          else
+            ssh-keyscan -H "$HOST" > ~/.ssh/known_hosts
+          fi
+
+      - name: Deploy lên EC2
+        run: |
+          ssh -i ~/.ssh/id_ec2 "$SSH_USER@$HOST" APP_DIR="$APP_DIR" SHA="$GITHUB_SHA" 'bash -s' <<'EOF'
+          set -euo pipefail
+          cd "$APP_DIR"
+          git fetch --quiet origin main
+          git reset --hard "$SHA"
+          docker compose up -d --build --remove-orphans
+          docker image prune -f >/dev/null
+          docker compose ps
+          EOF
+
+      - name: Kiểm tra health
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS "http://$HOST:${{ vars.WEB_PORT || '80' }}/_stcore/health"; then echo; exit 0; fi
+            sleep 5
+          done
+          echo "Web chưa trả /_stcore/health sau 150 giây" >&2
+          exit 1

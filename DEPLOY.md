@@ -18,7 +18,43 @@ Agent dòng lệnh cũng hỗ trợ gợi ý lưu trú. Chạy `python3 run.py` 
 
 Việt Du dùng Open-Meteo trực tiếp từ backend. Cho phép máy chủ truy cập `api.open-meteo.com` và `archive-api.open-meteo.com` qua HTTPS. Trình duyệt dùng nền bản đồ OpenStreetMap. Khi nền không tải được, các ghim và lịch trình vẫn hiển thị.
 
-## EC2 với Docker
+## CI/CD lên EC2 (GitHub Actions + Docker Compose)
+
+Mỗi lần push lên `main`, workflow [.github/workflows/deploy.yml](.github/workflows/deploy.yml) chạy `run.py check`, `pytest` và build image. Nếu qua, nó SSH vào EC2, đưa repo về đúng commit vừa push rồi chạy `docker compose up -d --build`. [docker-compose.yml](docker-compose.yml) chạy hai service: `web` (Streamlit, cổng 80) và `llama` (llama.cpp + Qwen3 0.6B Q8, chỉ trong mạng nội bộ của compose). Pull request chỉ chạy test, không deploy.
+
+### Chuẩn bị EC2 (làm một lần)
+
+- Instance tối thiểu `t3.small` (2 GB RAM), nên dùng `t3.medium`. Ổ đĩa từ 16 GB.
+- Security group: mở 22 (SSH) và 80 (HTTP). Không mở 8087.
+- SSH vào máy (ví dụ Ubuntu) và chạy:
+
+```bash
+curl -fsSL https://get.docker.com | sudo sh
+sudo usermod -aG docker $USER && newgrp docker
+git clone https://github.com/tu7749/K5-Day15-L3A-ASCLE.git
+cd K5-Day15-L3A-ASCLE
+docker compose up -d --build   # lần đầu tải model khoảng 640 MB
+```
+
+Amazon Linux 2023 thì thay dòng cài Docker bằng `sudo dnf install -y docker git && sudo systemctl enable --now docker` rồi cài [Compose plugin](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually).
+
+Biến tùy chọn (`S3_BUCKET`, `S3_PREFIX`, `AWS_REGION`, `BEDROCK_MODEL_ID`, `WEB_PORT`, `LLAMA_THREADS`) đặt trong file `.env` ở thư mục repo trên EC2. Compose đọc file này, còn git và image không chứa nó.
+
+### Khai báo trên GitHub (cần quyền admin repo)
+
+Vào **Settings → Secrets and variables → Actions**.
+
+| Loại | Tên | Giá trị |
+|---|---|---|
+| Variable | `EC2_HOST` | IP public hoặc DNS của EC2. Chưa đặt thì workflow bỏ qua bước deploy |
+| Variable | `EC2_USER` | `ubuntu` (Ubuntu) hoặc `ec2-user` (Amazon Linux). Mặc định `ubuntu` |
+| Variable | `EC2_APP_DIR` | Thư mục repo trên EC2. Mặc định `K5-Day15-L3A-ASCLE` (trong home) |
+| Secret | `EC2_SSH_KEY` | Nội dung private key (file `.pem`) |
+| Secret | `EC2_KNOWN_HOSTS` | Tùy chọn, kết quả `ssh-keyscan -H <EC2_HOST>`. Nên đặt để chống giả mạo máy chủ |
+
+Nên dùng Elastic IP để `EC2_HOST` không đổi khi khởi động lại máy. Có thể chạy lại deploy thủ công ở tab **Actions → CI/CD → Run workflow**.
+
+## EC2 với Docker (thủ công, không compose)
 
 ```bash
 git clone https://github.com/tu7749/K5-Day15-L3A-ASCLE.git
